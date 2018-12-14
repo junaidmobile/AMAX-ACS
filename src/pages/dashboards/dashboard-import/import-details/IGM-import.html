@@ -1,0 +1,104 @@
+<Gmax-header [title]="title">
+</Gmax-header>
+
+<ion-content class="marginTop44">
+    <div>
+
+        <!-- <ion-row> -->
+        <div center text-center class="imgClassDashboard">
+            <img src="assets/imgs/CSIAGVKlogo.jpg" width="100%">
+        </div>
+        <!-- </ion-row> -->
+    </div>
+    <div>
+        <form (ngSubmit)="GetAWBTrackingDetails()">
+            <ion-list>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-3>
+                            <ion-label color="primary" class="fontSize12 marginSet" fixed>AWB No.
+                                <font color="red" class="margin12">*</font>
+                            </ion-label>
+                        </ion-col>
+                        <ion-col ion-item col-3>
+                            <ion-input name="prefix" type="tel" class="fontSize12" [(ngModel)]="Prefix" placeholder="PREFIX"
+                                pattern="[0-9]*" maxlength="3" (ionChange)="focusNextInput()" #PrefixValue></ion-input>
+                        </ion-col>
+                        <!-- <ion-col col-1></ion-col> -->
+                        <ion-col ion-item col-4>
+                            <ion-input name="MAWBNo" type="tel" class="fontSize12" [(ngModel)]="MAWBNo" placeholder="MAWB No."
+                                pattern="[0-9]*" maxlength="8" #MAWBNoValue></ion-input>
+                        </ion-col>
+                        <ion-col col-2>
+                            <button ion-fab class="ion-fab34">
+                                <ion-icon name="md-search" class="margin4"></ion-icon>
+                            </button>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-list>
+            <!-- <ion-list> -->
+            <div *ngIf="showDiv">
+                <ion-grid>
+                    <ion-row>
+                        <table id="tblNews" border="1" style="width:100%;table-layout:fixed;word-break:break-word;border-color: white;margin-top: 2%;">
+                            <thead>
+                                <tr>
+                                    <th height="30" style="background-color:rgb(208, 225, 244);padding: 3px 3px 3px 0px;font-size:14px"
+                                        align="center">
+                                        IGM No.
+                                    </th>
+                                    <th height="30" style="background-color:rgb(208, 225, 244);padding: 3px 3px 3px 0px;font-size:14px;"
+                                        align="center">
+                                        IGM Date
+                                    </th>
+                                    <th height="30" style="background-color:rgb(208, 225, 244);padding: 3px 3px 3px 0px;font-size:14px;"
+                                        align="center">
+                                        Flight No.
+                                    </th>
+                                    <th height="30" style="background-color:rgb(208, 225, 244);padding: 3px 3px 3px 0px;font-size:14px;"
+                                        align="center">
+                                        Flight Date
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td height="30" style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px"
+                                        align="center">
+                                        {{IGMResp.IGMNo[0]}}
+                                    </td>
+                                    <td height="30" style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px"
+                                        align="center">
+                                        {{IGMResp.IGMYear[0]}}
+                                    </td>
+                                    <td height="30" style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px"
+                                        align="center">
+                                        {{IGMResp.IGMFlightNo[0]}}
+                                    </td>
+                                    <td height="30" style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px"
+                                        align="center">
+                                        {{IGMDate}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </ion-row>
+                </ion-grid>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        </form>
+    </div>
+
+</ion-content>
+<ion-fab right bottom #fab1 style="bottom:38px !important">
+    <button class="pop-in" ion-fab mini color="primary" [ngClass]="{'pop-out': fabGone}" (click)="clearInputs()">
+        <ion-icon name="close"></ion-icon>
+    </button>
+</ion-fab>
+<Gmax-footer></Gmax-footer>

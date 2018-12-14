@@ -1,0 +1,136 @@
+<ion-content class="has-subheader">
+    <div>
+        <div center text-center class="imgClassDashboard">
+            <img src="assets/imgs/CSIAGVKlogo.jpg" width="100%">
+        </div>
+    </div>
+    <div>
+        <form (ngSubmit)="GetCartingDetails()">
+            <ion-list>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-3>
+                            <ion-label color="primary" class="fontSize12 marginSet" fixed>AWB No.
+                                <font color="red" class="margin12">*</font>
+                            </ion-label>
+                        </ion-col>
+                        <ion-col ion-item col-3>
+                            <ion-input type="tel" class="fontSize12" [(ngModel)]="Prefix" placeholder="PREFIX" name="prefix"
+                                pattern="[0-9]*" maxlength="3" (ionChange)="focusNextInput()" #PrefixValue></ion-input>
+                        </ion-col>
+                        <!-- <ion-col col-1></ion-col> -->
+                        <ion-col ion-item col-4>
+                            <ion-input type="tel" class="fontSize12" [(ngModel)]="MAWBNo" placeholder="MAWB No." name="MAWBNo"
+                                pattern="[0-9]*" maxlength="8" #MAWBNoValue></ion-input>
+                        </ion-col>
+                        <ion-col col-2>
+                            <button ion-fab class="ion-fab34">
+                                <ion-icon name="md-search" class="margin4"></ion-icon>
+                            </button>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-list>
+        </form>
+        <div *ngIf="showDiv">
+            <form>
+                <ion-card>
+                    <div>
+                        <ion-item>
+                            <ion-label color="primary" class="fontSize12">Destination</ion-label>
+                            <ion-input type="text" class="fontSize12" name="Destination" [(ngModel)]="Resp.Destination"
+                                [disabled]="true" text-right maxlength="20"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label color="primary" class="fontSize12">First Carrier</ion-label>
+                            <ion-input type="text" class="fontSize12" name="First Carrier" [(ngModel)]="Resp.FirstCarrier"
+                                [disabled]="true" text-right maxlength="20"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label color="primary" class="fontSize12">No. of Pieces</ion-label>
+                            <ion-input type="text" class="fontSize12" name="No. of Pieces" [(ngModel)]="Resp.Packets"
+                                [disabled]="true" text-right maxlength="20"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label color="primary" class="fontSize12">Gross Wt. (Kgs.)</ion-label>
+                            <ion-input type="text" class="fontSize12" name="Gross Wt" [(ngModel)]="Resp.GrossWeight"
+                                [disabled]="true" text-right maxlength="20"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label color="primary" class="fontSize12">Chargeable Wt. (Kgs.)</ion-label>
+                            <ion-input type="text" class="fontSize12" name="Chargeable Wt" [(ngModel)]="Resp.NetWeight"
+                                [disabled]="true" text-right maxlength="20"></ion-input>
+                        </ion-item>
+                        <ion-row>
+                            <ion-col col-5>
+                                <ion-label color="primary" class="fontSize12" style="margin-right:42px">Flight No.</ion-label>
+                            </ion-col>
+                            <ion-col col-3>
+                                <ion-item>
+                                    <!-- <ion-label color="primary" class="fontSize12">Country Code</ion-label> -->
+                                    <ion-input type="text" maxlength="2" class="fontSize12" [(ngModel)]="flighttxt"
+                                        name="f1" (ionChange)="focusElem()" [disabled]="isCOCreated" [ngClass]="{'customised-input-class': !isCOCreated}"
+                                        [placeholder]="(flighttxt == undefined || flighttxt =='') ? 'Code' :''"
+                                        text-center pattern="/^[a-zA-Z]*$/"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-4>
+                                <ion-item class="padding-left-2px">
+                                    <!-- <ion-label color="primary" class="fontSize12">Enter Phone Number</ion-label> -->
+                                    <ion-input type="tel" maxlength="4" class="fontSize12" [(ngModel)]="flightnum" name="f2"
+                                        #flight2 [disabled]="isCOCreated" [ngClass]="{'customised-input-class': !isCOCreated}"
+                                        [placeholder]="(flightnum == undefined || flightnum =='') ? 'FlightNo' :'FlightNo'"
+                                        text-center></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col>
+                                <ion-label color="primary" class="fontSize12" style="margin-right:70px">Flight Date</ion-label>
+                            </ion-col>
+                            <ion-col *ngIf="!isNative">
+                                <ion-item>
+                                    <ion-datetime displayFormat="DD/MM/YYYY" [placeholder]="!isCOCreated ?'Enter Flight Date':''"
+                                        name="flightDate" [(ngModel)]="flightDate" [ngClass]="{'customised-input-class': !isCOCreated}"
+                                        class="fontSize12" text-right [disabled]="isCOCreated"></ion-datetime>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col *ngIf="isNative">
+                                <ion-item class="padding-left-2px">
+                                    <ion-input [placeholder]="!isCOCreated ?'Enter Flight Date':''" class="fontSize12 customised-input-class"
+                                        type="text" name="flightDate" (click)="openDatepicker()" [(ngModel)]="flightDate"
+                                        ng-readonly text-right disabled="true"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                        <ion-item>
+                            <ion-label color="primary" class="fontSize12">Flight Off Point</ion-label>
+                            <ion-input type="text" #input (input)="input.value=$event.target.value.toUpperCase()" class="fontSize12"
+                                [ngClass]="{'customised-input-class': !isCOCreated}" [placeholder]="!isCOCreated ?'Enter Flight Off Point':''"
+                                [(ngModel)]="cartingOffPoint" name="flightOff" text-right maxlength="3" [disabled]="isCOCreated"></ion-input>
+                        </ion-item>
+                        <ion-row class="bg-beige">
+                            <ion-col center text-center>
+                                <button class="button-designed-radius-orders" ion-button (click)="submitOrApprove()">{{(isCOCreated)?
+                                    'Revoke' : 'Submit'}}</button>
+                            </ion-col>
+                        </ion-row>
+                    </div>
+
+                </ion-card>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+            </form>
+        </div>
+    </div>
+</ion-content>
+
+<ion-fab right bottom #fab1 style="bottom:38px !important">
+    <button class="pop-in" ion-fab mini color="primary" [ngClass]="{'pop-out': fabGone}" (click)="clearInputs()">
+        <ion-icon name="close"></ion-icon>
+    </button>
+</ion-fab>

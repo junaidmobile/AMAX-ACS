@@ -1,0 +1,66 @@
+<ion-header>
+    <ion-navbar no-border-bottom>
+        <ion-title id="Dashboard" center text-center [ngClass]="{'marginLeft70': isAndroid === true}">
+            Main Menu
+        </ion-title>
+        <ion-buttons right>
+            <button id="notification-button" ion-button icon-only (click)="notifications()">
+                <ion-icon ios="ios-notifications" md="md-notifications">
+                </ion-icon>
+            </button>
+            <button ion-button icon-only (click)="logOut()">
+                <ion-icon ios="ios-power" md="md-power"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+    <ion-toolbar no-border-top mode='md'>
+        <ion-segment mode='md' [(ngModel)]="selectedSegment" (ionChange)="onSegmentChanged($event)">
+            <ion-segment-button value="Exports" *ngIf="LoginType == 'Agent'">
+                Exports
+            </ion-segment-button>
+            <ion-segment-button value="Imports" *ngIf="LoginType == 'Agent'">
+                Imports
+            </ion-segment-button>
+            <ion-segment-button value="Others" *ngIf="LoginType == 'Agent'">
+                Others
+            </ion-segment-button>
+
+            <ion-segment-button value="Carting Order" *ngIf="LoginType == 'Airline'">
+                Carting Order
+            </ion-segment-button>
+            <ion-segment-button value="Delivery Order" *ngIf="LoginType == 'Airline'">
+                Delivery Order
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="outer-content">
+    <ion-slides *ngIf="slides && slides.length" #mySlider (ionSlideDidChange)="onSlideChanged($event)">
+        <!--  TODO in future-->
+        <!-- <ion-slide *ngFor="let slide of slides">
+            <div [innerHtml]="slide.name | sanitizeHtml"></div>
+        </ion-slide> -->
+
+        <ion-slide *ngIf="LoginType == 'Agent'">
+            <page-dashboard-export></page-dashboard-export>
+        </ion-slide>
+
+        <ion-slide *ngIf="LoginType == 'Agent'">
+            <page-dashboard-import></page-dashboard-import>
+        </ion-slide>
+
+        <ion-slide *ngIf="LoginType == 'Agent'">
+            <page-dashboard-other></page-dashboard-other>
+        </ion-slide>
+
+        <ion-slide *ngIf="LoginType == 'Airline'">
+            <page-issue-carting-order></page-issue-carting-order>
+        </ion-slide>
+
+        <ion-slide *ngIf="LoginType == 'Airline'">
+            <page-issue-delivery-order></page-issue-delivery-order>
+        </ion-slide>
+    </ion-slides>
+</ion-content>
+
+<Gmax-footer></Gmax-footer>

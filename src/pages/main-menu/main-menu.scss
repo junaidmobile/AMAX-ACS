@@ -1,0 +1,164 @@
+.margin10{
+    margin-top: 10px;
+}
+
+.toolbar-background {
+    background-color: #F36F23;
+  }
+  
+  .imgClassDashboard{
+    background-color:white;
+     border-bottom:solid 2px;
+     border-color:#F36F23;
+    //  margin-top: 10px;
+  }
+
+  .bar-button-default-md, .bar-button-clear-md-default, .bar-button-md-default{
+      color: #ffffff !important;
+  }
+
+  .bar-button-default-md:hover:not(.disable-hover), .bar-button-clear-md-default:hover:not(.disable-hover), .bar-button-md-default:hover:not(.disable-hover){
+    color: #ffffff !important;
+  }
+  .fontSize12{
+    font-size: 1.3rem;
+  }
+
+  .padding8{
+    padding: 8px;
+  }
+
+  .margin12{
+    margin-top: 12px;
+  }
+
+  .marginSet{
+    padding-left: 14px;
+    margin: 12px 0px 11px 0px !important;
+  }
+
+//   input[type="text"]
+// {
+//     font-size:1.2rem;
+// }
+
+ion-label[fixed]{
+  font-size:1.2rem !important;
+}
+
+.ion-fab34{
+  width: 34px !important;
+height: 34px !important;
+}
+
+.margin4{
+  margin-top: 4px;
+}
+
+ion-content.content-md[padding] .scroll-content {
+	padding-bottom: 16px !important;
+}
+
+ion-content.content-md:not([padding]) .scroll-content {
+	padding-bottom: 0 !important;
+}
+
+.paddingAlignHeader{
+      padding: 4px 20px 0px 53px;
+}
+
+.button-designed-radius {
+  border-top-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+
+.alert-title{
+  font-size: 1.5rem !important; 
+  text-align: center;
+}
+
+.alert-md .alert-head{
+  color: #ffffff;
+  background-color: #F36F23;
+  padding: 20px 24px 20px !important;
+}
+.select-md .select-icon .select-icon-inner{
+  color: #F36F23 !important;
+}
+.select-text{
+  font-size: 1.3rem !important;
+}
+
+.width34{
+  width: 34%
+}
+
+.padding14{
+  padding: 14px !important;
+}
+
+.details_text {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  text-decoration: none;
+  text-align: justify;
+}
+.item-md{
+  background-color: beige !important;
+}
+.list-ios .item-block .item-inner{
+  border-bottom: 0.55px solid #f36f23 !important;
+}
+
+main-menu{
+  .customIcon {
+    font-size: 1.7em;
+}
+.slide-zoom{
+  height: 100%;
+}
+}
+
+#notification-button {            
+  position: relative;
+  width: 42px;
+  top:1px;
+  right: 1px;
+  overflow: visible!important;
+}
+
+
+#notifications-badge {
+  background-color: red;
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  border-radius: 100%;
+}
+
+.segment-md .segment-button{
+  color: white !important;
+}
+
+.segment-md .segment-button.activated, .segment-md .segment-button.segment-activated{
+  border-color: white !important;
+}
+
+.segment-ios .segment-button.segment-activated{
+  background-color: inherit !important;
+}
+
+.segment-ios .segment-button{
+  color: initial ;
+  border-color: initial ; 
+}
+
+.marginTop44{
+  margin-top: 44px
+}
+
+.toolbar-md{
+  min-height: 30px !important;
+}
+
+

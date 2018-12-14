@@ -1,0 +1,33 @@
+page-issue-carting-order{
+.customised-input-class{
+border-bottom: 1px solid #F36F23;
+
+}
+
+.text-input-md{
+    margin: 4px 8px !important;
+}
+.row{
+    background-color: beige !important;
+}
+
+.item-md.item-input.input-has-focus .item-inner {
+    box-shadow: none;
+}
+.text-input{
+    text-align: end;
+  }
+}
+
+.button-designed-radius-orders {
+    padding: 0 5rem !important;
+    border-top-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    font-size: 1.3rem !important;
+}
+
+page-issue-delivery-order{
+    .text-input{
+        text-align: end;
+      }
+}

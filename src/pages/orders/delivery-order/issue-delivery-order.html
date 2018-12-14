@@ -1,0 +1,95 @@
+<ion-content class="has-subheader">
+    <div>
+        <div center text-center class="imgClassDashboard">
+            <img src="assets/imgs/CSIAGVKlogo.jpg" width="100%">
+        </div>
+    </div>
+    <div>
+        <form (ngSubmit)="GetDeliveryDetails()">
+            <ion-list>
+                <ion-grid>
+                    <ion-item>
+                        <ion-label color="primary" class="fontSize12">IGM No.
+                            <font color="red" class="margin12">*</font>
+                        </ion-label>
+                        <ion-input type="tel" class="fontSize12" placeholder="IGM No." [(ngModel)]="IGMNo" name="IGMNo"
+                            pattern="[0-9]*" maxlength="7" #IGMNumber required text-right clearInput></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label color="primary" class="fontSize12">Hawb No.
+                        </ion-label>
+                        <ion-input type="tel" class="fontSize12" placeholder="HawbNo." [(ngModel)]="HAWBNO" name="HawbNo"
+                            pattern="[0-9]*" maxlength="7" #HAWBNumber required text-right clearInput></ion-input>
+                    </ion-item>
+                    <br>
+                    <ion-row>
+                        <ion-col col-3>
+                            <ion-label color="primary" class="fontSize12" fixed>AWB No.
+                                <font color="red" class="margin12">*</font>
+                            </ion-label>
+                        </ion-col>
+                        <ion-col ion-item col-3>
+                            <ion-input type="tel" class="fontSize12" [(ngModel)]="Prefix" placeholder="PREFIX" name="prefix"
+                                pattern="[0-9]*" maxlength="3" (ionChange)="focusNextInput()" #PrefixValue></ion-input>
+                        </ion-col>
+                        <ion-col ion-item col-4>
+                            <ion-input type="tel" class="fontSize12" [(ngModel)]="MAWBNo" placeholder="MAWB No." name="MAWBNo"
+                                pattern="[0-9]*" maxlength="8" #MAWBNoValue></ion-input>
+                        </ion-col>
+                        <ion-col col-2>
+                            <button ion-fab class="ion-fab34">
+                                <ion-icon name="md-search" class="margin4"></ion-icon>
+                            </button>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-list>
+        </form>
+        <div *ngIf="showDiv">
+            <form>
+                <ion-card>
+                    <div>
+                        <ion-item>
+                            <ion-label color="primary" class="fontSize12">Agent Name</ion-label>
+                            <ion-input type="text" class="fontSize12" name="Agent Name" [(ngModel)]="masterDataResp.ConsigneeName[0]"
+                                [disabled]="true" text-right></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label color="primary" class="fontSize12">No. of Pieces</ion-label>
+                            <ion-input type="text" class="fontSize12" name="No. of Pieces" [(ngModel)]="masterDataResp.Packages[0]"
+                                [disabled]="true" text-right></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label color="primary" class="fontSize12"> Gross Wt. (Kgs.)</ion-label>
+                            <ion-input type="text" class="fontSize12" name="Gross wt." [(ngModel)]="masterDataResp.GrossWeight[0]"
+                                [disabled]="true" text-right></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label color="primary" class="fontSize12">Destination</ion-label>
+                            <ion-input type="text" class="fontSize12" name="Destination" [(ngModel)]="masterDataResp.Destination[0]"
+                                [disabled]="true" text-right></ion-input>
+                        </ion-item>
+                        <ion-row class="bg-beige">
+                            <ion-col center text-center>
+                                <button class="button-designed-radius-orders" ion-button (click)="submitOrRevoke()">{{(isDOCreated)?
+                                    'Revoke' :'Submit'}}</button>
+                            </ion-col>
+                        </ion-row>
+                    </div>
+                </ion-card>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+            </form>
+        </div>
+    </div>
+</ion-content>
+
+<ion-fab right bottom #fab1 style="bottom:38px !important">
+    <button class="pop-in" ion-fab mini color="primary" [ngClass]="{'pop-out': fabGone}" (click)="clearInputs()">
+        <ion-icon name="close"></ion-icon>
+    </button>
+</ion-fab>

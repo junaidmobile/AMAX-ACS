@@ -1,0 +1,44 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title id="Dashboard" center text-center>
+            Notifications
+        </ion-title>
+        <ion-buttons right>
+            <button ion-button icon-only (click)="logOut()">
+                <ion-icon ios="ios-power" md="md-power"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="outer-content">
+    <ion-list *ngIf="isNotified">
+        <ion-list-header>
+            GMAX Notifications
+        </ion-list-header>
+
+        <ion-item-sliding *ngFor="let notification of notification_list.notifications">
+            <ion-item (click)="openModal1(notification)">
+                <!-- <ion-avatar item-start>
+                    <img src="assets/img/venkman.jpg">
+                </ion-avatar> -->
+                <h2>{{notification.headings.en}}</h2>
+                <p>{{notification.contents.en}}</p>
+                <ion-note item-end>{{notification.delivery_time_of_day}}</ion-note>
+            </ion-item>
+            <!-- <ion-item-options>
+                <button ion-button color="light" icon-start>
+                    <ion-icon name="ios-more"></ion-icon>
+                    More
+                </button>
+            </ion-item-options> -->
+        </ion-item-sliding>
+    </ion-list>
+
+    <div center text-center *ngIf="!isNotified">
+        <ion-label>
+            <ion-icon ios="ios-notifications-off" md="md-notifications-off"></ion-icon> No Notfications
+        </ion-label>
+    </div>
+</ion-content>
+<Gmax-footer></Gmax-footer>

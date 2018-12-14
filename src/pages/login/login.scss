@@ -1,0 +1,197 @@
+page-login {
+  .customIcon {
+    font-size: 1.7em;
+  }
+
+  .fadeInDown {
+    -webkit-animation-name: fadeInDown;
+    animation-name: fadeInDown;
+}
+
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.logo {
+  width: 60px;
+  height: 60px;
+  margin: 20px auto 0;
+  border-radius: 10%;
+  background: url("../assets/imgs/icon_logo.png") no-repeat;
+  background-size: 100%;
+}
+
+.text-md-light {
+  color: #F36F23;
+}
+
+.text-white {
+  color: #928484 !important;
+}
+
+h2 {
+  margin-top: 1.8rem;
+  font-size: 2.4rem;
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.fadeInDown {
+  animation-name: fadeInDown;
+}
+
+.auth-page::after {
+  content: "";
+  background: url("../assets/imgs/bg.jpg") no-repeat;
+  background-size: cover;
+  opacity: .1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: 0;
+}
+
+.item-md{
+  background-color: inherit !important;
+  background: transparent;
+}
+}
+
+
+#checkboxRemember{
+    margin: 0px 0px 0px 0px !important;
+}
+
+
+
+ion-content.content-md[padding] .scroll-content {
+	padding-bottom: 16px !important;
+}
+
+ion-content.content-md:not([padding]) .scroll-content {
+	padding-bottom: 0 !important;
+}
+// ion-app.md [padding]{
+//     background-color: antiquewhite;
+// }
+
+// .ion-page > ion-content{
+//     background-color: antiquewhite;
+
+// }
+
+.btn-img {
+    background-color: #F36F23;
+    border: 0 none;
+    color: #FFFFFF;
+    height: 40px;
+    font-weight: bold;
+    padding: 0 3px 5px 1px;
+    border-top-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+.imgClassLogin{
+    background-color:white;
+     border-bottom:solid 2px;
+     border-color:#F36F23;
+    //  margin-top: 10px;
+  }
+
+  .marginLeft20{
+    margin-left: 20px;
+  }
+
+  .marginTop23{
+    margin-top: 23px;
+  }
+
+  .margin10{
+    margin-top: 10px;
+}
+
+.marginTop8{
+  margin-top: 8px;
+}
+
+.toolbar-background {
+    background-color: #F36F23;
+  }
+
+  .toolbar-title-md{
+    color: #ffffff !important;
+    font-size: 1.5rem;
+    padding: 0px 0px !important;
+  }
+
+  .button-designed-radius {
+    padding: 0 6rem !important;
+    border-top-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    height: 3.2rem !important;
+}
+page-login{
+  .alert-md .alert-head{
+    padding: 24px 24px 20px !important;
+  }
+  .item-ios{
+    background-color: inherit !important;
+    background: transparent;
+  }
+
+  .button-ios{
+    padding: 0 5rem !important;
+    height: 2em !important;
+  }
+}
+
+
+
+
+.toolbar-title-ios{
+  font-size: 1.5rem;
+  padding: 0px 0px !important;
+}
+
+.bar-button-default-ios, .bar-button-default.bar-button-ios-default, .bar-button-clear-ios-default{
+  color: inherit !important
+}
+
+.copyright{
+  min-height: 20px !important;
+  font-size: 1.0rem !important;
+}
+
+.bg-beige{
+  background-color: beige !important;
+}

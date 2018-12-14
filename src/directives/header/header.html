@@ -1,0 +1,15 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title id="Dashboard" center text-center>
+            {{title}}
+        </ion-title>
+        <ion-buttons right>
+            <button ion-button icon-only (click)="notifications()">
+                <ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
+            </button>
+            <button ion-button icon-only (click)="logOut()">
+                <ion-icon ios="ios-power" md="md-power"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>

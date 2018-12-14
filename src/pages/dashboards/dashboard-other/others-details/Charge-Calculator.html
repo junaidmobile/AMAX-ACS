@@ -1,0 +1,187 @@
+<Gmax-header [title]="title">
+</Gmax-header>
+
+<ion-content class="marginTop44">
+    <div>
+        <div center text-center class="imgClassDashboard">
+            <img src="assets/imgs/CSIAGVKlogo.jpg" width="100%">
+        </div>
+    </div>
+    <div>
+        <form (ngSubmit)="Calculate()">
+            <ion-item>
+                <ion-label color="primary" class="fontSize12">Select Commodity</ion-label>
+                <ion-select okText="Select" cancelText="Cancel" color="primary" placeholder="Select" name="Commodities"
+                    text-center multiple="false" [(ngModel)]="commodityModel" #Commodity>
+                    <ion-option *ngFor="let commodity of CommodityDetails" [value]="commodity">{{commodity.MC_COMMODITYDESC_C[0]}}</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label color="primary" class="fontSize12">Gr/Ch. Wt. (Kgs)
+                    <font color="red">*</font>
+                </ion-label>
+
+                <ion-input type="tel" class="fontSize12" name="Gr/Ch. Wt. (Kgs)" [(ngModel)]="GrCh" placeholder=""
+                    text-right maxlength="9"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label color="primary" class="fontSize12">No. of Days
+                    <font color="red">*</font>
+                </ion-label>
+
+                <ion-input type="tel" class="fontSize12" name="No. of Days" [(ngModel)]="noOfDays" placeholder=""
+                    text-right maxlength="9"></ion-input>
+            </ion-item>
+            <br>
+            <br>
+            <button [hidden]="true" class="button-designed-radius width34" ion-button (click)="Calculate()">Calculate</button>
+            <div *ngIf="showDiv">
+                <ion-grid style="padding-bottom: 120px;">
+                    <ion-row>
+                        <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse; width: 100%; border: none; --darkreader-inline-border-top: initial; --darkreader-inline-border-right: initial; --darkreader-inline-border-bottom: initial; --darkreader-inline-border-left: initial;"
+                            data-darkreader-inline-border-top="" data-darkreader-inline-border-right=""
+                            data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left="">
+
+                            <tbody>
+                                <tr>
+
+                                    <td align="left" class="table-header" style="width:10%; padding: 0in 5.4pt 0in 5.4pt"
+                                        valign="top">
+
+                                        SR. No.
+
+                                    </td>
+
+                                    <td class="table-header" style="border-left: none; width: 30%; padding: 0in 5.4pt; --darkreader-inline-border-left: initial;"
+                                        valign="top" data-darkreader-inline-border-left="">
+
+                                        Charge Description
+
+                                    </td>
+
+                                    <td class="table-header" style="border-left: none; width: 30%; padding: 0in 5.4pt; --darkreader-inline-border-left: initial;"
+                                        valign="top" data-darkreader-inline-border-left="">
+
+                                        Charge Amount(INR)
+
+                                    </td>
+
+                                    <td class="table-header" style="border-left: none; width: 30%; padding: 0in 5.4pt; --darkreader-inline-border-left: initial;"
+                                        valign="top" data-darkreader-inline-border-left="">
+
+                                        GST(INR)
+
+                                    </td>
+
+                                </tr>
+
+
+                                <tr *ngFor="let calculated of calculatedDetails.Table1;let i = index">
+
+                                    <td class="Charges_data_table" style="padding: 0in 5.4pt 0in 5.4pt" valign="top">
+
+                                        <p class="details_text">
+
+                                            {{i+1}}
+
+                                        </p>
+
+                                    </td>
+
+                                    <td class="Charges_data_table" style="padding: 0in 5.4pt 0in 5.4pt" valign="top">
+
+                                        <p class="details_text">
+
+                                            {{calculated.ChargeDesc[0]}}
+
+                                        </p>
+
+                                    </td>
+
+                                    <td class="Charges_data_table" style="padding: 0in 5.4pt 0in 5.4pt" valign="top">
+
+                                        <p class="details_text">
+
+                                            {{calculated.TotalAmount[0]}}
+
+                                        </p>
+
+                                    </td>
+
+                                    <td class="Charges_data_table" style="padding: 0in 5.4pt 0in 5.4pt" valign="top">
+
+                                        <p class="details_text">
+
+                                            {{calculated.TaxAmount[0]}}
+
+                                        </p>
+
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td class="Charges_data_table" style="padding: 0in 5.4pt 0in 5.4pt" valign="top">
+
+                                        <p class="details_text">
+
+
+
+                                        </p>
+
+                                    </td>
+
+                                    <td class="Charges_data_table" style="padding: 0in 5.4pt 0in 5.4pt" valign="top">
+
+                                        <p class="details_text">
+
+                                            <b>Total Charges(Approx.)</b>
+
+                                        </p>
+
+                                    </td>
+
+                                    <td class="Charges_data_table" style="padding: 0in 5.4pt 0in 5.4pt" valign="top">
+
+                                        <p class="details_text">
+
+                                            {{calculatedDetails.Table[0].TSPCalculated[0]}}
+
+                                        </p>
+
+                                    </td>
+
+                                    <td class="Charges_data_table" style="padding: 0in 5.4pt 0in 5.4pt" valign="top">
+
+                                        <p class="details_text">
+
+                                            {{calculatedDetails.Table[0].ServiceTaxCalculated[0]}}
+
+                                        </p>
+
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </ion-row>
+                </ion-grid>
+            </div>
+
+        </form>
+    </div>
+</ion-content>
+<ion-fab left bottom #fab1>
+    <button class="pop-in" ion-fab color="primary" [ngClass]="{'pop-out': fabGone}" (click)="clearAll()">
+        <ion-icon name="close"></ion-icon>
+    </button>
+</ion-fab>
+
+<ion-fab right bottom #fab2>
+    <button class="pop-in" ion-fab color="primary" [ngClass]="{'pop-out': fabGone}" (click)="Calculate()">
+        <ion-icon name="calculator"></ion-icon>
+    </button>
+</ion-fab>
+<Gmax-footer></Gmax-footer>

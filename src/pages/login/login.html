@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-navbar hideBackButton="true">
+
+    <ion-title id="Dashboard" center text-center>
+      LOGIN
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="animated fadeIn login auth-page">
+  <div>
+    <form #myForm="ngForm" (ngSubmit)="logIn()">
+      <!-- <div center text-center class="imgClassLogin">
+        <img src="assets/imgs/CSIAGVKlogo.jpg"   width="100%">
+      </div> -->
+
+      <div class="animated fadeInDown" padding-horizontal="" text-center="">
+        <div class="logo">
+        </div>
+        <h2 class="text-white text text-md" ion-text="" no-margin="">
+          <span color="light" ion-text="" class="text text-md text-md-light">GMAX</span>
+          <strong>ACS</strong>
+        </h2>
+      </div>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label floating>
+              <ion-icon ios="ios-person" md="md-person" item-start="" name="user" role="img" aria-label="username"></ion-icon>
+              Username
+            </ion-label>
+            <ion-input name="username" type="text" [(ngModel)]="user.pi_strUserName" class="input input-md ng-touched ng-pristine ng-invalid"
+              clearInput required></ion-input>
+
+          </ion-item>
+          <ion-item>
+            <ion-label floating>
+              <ion-icon ios="ios-lock" md="md-lock" item-start="" role="img" aria-label="password"></ion-icon>
+              Password</ion-label>
+            <ion-input name="p1" type="text" *ngIf="showPwd" [(ngModel)]="user.pi_strPassword" required></ion-input>
+            <ion-input name="p2" type="password" *ngIf="!showPwd" [(ngModel)]="user.pi_strPassword" required></ion-input>
+            <button icon-only ion-button clear type="button" item-right (click)="showPwd=!showPwd">
+              <ion-icon *ngIf="showPwd" name="eye"></ion-icon>
+              <ion-icon *ngIf="!showPwd" name="eye-off"></ion-icon>
+            </button>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <br>
+      <ion-row class="marginLeft20">
+        <ion-checkbox name='remember' [(ngModel)]="isRemembered"></ion-checkbox>&nbsp;&nbsp;
+        <ion-label id="checkboxRemember">Remember Me</ion-label>
+      </ion-row>
+      <ion-row class="marginTop23">
+        <ion-col center text-center>
+          <button class="button-designed-radius" ion-button [disabled]="isInputValid()">
+            <ion-icon name="log-in" role="img" class="icon icon-md ion-md-log-in" aria-label="log in"></ion-icon>&nbsp;LOGIN</button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </div>
+</ion-content>
+
+
+<Gmax-footer></Gmax-footer>

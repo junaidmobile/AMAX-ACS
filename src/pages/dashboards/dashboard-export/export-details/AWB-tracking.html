@@ -1,0 +1,135 @@
+<Gmax-header [title]="title">
+</Gmax-header>
+<ion-content class="marginTop44">
+    <div>
+        <!-- <ion-row> -->
+        <div center text-center class="imgClassDashboard">
+            <img src="assets/imgs/CSIAGVKlogo.jpg" width="100%">
+        </div>
+        <!-- </ion-row> -->
+    </div>
+    <div>
+        <form (ngSubmit)="GetAWBTrackingDetails()">
+            <ion-list>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-3>
+                            <ion-label color="primary" class="fontSize12 marginSet" fixed>AWB No.
+                                <font color="red" class="margin12">*</font>
+                            </ion-label>
+                        </ion-col>
+                        <ion-col ion-item col-3>
+                            <ion-input type="tel" class="fontSize12" [(ngModel)]="Prefix" placeholder="PREFIX" name="prefix"
+                                pattern="[0-9]*" maxlength="3" (ionChange)="focusNextInput()" #PrefixValue></ion-input>
+                        </ion-col>
+                        <!-- <ion-col col-1></ion-col> -->
+                        <ion-col ion-item col-4>
+                            <ion-input type="tel" class="fontSize12" [(ngModel)]="MAWBNo" placeholder="MAWB No." name="MAWBNo"
+                                pattern="[0-9]*" maxlength="8" #MAWBNoValue></ion-input>
+                        </ion-col>
+                        <ion-col col-2>
+                            <button ion-fab class="ion-fab34">
+                                <ion-icon name="md-search" class="margin4"></ion-icon>
+                            </button>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-list>
+        </form>
+
+        <!-- <ion-list> -->
+        <div *ngIf="showDiv">
+            <ion-item>
+                <ion-label color="primary" class="fontSize12">ASI</ion-label>
+                <ion-input type="text" class="fontSize12" name="ASI" [(ngModel)]="timeStampASI" placeholder="Action awaiting"
+                    [disabled]="true" text-right></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label color="primary" class="fontSize12">CO Request</ion-label>
+                <ion-input type="text" class="fontSize12" name="CO Request" [(ngModel)]="timeStampCORequest"
+                    placeholder="Action awaiting" [disabled]="true" text-right></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label color="primary" class="fontSize12">CO Approval</ion-label>
+                <ion-input type="text" class="fontSize12" name="CO Approval" [(ngModel)]="timeStampCOApproval"
+                    placeholder="Action awaiting" [disabled]="true" text-right></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label color="primary" class="fontSize12">TSP</ion-label>
+                <ion-input type="text" class="fontSize12" name="TSP" [(ngModel)]="timeStampTSP" placeholder="Action awaiting"
+                    [disabled]="true" text-right></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label color="primary" class="fontSize12">Cargo Acceptance</ion-label>
+                <ion-input type="text" class="fontSize12" name="Cargo Acceptance" placeholder="Action awaiting"
+                    [(ngModel)]="TDGAcceptance" [disabled]="true" text-right></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label color="primary" class="fontSize12">LEO</ion-label>
+                <ion-input type="text" class="fontSize12" name="LEO" placeholder="Action awaiting" [(ngModel)]="LeoConfirmed"
+                    [disabled]="true" text-right></ion-input>
+            </ion-item>
+            <!-- <ion-item>
+                    <ion-label color="primary" class="fontSize12">Security</ion-label>
+                    <ion-input type="text" class="fontSize12" name="Security" placeholder="Action awaiting" [disabled]="true" text-right></ion-input>
+                </ion-item> -->
+            <!-- <ion-item>
+                    <ion-label color="primary" class="fontSize12">BAG</ion-label>
+                    <ion-input type="text" class="fontSize12" name="BAG" placeholder="Action awaiting" [disabled]="true" text-right></ion-input>
+                </ion-item> -->
+            <ion-item>
+                <ion-label color="primary" class="fontSize12">RCS</ion-label>
+                <ion-input type="text" class="fontSize12" name="RCS" placeholder="Action awaiting" [(ngModel)]="BAGAcceptance"
+                    [disabled]="true" text-right></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label color="primary" class="fontSize12">EGM</ion-label>
+                <ion-input type="text" class="fontSize12" name="EGM" placeholder="Action awaiting" [(ngModel)]="EGM"
+                    [disabled]="true" text-right></ion-input>
+            </ion-item>
+            <br>
+            <br>
+            <br>
+            <!-- </ion-list> -->
+
+            <!-- <ion-list> -->
+            <ion-item>
+                <ion-label color="primary" class="fontSize12">Pkgs. / Unit</ion-label>
+                <ion-input type="text" class="fontSize12" name="pkgs" [(ngModel)]="AWBResponse.ActualPackageCount[0]"
+                    placeholder="Action awaiting" [disabled]="true" text-right></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label color="primary" class="fontSize12">Gross Wt. / Unit</ion-label>
+                <ion-input type="text" class="fontSize12" name="grosswt" [(ngModel)]="AWBResponse.ActualGrossWt[0]"
+                    placeholder="Action awaiting" [disabled]="true" text-right></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label color="primary" class="fontSize12">Charge Wt. / Unit</ion-label>
+                <ion-input type="text" class="fontSize12" name="chargewt" [(ngModel)]="AWBResponse.ActualNetWt[0]"
+                    placeholder="Action awaiting" [disabled]="true" text-right></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label color="primary" class="fontSize12">Commodity</ion-label>
+                <ion-input type="text" class="fontSize12" name="commodity" [(ngModel)]="AWBResponse.Commodity[0]"
+                    placeholder="Action awaiting" [disabled]="true" text-right></ion-input>
+            </ion-item>
+        </div>
+        <!-- </ion-list> -->
+        <br>
+        <br>
+        <br>
+
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</ion-content>
+<ion-fab right bottom #fab1 style="bottom:38px !important">
+    <button class="pop-in" ion-fab mini color="primary" [ngClass]="{'pop-out': fabGone}" (click)="clearInputs()">
+        <ion-icon name="close"></ion-icon>
+    </button>
+</ion-fab>
+<Gmax-footer></Gmax-footer>

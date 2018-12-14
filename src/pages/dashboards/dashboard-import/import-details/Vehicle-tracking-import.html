@@ -1,0 +1,112 @@
+<Gmax-header [title]="title">
+</Gmax-header>
+
+<ion-content class="marginTop44">
+    <div>
+
+        <!-- <ion-row> -->
+        <div center text-center class="imgClassDashboard">
+            <img src="assets/imgs/CSIAGVKlogo.jpg" width="100%">
+        </div>
+        <!-- </ion-row> -->
+    </div>
+    <div>
+        <form (ngSubmit)="GetDummyVehicleDetails()">
+            <ion-list>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-3>
+                            <ion-label color="primary" class="fontSize12 marginSet" fixed>AWB No.
+                                <font color="red" class="margin12">*</font>
+                            </ion-label>
+                        </ion-col>
+                        <ion-col ion-item col-3>
+                            <ion-input type="tel" class="fontSize12" name="prefix" [(ngModel)]="Prefix" placeholder="PREFIX"
+                                pattern="[0-9]*" maxlength="3" (ionChange)="focusNextInput()" #PrefixValue></ion-input>
+                        </ion-col>
+                        <!-- <ion-col col-1></ion-col> -->
+                        <ion-col ion-item col-4>
+                            <ion-input type="tel" class="fontSize12" name="MAWBNo" [(ngModel)]="MAWBNo" placeholder="MAWB No."
+                                pattern="[0-9]*" maxlength="8" #MAWBNoValue></ion-input>
+
+                        </ion-col>
+                        <ion-col col-2>
+                            <button ion-fab class="ion-fab34">
+                                <ion-icon name="md-search" class="margin4"></ion-icon>
+                            </button>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-list>
+            <div *ngIf="showDiv">
+                <ion-grid>
+                    <ion-row justify-content-start>
+                        <table id="tblNews" border="1" style="width:100%;table-layout:fixed;word-break:break-word;border-color: white;margin-top: 2%;">
+                            <thead>
+                                <tr>
+                                    <th height="30" style="background-color:rgb(208, 225, 244);padding: 3px 3px 3px 0px;font-size:14px"
+                                        align="center">
+                                        EVT Number
+                                    </th>
+                                    <th height="30" style="background-color:rgb(208, 225, 244);padding: 3px 3px 3px 0px;font-size:14px;"
+                                        align="center">
+                                        Vehicle No.
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td height="30" style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px"
+                                        align="center">
+                                        {{tableData.TokenNo}}
+                                    </td>
+                                    <td height="30" style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px"
+                                        align="center">
+                                        {{tableData.VehicleNo}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </ion-row>
+                </ion-grid>
+
+                <!-- <ion-list> -->
+                <div *ngIf="false">
+                    <ion-item>
+                        <ion-label color="primary" class="fontSize12">Line Area</ion-label>
+                        <ion-input type="text" name="lineArea" class="fontSize12" [(ngModel)]="VehicleTrackResp.FlightNo[0]"
+                            placeholder="" [disabled]="true" maxlength="20" text-right></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label color="primary" class="fontSize12">Gate-IN</ion-label>
+                        <ion-input type="text" name="Gate-IN" class="fontSize12" [(ngModel)]="VehicleTrackResp.FlightDt[0]"
+                            placeholder="" [disabled]="true" maxlength="20" text-right></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label color="primary" class="fontSize12">Dock-IN</ion-label>
+                        <ion-input type="text" name="Dock-IN" class="fontSize12" [(ngModel)]="VehicleTrackResp.DN_TOTAL_NPR[0]"
+                            placeholder="" [disabled]="true" maxlength="20" text-right></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label color="primary" class="fontSize12">Dock-OUT</ion-label>
+                        <ion-input type="text" name="Dock-OUT" class="fontSize12" [(ngModel)]="VehicleTrackResp.DN_TOT_WGHT_REC_KG[0]"
+                            placeholder="" [disabled]="true" maxlength="20" text-right></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label color="primary" class="fontSize12">Gate-OUT</ion-label>
+                        <ion-input type="text" name="Gate-OUT" class="fontSize12" [(ngModel)]="VehicleTrackResp.Loc[0]"
+                            placeholder="" [disabled]="true" maxlength="20" text-right></ion-input>
+                    </ion-item>
+                </div>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+            </div>
+        </form>
+    </div>
+
+</ion-content>
+<Gmax-footer></Gmax-footer>

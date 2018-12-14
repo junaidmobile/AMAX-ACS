@@ -1,0 +1,72 @@
+.gridProperAlign{
+    padding:10px !important;
+}
+
+.colProperAlign{
+    padding:18px !important;
+}
+
+.colProperAlign img{
+    border-radius: 12px;
+}
+
+
+.sub_details {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: #AE441B;
+    text-decoration: none;
+}
+
+.warehouse-header {
+    background-color: #F9E698;
+    height: 24px;
+    color: #AE441B;
+    line-height: 18px;
+    background-repeat: repeat-x;
+}
+.table{
+    border-collapse: collapse;
+    width: 90%;
+    border: none;
+}
+
+.table-header {
+    height: 24px;
+    color: #F26820;
+    font-size: 12px;
+    text-align: center;
+    background-color: #F9E698;
+    font-weight: bold;
+    border-color: black;
+    width: 10%;
+    padding: 0in 5.4pt 0in 5.4pt;
+}
+.paddingAlignHeaderAppCharges{
+    padding: 4px 0px 0px 40px;
+}
+
+page-export-appcharges{
+    .scroll-content{
+          overflow-x: scroll !important;
+        }
+}
+
+page-export-AWB-tracking{
+    .text-input{
+        text-align: end;
+      }
+}
+
+page-export-EGM{
+    .text-input{
+        text-align: end;
+      }
+}
+
+page-export-Vehicle-tracking{
+    .text-input{
+        text-align: end;
+      }
+}
