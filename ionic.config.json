@@ -1,8 +1,13 @@
 {
   "name": "GMAX",
-  "app_id": "",
-  "type": "ionic-angular",
   "integrations": {
     "cordova": {}
-  }
+  },
+  "type": "ionic-angular",
+  "proxies": [
+    {
+      "path": "/GMAXAndroid_HHT/",
+      "proxyUrl": "http://113.193.225.59:8080"
+    }
+  ]
 }

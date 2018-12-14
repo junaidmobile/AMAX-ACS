@@ -14,3 +14,70 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+  ion-content{
+    background-color: #f5f5dc !important;
+  }
+
+  tr {
+    border-color: black !important;
+  }
+
+  .content-ios{
+    background-color: #f5f5dc !important;
+  }
+  .button-ios{
+    color: black !important;
+  }
+
+  .marginLeft70{
+    margin-left: 70px;
+  }
+
+  .item-ios{
+    background-color: beige !important;
+  }
+
+  .text-1x {
+    font-size: 1em;
+  }
+
+  // POP-IN (FLOAT ACTION BUTTON EFFECT) -------------
+.pop-in {
+  animation: pop-in 0.65s;
+}
+@keyframes pop-in {
+  0% {
+      transform: scale(0); 
+  }
+  45% {
+      transform: scale(0);
+  }
+  90% {
+      transform: scale(1.15);
+  }
+  100% {
+      transform: scale(1);
+  }
+}
+
+// POP-OUT (FLOAT ACTION BUTTON EFFECT) -------------
+.pop-out {
+  animation: pop-out 2.5s;
+}
+
+@keyframes pop-out {
+  0% {
+      transform: scale(1);
+  }
+  15% {
+      transform: scale(0);
+  }
+  100% {
+      transform: scale(0);
+  }
+}
+
+.text-input[disabled]{
+  opacity: 1 !important;
+}
+
