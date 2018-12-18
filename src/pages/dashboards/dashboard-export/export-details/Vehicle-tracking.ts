@@ -61,6 +61,7 @@ export class VehicleTracking implements OnInit {
     }
 
     fetchVehicleDetails() {
+        // Check if records is not available from first service. then fetch records from the other service
         this.http.getHttpPostRequest(Constants.GMAX_Services.Exports.Vehicle_tracking, this.exportVehicle).then((response) => {
             //console.log("Response : ", response);
             if (response != null && response != "") {

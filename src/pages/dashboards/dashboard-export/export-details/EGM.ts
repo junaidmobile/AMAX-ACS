@@ -66,6 +66,7 @@ export class EGM implements OnInit {
     }
 
     fetchEGMDetails() {
+        // check if records is not available from the first service. then fetch the records from the second service
         this.http.getHttpPostRequest(Constants.GMAX_Services.Exports.EGM, this.exportEGM).then((response) => {
             //console.log("Response : ", response);
             if (response != null && response != "") {

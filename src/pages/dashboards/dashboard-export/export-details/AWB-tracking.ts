@@ -64,6 +64,7 @@ export class AWBTracking implements OnInit {
     }
 
     fetchAWBDetails() {
+        // check if no records available from first service, then fetch the records from other service
         this.http.getHttpPostRequest(Constants.GMAX_Services.Exports.AWB_tracking, this.exportAWB).then((response) => {
             //console.log("Response : ", JSON.stringify(response));
             if (response != null && response != "" && response.hasOwnProperty('clsAirWayBill')) {
