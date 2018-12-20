@@ -70,15 +70,15 @@ export class AWBTracking implements OnInit {
             if (response != null && response != "" && response.hasOwnProperty('clsAirWayBill')) {
                 this.setAWBDetails(response);
             } else if (response == null || response == '') {
-                this.getAWBDetails(Constants.GMAX_Services.Exports.AWB_tracking); // change this service name later
+                this.getAWBDetails(Constants.GMAX_CSC_perishabe_URL, Constants.GMAX_Services.Exports.AWB_tracking);
             } else {
                 this.global.showAlert("Shipment does not exist.");
             }
         }, (error) => { });
     }
 
-    getAWBDetails(url) {
-        this.http.getHttpPostRequest(url, this.exportAWB).then((response) => {
+    getAWBDetails(url, service_name) {
+        this.http.getHttpPostRequest1(url, service_name, this.exportAWB).then((response) => {
             //console.log("Response : ", JSON.stringify(response));
             if (response != null && response != "" && response.hasOwnProperty('clsAirWayBill')) {
                 this.setAWBDetails(response)

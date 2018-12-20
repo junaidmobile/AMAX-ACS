@@ -119,7 +119,7 @@ export class HttpProvider {
 
   }
 
-  public getHttpRequest1(service_name: string, requestMethod: RequestMethod, body?: any) {
+  public getHttpRequest1(url: string, service_name: string, requestMethod: RequestMethod, body?: any) {
     let connectionStatus = navigator.onLine ? 'online' : 'offline';
     return new Promise((resolve, reject) => {
       if (connectionStatus == 'online') {
@@ -128,7 +128,7 @@ export class HttpProvider {
         // Next we process the data and resolve the promise with the new data.
         let requestOptionArgs: RequestOptionsArgs;
         requestOptionArgs = {
-          url: Constants.PD_balance_URL + service_name,
+          url: url + service_name,
           method: requestMethod,
           body: body,
           headers: new Headers({
@@ -187,8 +187,8 @@ export class HttpProvider {
     return this.getHttpRequest(url, RequestMethod.Post, body);
   }
 
-  public getHttpPostRequest1(url: string, body?: any) {
-    return this.getHttpRequest1(url, RequestMethod.Post, body);
+  public getHttpPostRequest1(url: string, service_name: string, body?: any) {
+    return this.getHttpRequest1(url, service_name, RequestMethod.Post, body);
   }
 
 

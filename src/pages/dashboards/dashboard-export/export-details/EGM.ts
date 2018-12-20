@@ -72,15 +72,15 @@ export class EGM implements OnInit {
             if (response != null && response != "") {
                 this.setEGMDetails(response);
             } else if (response == null || response == '') {
-                this.getEGMDetails(Constants.GMAX_Services.Exports.EGM)  // Change this service name later.
+                this.getEGMDetails(Constants.GMAX_CSC_perishabe_URL, Constants.GMAX_Services.Exports.EGM);
             } else {
                 this.global.showAlert("Shipment does not exist.");
             }
         }, (error) => { });
     }
 
-    getEGMDetails(url) {
-        this.http.getHttpPostRequest(url, this.exportEGM).then((response) => {
+    getEGMDetails(url, service_name) {
+        this.http.getHttpPostRequest1(url, service_name, this.exportEGM).then((response) => {
             //console.log("Response : ", response);
             if (response != null && response != "") {
                 this.setEGMDetails(response);

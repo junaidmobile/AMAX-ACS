@@ -67,15 +67,15 @@ export class VehicleTracking implements OnInit {
             if (response != null && response != "") {
                 this.setVehicleDetails(response);
             } else if (response == null || response == '') {
-                this.getVehicleDetails(Constants.GMAX_Services.Exports.Vehicle_tracking);  // change this service name later
+                this.getVehicleDetails(Constants.GMAX_CSC_perishabe_URL, Constants.GMAX_Services.Exports.Vehicle_tracking);
             } else {
                 this.global.showAlert("Shipment does not exist.");
             }
         }, (error) => { });
     }
 
-    getVehicleDetails(url) {
-        this.http.getHttpPostRequest(url, this.exportVehicle).then((response) => {
+    getVehicleDetails(url, service_name) {
+        this.http.getHttpPostRequest1(url, service_name, this.exportVehicle).then((response) => {
             //console.log("Response : ", response);
             if (response != null && response != "") {
                 this.setVehicleDetails(response)

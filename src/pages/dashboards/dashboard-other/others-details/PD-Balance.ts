@@ -47,7 +47,7 @@ export class PDBalance {
         if (this.selectedVal == 'GMAX') {
             this.PDbalance.strUserName = JSON.parse(this.global.get('userResp')).UserName[0];
             this.PDbalance.strBranchId = "BOM";
-            this.http.getHttpPostRequest1(Constants.GMAX_Services.Others.PD_Balance, this.PDbalance).then((response) => {
+            this.http.getHttpPostRequest1(Constants.PD_balance_URL, Constants.GMAX_Services.Others.PD_Balance, this.PDbalance).then((response) => {
                 //console.log("Response : ", JSON.stringify(response));
                 if (response != null && response != "" && response.hasOwnProperty('NewDataSet')) {
                     this.PDBal = " INR- " + response['NewDataSet'].Table[0].Balance;

@@ -15,8 +15,12 @@ export class Constants {
     // GMAX_LIVE_URL
     public static get GMAX_Service_URL(): string { return "http://cargo.gvk.com/gmaxmobapp/hhtservice.asmx/"; };
 
-    // GMAX_UAT_URL/Testing URL
+    // Expor
+    public static get GMAX_CSC_perishabe_URL(): string { return "http://13.71.113.217/gmaxmobapp/hhtservice.asmx/"; };
 
+    //
+
+    // GMAX_UAT_URL/Testing URL
     // public static get GMAX_Service_URL(): string { return "http://113.193.225.59:8080/GMAXAndroid_HHT/HHTService.asmx/"; };
     // public static get GMAX_Service_URL(): string { return "http://10.22.2.71:8080/GMAXAndroid_HHT/HHTService.asmx/"; };
     // public static get PD_balance_URL(): string { return "http://10.22.3.113/GMaxMObilesrv/GmaxMSrv.asmx/" }
@@ -35,7 +39,6 @@ export class Constants {
     static get GOOOGLE_PROJECT_NUMBER(): string { return "165264439036" };
     static get REST_API_KEY(): string { return "Mjc4ZjY4OGItZDUxMy00N2U4LWI3YzctYzFmM2E4MTc1NTVm" }
     static get ONE_SIGNAL_NOTIFACTION_URL(): string { return "https://onesignal.com/api/v1/notifications?app_id=" + this.APP_ID }
-
     static readonly DATE_FMT = 'dd/MMM/yyyy';
     static readonly DATE_TIME_FMT = `${Constants.DATE_FMT} hh:mm:ss`;
     // for localstorage Encryption secretKey
