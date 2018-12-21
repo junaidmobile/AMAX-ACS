@@ -16,7 +16,7 @@ import { Constants } from '../../constant';
 export class GlobalProvider {
   /*Configuration of the app build */
   appBuildConfig = {
-    version: 'V1.0.8',
+    version: 'V1.1.0',
     fullYear: (new Date).getFullYear().toString()
   }
   constructor(public http: HttpClient, private app: App, public alertCtrl: AlertController, public toastCtrl: ToastController, public platform: Platform) {
