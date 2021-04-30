@@ -14,7 +14,8 @@ import { Notifications } from '../../notifications/notifications';
 import { Constants } from '../../../constant';
 import moment from 'moment';
 
-export class GetAirWayBillHistoryForHHT { pi_strAirwayBillNo: string }
+export class GetAirWayBillHistoryForHHT { pi_strAirwayBillNo: string;pi_strUserName: any;
+ }
 
 export class CartingOrder { pi_strMawbNo: string; pi_strAirline: number; pi_strFlightNo: string; pi_strFlightDate: string; pi_strOffpoint: string; pi_intAwbStatus: number; pi_UserName: string }
 @Component({
@@ -41,6 +42,7 @@ export class IssueCartingOrder implements OnInit {
     isCOCreated: boolean;
     airWayBillHistory: GetAirWayBillHistoryForHHT;
     ResponseDetails: any;
+  private _strUserName: any;
     constructor(public navCtrl: NavController, public alertCtrl: AlertController, public http: HttpProvider, public global: GlobalProvider, public datePicker: DatePicker) {
         this.cartingOrder = new CartingOrder();
         this.airWayBillHistory = new GetAirWayBillHistoryForHHT();
@@ -51,7 +53,7 @@ export class IssueCartingOrder implements OnInit {
 
     // on Page Load
     ngOnInit() {
-
+      this._strUserName = JSON.parse(this.global.get('userResp')).UserName[0];
     }
 
     // fetch the CO Details
@@ -78,6 +80,7 @@ export class IssueCartingOrder implements OnInit {
     getDetails() {
         this.showDiv = false;
         this.airWayBillHistory.pi_strAirwayBillNo = this.Prefix + this.MAWBNo;
+        this.airWayBillHistory.pi_strUserName = this._strUserName
 
         this.http.getHttpPostRequest(Constants.GMAX_Services.Orders.cartingOrder.carting_Order_Details, this.airWayBillHistory).then((response) => {
             //console.log("Response : ", JSON.stringify(response));
@@ -122,7 +125,7 @@ export class IssueCartingOrder implements OnInit {
                 // console.log("RESP : ", this.Resp)
                 this.showDiv = true;
             } else {
-                this.global.showAlert("Shipment does not exist.");
+                this.global.showAlert("MAWB number is invalid.");
             }
         }, (error) => { });
     }
@@ -180,7 +183,7 @@ export class IssueCartingOrder implements OnInit {
 
     }
 
-    // Submit the CO Details 
+    // Submit the CO Details
     submitCO() {
         this.cartingOrder.pi_strMawbNo = this.Prefix + this.MAWBNo;
         this.cartingOrder.pi_intAwbStatus = 7;
@@ -243,7 +246,7 @@ export class IssueCartingOrder implements OnInit {
     ionViewDidLoad() {
         setTimeout(() => {
             this.PrefixInput.setFocus();
-        }, 800);
+        }, 500);
     }
 
     focusNextInput() {

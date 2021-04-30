@@ -15,6 +15,10 @@ import { ApplicableChargesImport } from './import-details/Applicable-charges';
 import { GlobalProvider } from '../../../providers/global/global';
 import { Notifications } from '../../notifications/notifications';
 import { IssueDOImport } from './import-details/Issue-DO';
+import { AWBGatePassSearch } from './import-details/AWB-GatePass';
+import { DeliveryDocket } from './import-details/Delivery-Docket';
+import { ScanTSPStaff } from './import-details/Scan-TSP-Staff';
+import { ULDLocation } from './import-details/ULD-Location';
 
 @Component({
   selector: 'page-dashboard-import',
@@ -72,5 +76,14 @@ export class DashboardImport implements OnInit {
   goToissueDO() {
     this.global.routePage(IssueDOImport);
   }
-
+  goGatePass() {
+    if (this.DOStat == 3 || this.DOStat == 5) { // Kale staff ID
+      this.global.routePage(ScanTSPStaff);
+    } else if (this.DOStat == 4 ||  this.DOStat == 1) { // Mial staff
+      this.global.routePage(DeliveryDocket);
+    }
+  }
+  goLocation() {
+    this.global.routePage(ULDLocation);
+  }
 }

@@ -26,19 +26,22 @@
         <ion-col>
           <ion-item>
             <ion-label floating>
-              <ion-icon ios="ios-person" md="md-person" item-start="" name="user" role="img" aria-label="username"></ion-icon>
+              <ion-icon ios="ios-person" md="md-person" item-start="" name="user" role="img" aria-label="username">
+              </ion-icon>
               Username
             </ion-label>
-            <ion-input name="username" type="text" [(ngModel)]="user.pi_strUserName" class="input input-md ng-touched ng-pristine ng-invalid"
-              clearInput required></ion-input>
+            <ion-input name="username" type="text" [(ngModel)]="user.pi_strUserName"
+              class="input input-md ng-touched ng-pristine ng-invalid" clearInput required></ion-input>
 
           </ion-item>
           <ion-item>
             <ion-label floating>
               <ion-icon ios="ios-lock" md="md-lock" item-start="" role="img" aria-label="password"></ion-icon>
-              Password</ion-label>
+              Password
+            </ion-label>
             <ion-input name="p1" type="text" *ngIf="showPwd" [(ngModel)]="user.pi_strPassword" required></ion-input>
-            <ion-input name="p2" type="password" *ngIf="!showPwd" [(ngModel)]="user.pi_strPassword" required></ion-input>
+            <ion-input name="p2" type="password" *ngIf="!showPwd" [(ngModel)]="user.pi_strPassword" required>
+            </ion-input>
             <button icon-only ion-button clear type="button" item-right (click)="showPwd=!showPwd">
               <ion-icon *ngIf="showPwd" name="eye"></ion-icon>
               <ion-icon *ngIf="!showPwd" name="eye-off"></ion-icon>
@@ -54,10 +57,27 @@
       <ion-row class="marginTop23">
         <ion-col center text-center>
           <button class="button-designed-radius" ion-button [disabled]="isInputValid()">
-            <ion-icon name="log-in" role="img" class="icon icon-md ion-md-log-in" aria-label="log in"></ion-icon>&nbsp;LOGIN</button>
+            <ion-icon name="log-in" role="img" class="icon icon-md ion-md-log-in" aria-label="log in"></ion-icon>
+            &nbsp;LOGIN
+          </button>
         </ion-col>
       </ion-row>
+
+
+
+
+
     </form>
+
+    <!-- <br>
+    <ion-row class="marginTop23">
+      <ion-col center text-center>
+        <button (click)="testMethod();" class="button-designed-radius" ion-button>
+          <ion-icon name="log-in" role="img" class="icon icon-md ion-md-log-in" aria-label="log in">
+          </ion-icon>&nbsp;test
+        </button>
+      </ion-col>
+    </ion-row> -->
   </div>
 </ion-content>
 

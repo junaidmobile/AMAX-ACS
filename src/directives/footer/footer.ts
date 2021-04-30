@@ -5,7 +5,7 @@
  * @modify date 2018-07-16 11:45:12
  * @desc [description]
 */
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { GlobalProvider } from '../../providers/global/global';
 
 @Component({
@@ -13,11 +13,15 @@ import { GlobalProvider } from '../../providers/global/global';
   templateUrl: 'footer.html'
 })
 
-export class FooterDirective {
+export class FooterDirective implements OnInit {
   appBuildConfig: any;
-
+  @Input('isCSC') isCsc: boolean;
+  color: String;
   constructor(public global: GlobalProvider) {
     this.appBuildConfig = this.global.appBuildConfig;
   }
 
+  ngOnInit() {
+    this.color = this.isCsc ? "primaryCsc" : "primary";
+  }
 }

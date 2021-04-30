@@ -16,7 +16,7 @@ import { Constants } from '../../constant';
 export class GlobalProvider {
   /*Configuration of the app build */
   appBuildConfig = {
-    version: 'V1.1.0',
+    version: 'V1.1.2',
     fullYear: (new Date).getFullYear().toString()
   }
   constructor(public http: HttpClient, private app: App, public alertCtrl: AlertController, public toastCtrl: ToastController, public platform: Platform) {
@@ -79,7 +79,7 @@ export class GlobalProvider {
       subTitle: msg,
       buttons: ['OK']
     });
-    alert.present();
+    return alert.present();
   }
 
   /* check is cordova Available*/
@@ -99,12 +99,14 @@ export class GlobalProvider {
 
   /* Encrypt and store the local storage data*/
   store(key: string, value: any) {
+
     let encryptedData = CryptoJS.AES.encrypt(JSON.stringify(value), Constants.SECRET_KEY).toString();
     window.localStorage.setItem(key, encryptedData);
   }
 
   /* get the stored localStorage Value after decryption */
   get(key: string) {
+
     let encryptedData = window.localStorage.getItem(key);
     if (encryptedData != null)
       return JSON.parse(CryptoJS.AES.decrypt(encryptedData, Constants.SECRET_KEY).toString(CryptoJS.enc.Utf8));

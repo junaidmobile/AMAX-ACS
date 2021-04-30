@@ -12,7 +12,8 @@ import { GlobalProvider } from '../../../../providers/global/global';
 import moment from 'moment';
 import { Constants } from '../../../../constant';
 
-export class ExportEGM { pi_strEGMNo: any; pi_dtFromDate: any; pi_dtToDate: any; pi_strSelection: any; pi_strAWBNo: any; po_strErrmsg: any; }
+export class ExportEGM { pi_strEGMNo: any; pi_dtFromDate: any; pi_dtToDate: any; pi_strSelection: any; pi_strAWBNo: any; po_strErrmsg: any;pi_strUserName: string;
+ }
 
 @Component({
     selector: 'page-export-EGM',
@@ -31,6 +32,7 @@ export class EGM implements OnInit {
     EGMDate: any;
     appBuildConfig: any;
     title: any;
+    private _strUserName: any;
     constructor(public navCtrl: NavController, public alertCtrl: AlertController, public http: HttpProvider, public global: GlobalProvider) {
         this.exportEGM = new ExportEGM();
         this.appBuildConfig = this.global.appBuildConfig;
@@ -39,6 +41,7 @@ export class EGM implements OnInit {
 
 
     ngOnInit() {
+      this._strUserName = JSON.parse(this.global.get('userResp')).UserName[0];
 
     }
     submitDetails() {
@@ -62,10 +65,12 @@ export class EGM implements OnInit {
         this.exportEGM.po_strErrmsg = "";
         this.exportEGM.pi_dtFromDate = TodayDate;
         this.exportEGM.pi_dtToDate = TodayDate;
+        this.exportEGM.pi_strUserName = this._strUserName;
         this.fetchEGMDetails();
     }
 
     fetchEGMDetails() {
+      debugger
         // check if records is not available from the first service. then fetch the records from the second service
         this.http.getHttpPostRequest(Constants.GMAX_Services.Exports.EGM, this.exportEGM).then((response) => {
             //console.log("Response : ", response);
@@ -74,7 +79,7 @@ export class EGM implements OnInit {
             } else if (response == null || response == '') {
                 this.getEGMDetails(Constants.GMAX_CSC_perishabe_URL, Constants.GMAX_Services.Exports.EGM);
             } else {
-                this.global.showAlert("Shipment does not exist.");
+                this.global.showAlert("MAWB number is invalid.");
             }
         }, (error) => { });
     }
@@ -85,7 +90,7 @@ export class EGM implements OnInit {
             if (response != null && response != "") {
                 this.setEGMDetails(response);
             } else {
-                this.global.showAlert("Shipment does not exist.");
+                this.global.showAlert("MAWB number is invalid.");
             }
         }, (error) => { });
     }

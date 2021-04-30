@@ -12,7 +12,9 @@ import { GlobalProvider } from '../../../../providers/global/global';
 import moment from 'moment';
 import { Constants } from '../../../../constant';
 
-export class ExportAWB { pi_strAirwayBillNo: any }
+export class ExportAWB { pi_strAirwayBillNo: any;pi_strUserName: any;
+
+ }
 @Component({
     selector: 'page-export-AWB-tracking',
     templateUrl: 'AWB-tracking.html'
@@ -36,6 +38,7 @@ export class AWBTracking implements OnInit {
     BAGAcceptance: any;
     EGM: any;
     title: String;
+  private _strUserID: any;
     constructor(public navCtrl: NavController, public alertCtrl: AlertController, public http: HttpProvider, public global: GlobalProvider) {
         this.exportAWB = new ExportAWB();
         this.appBuildConfig = this.global.appBuildConfig;
@@ -44,11 +47,13 @@ export class AWBTracking implements OnInit {
 
 
     ngOnInit() {
+      this._strUserID = JSON.parse(this.global.get('userResp')).UserName[0];
 
     }
 
 
     GetAWBTrackingDetails() {
+
         if (this.Prefix == undefined || (this.Prefix == '') || (this.Prefix.length < 3)) {
             this.global.showAlert("Please enter valid Prefix.");
             return;
@@ -60,10 +65,12 @@ export class AWBTracking implements OnInit {
         }
 
         this.exportAWB.pi_strAirwayBillNo = this.Prefix + this.MAWBNo;
+        this.exportAWB.pi_strUserName = this._strUserID;
         this.fetchAWBDetails();
     }
 
     fetchAWBDetails() {
+
         // check if no records available from first service, then fetch the records from other service
         this.http.getHttpPostRequest(Constants.GMAX_Services.Exports.AWB_tracking, this.exportAWB).then((response) => {
             //console.log("Response : ", JSON.stringify(response));
@@ -72,7 +79,7 @@ export class AWBTracking implements OnInit {
             } else if (response == null || response == '') {
                 this.getAWBDetails(Constants.GMAX_CSC_perishabe_URL, Constants.GMAX_Services.Exports.AWB_tracking);
             } else {
-                this.global.showAlert("Shipment does not exist.");
+                this.global.showAlert("MAWB number is invalid.");
             }
         }, (error) => { });
     }
@@ -83,7 +90,7 @@ export class AWBTracking implements OnInit {
             if (response != null && response != "" && response.hasOwnProperty('clsAirWayBill')) {
                 this.setAWBDetails(response)
             } else {
-                this.global.showAlert("Shipment does not exist.");
+                this.global.showAlert("MAWB number is invalid.");
             }
         }, (error) => { });
     }
@@ -138,7 +145,7 @@ export class AWBTracking implements OnInit {
     ionViewDidLoad() {
         setTimeout(() => {
             this.PrefixInput.setFocus();
-        }, 800);
+        }, 500);
     }
 
     // Just to animate the fab

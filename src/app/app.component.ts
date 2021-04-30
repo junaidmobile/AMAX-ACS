@@ -6,7 +6,7 @@
  * @desc [description]
 */
 import { Component, ViewChild } from '@angular/core';
-import { Platform, Events, ToastController, NavController, App } from 'ionic-angular';
+import { Platform, Events, ToastController, NavController, App, Keyboard } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
@@ -14,7 +14,7 @@ import { MainMenu } from '../pages/main-menu/main-menu';
 import { NetworkProvider } from '../providers/network/network';
 import { GlobalProvider } from '../providers/global/global';
 import { PushNotificationServiceProvider } from '../providers/push-notification-service/push-notification-service';
-
+import { HomePage } from '../pages/home/home';
 
 @Component({
   templateUrl: 'app.html'
@@ -70,7 +70,7 @@ export class MyApp {
 
       let activePage = activeNav.getActive().instance;
 
-      let whitelistPages = ["", LoginPage, MainMenu];
+      let whitelistPages = ["", LoginPage, MainMenu, HomePage];
 
       // if current page is not in whitelistPages
       // then back to home or login page first

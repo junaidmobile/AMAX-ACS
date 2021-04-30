@@ -14,6 +14,9 @@ import { FAQ } from './export-details/FAQ';
 import { ApplicableCharges } from './export-details/Applicable-charges';
 import { GlobalProvider } from '../../../providers/global/global';
 import { Notifications } from '../../notifications/notifications';
+import { CscMainMenuPage } from '../../csc-main-menu/csc-main-menu';
+import { VehicleTokenSummary } from './export-details/Vehicle-tokensummary';
+import { TGDAcceptance } from '../dashboard-import/import-details/TGD-Acceptance';
 @Component({
   selector: 'page-dashboard-export',
   templateUrl: 'dashboard-export.html'
@@ -22,8 +25,11 @@ import { Notifications } from '../../notifications/notifications';
 export class DashboardExport implements OnInit {
   ExpDashImages: any;
   appBuildConfig: any;
+  DOStat: any;
   constructor(public global: GlobalProvider) {
     this.appBuildConfig = this.global.appBuildConfig;
+
+    this.DOStat = JSON.parse(this.global.get('userResp')).Organization[0].Type[0];
   }
 
 
@@ -62,6 +68,20 @@ export class DashboardExport implements OnInit {
     this.global.routePage(ApplicableCharges);
   }
 
+  goToCscPage() {
+    this.global.routePage(CscMainMenuPage);
+  }
 
+  goToVehicleTokenSummary() {
+    this.global.routePage(VehicleTokenSummary);
+  }
+
+  goToTGD() {
+    this.global.routePage(TGDAcceptance);
+  }
+
+  goToLocation() {
+    // this.global.routePage(VehicleTokenSummary);
+  }
 
 }

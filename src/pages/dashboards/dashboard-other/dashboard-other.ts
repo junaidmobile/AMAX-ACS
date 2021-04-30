@@ -61,7 +61,7 @@ export class DashboardOther implements OnInit {
         //console.log("commDetails : ", commDetails)
         this.global.routePageWithData(ChargeCalculator, { 'commDetails': commDetails });
       } else {
-        this.global.showAlert("Shipment does not exist.");
+        this.global.showAlert("MAWB number is invalid.");
       }
     }, (error) => { });
   }

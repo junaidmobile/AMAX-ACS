@@ -77,7 +77,7 @@ export class VehicleTrackingImport implements OnInit {
                     this.tableData = response['clsUser'].NewDataSet.Table1;
                 }
             } else {
-                this.global.showAlert("Shipment does not exist.");
+                this.global.showAlert("MAWB number is invalid.");
             }
         }, (error) => { });
     }

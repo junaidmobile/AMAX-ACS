@@ -9,8 +9,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { HttpProvider } from '../../../../providers/http/http';
 import { GlobalProvider } from '../../../../providers/global/global';
-export class ImportAWB { pi_intIGMNumber: any; pi_intIGMYear: any; pi_strMAWBNo: any }
-export class HawbMaster { strMAWBNO: any; strHAWBNO: any; intIGMNo: any; intIGMYear: any }
+export class ImportAWB { pi_intIGMNumber: any; pi_intIGMYear: any; pi_strMAWBNo: any;pi_strUserName: any;
+ }
+export class HawbMaster { strMAWBNO: any; strHAWBNO: any; intIGMNo: any; intIGMYear: any;pi_strUserName: any;
+ }
 import moment from 'moment';
 import { Constants } from '../../../../constant';
 
@@ -40,6 +42,7 @@ export class AWBTrackingImport implements OnInit {
     DOStatus: any;
     isDOStat: boolean;
     title: String;
+  private _strUserID: any;
     constructor(public navCtrl: NavController, public alertCtrl: AlertController, public http: HttpProvider, public global: GlobalProvider) {
         this.importAWB = new ImportAWB();
         this.HawbMaster = new HawbMaster();
@@ -49,9 +52,11 @@ export class AWBTrackingImport implements OnInit {
 
 
     ngOnInit() {
+      this._strUserID = JSON.parse(this.global.get('userResp')).UserName[0];
     }
 
     GetAWBTrackingDetails() {
+      debugger
         this.showAWBDetails = false;
         this.showSelectedValue = false;
         this.IHM_HAWBNO_C = '';
@@ -59,6 +64,8 @@ export class AWBTrackingImport implements OnInit {
             this.importAWB.pi_intIGMNumber = 0;
             this.importAWB.pi_intIGMYear = new Date().getFullYear();
             this.importAWB.pi_strMAWBNo = this.Prefix + this.MAWBNo;
+            this.importAWB.pi_strUserName = this._strUserID;
+
             this.http.getHttpPostRequest(Constants.GMAX_Services.Imports.AWB_tracking.HAWBNO, this.importAWB).then((response) => {
 
                 //console.log("Response : ", JSON.stringify(response));
@@ -66,7 +73,7 @@ export class AWBTrackingImport implements OnInit {
                     this.IHM_HAWBNO_C = response['NewDataSet'].Table;
                     this.IHM_HAWBNO_C[0].hasOwnProperty('IHM_HAWBNO_C') && this.IHM_HAWBNO_C[0]['IHM_HAWBNO_C'][0] != '' && (this.showSelectedValue = true);
                 } else {
-                    this.global.showAlert("Shipment does not exist.");
+                    this.global.showAlert("MAWB number is invalid.");
                 }
             }, (error) => { });
         }
@@ -83,6 +90,7 @@ export class AWBTrackingImport implements OnInit {
         this.HawbMaster.intIGMNo = 0;
         this.HawbMaster.strHAWBNO = selectedVal;
         this.HawbMaster.intIGMYear = new Date().getFullYear();
+        this.HawbMaster.pi_strUserName = this._strUserID;
         this.http.getHttpPostRequest(Constants.GMAX_Services.Imports.AWB_tracking.AWB_details, this.HawbMaster).then((response) => {
             //console.log("Response : ", JSON.stringify(response));
             if (response != null && response != "" && response.hasOwnProperty('NewDataSet')) {
@@ -104,14 +112,15 @@ export class AWBTrackingImport implements OnInit {
                 }
                 this.showAWBDetails = true;
             } else {
-                this.global.showAlert("Shipment does not exist.");
+                this.global.showAlert("MAWB number is invalid.");
+                this.clearInputs();
             }
         }, (error) => { });
 
     }
 
     checkStatus(status) {
-        return (status == 'true' || status == true) ? 'Done' : (status == 'false' || status == false) ? 'Pending' : moment(status).format('DD-MMM-YYYY HH:mm');
+        return (status == 'true' || status == true) ? 'on Hold' : (status == 'false' || status == false) ? 'N.A' : moment(status).format('DD-MMM-YYYY HH:mm');
     }
 
     ionViewDidLoad() {

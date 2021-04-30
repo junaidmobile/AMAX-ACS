@@ -54,7 +54,7 @@ export class PDBalance {
                     this.showGMAXBal = true;
                     this.showMIALBal = false;
                 } else {
-                    this.global.showAlert("Shipment does not exist.");
+                    this.global.showAlert("MAWB number is invalid.");
                 }
             }, (error) => { });
         } else if (this.selectedVal == 'MIAL') {

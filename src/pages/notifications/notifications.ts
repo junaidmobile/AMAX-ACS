@@ -6,11 +6,12 @@
  * @desc [description]
 */
 import { Component } from '@angular/core';
-import { Modal, ModalController, ModalOptions, ViewController } from 'ionic-angular';
+import { Modal, ModalController, ModalOptions, ViewController, Events } from 'ionic-angular';
 import { GlobalProvider } from '../../providers/global/global';
 import { HttpProvider } from '../../providers/http/http';
 import { Constants } from '../../constant';
 import { NotificationDetail } from './notification-details/notification-detail';
+
 @Component({
     selector: 'notifications',
     templateUrl: 'notifications.html'
@@ -19,7 +20,7 @@ export class Notifications {
     appBuildConfig: any;
     notification_list: any;
     isNotified: boolean;
-    constructor(public global: GlobalProvider, private http: HttpProvider, public modalCtrl: ModalController, public viewCtrl: ViewController) {
+    constructor(public global: GlobalProvider, private http: HttpProvider, public modalCtrl: ModalController, public viewCtrl: ViewController, public event: Events) {
         this.appBuildConfig = this.global.appBuildConfig;
     }
 
@@ -38,6 +39,8 @@ export class Notifications {
             // console.log("all notifications : ", JSON.stringify(res));
             this.notification_list = res;
             this.isNotified = true;
+            window.localStorage.setItem('isNotificationsSeen', "true");
+            this.event.publish('isNotificationsSeen');
         })
     }
 

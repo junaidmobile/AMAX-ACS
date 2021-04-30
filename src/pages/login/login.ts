@@ -11,6 +11,8 @@ import { MainMenu } from '../main-menu/main-menu';
 import { HttpProvider } from '../../providers/http/http';
 import { GlobalProvider } from '../../providers/global/global';
 import { Constants } from '../../constant';
+import { HomePage } from '../home/home';
+import { TSPSuccessMessage } from '../dashboards/dashboard-import/import-details/TSP-Success-Message';
 export class User { pi_strUserName: string; pi_strPassword: string; pi_blnIsPIN: boolean };
 @Component({
   selector: 'page-login',
@@ -30,11 +32,13 @@ export class LoginPage implements OnInit {
 
   // when users login in through the app this function is called
   logIn() {
+
     if (this.isValidUser()) {
       this.user.pi_blnIsPIN = false;
       this.http.getHttpPostRequest(Constants.GMAX_Services.Login.validateUser, this.user).then((response) => {
-        //console.log("Response : ", response);
+        console.log("Response 123 : ", response);
         if (response != null && response != "") {
+
           if (this.isRemembered) {
             this.global.store('userName', this.user.pi_strUserName);
             this.global.store('password', this.user.pi_strPassword);
@@ -78,6 +82,9 @@ export class LoginPage implements OnInit {
     } else {
       this.isRemembered = false;
     }
+
+
+
   }
 
   // check input Valid
@@ -98,14 +105,23 @@ export class LoginPage implements OnInit {
     /* 1. Agent Login Type = 1,3,4,7,8.
        2. Airline Login Type = 2. */
 
-    (Organization.Type[0] == '1' || Organization.Type[0] == '3' || Organization.Type[0] == '4' || Organization.Type[0] == '7' || Organization.Type[0] == '8') ? this.gotoMenuPage('Agent') : (Organization.Type[0] == '2') ? this.gotoMenuPage('Airline') : this.global.showAlert('Invalid username and password.');
+    (Organization.Type[0] == '1' || Organization.Type[0] == '3' || Organization.Type[0] == '4' || Organization.Type[0] == '7' || Organization.Type[0] == '8' || Organization.Type[0] == '5') ? this.gotoMenuPage('Agent') : (Organization.Type[0] == '2') ? this.gotoMenuPage('Airline') : this.global.showAlert('Invalid username and password.');
 
   }
 
   gotoMenuPage(LoginType) {
     this.global.store('LoginType', LoginType);
-    this.global.setRootPage(MainMenu);
+    if (LoginType == "Agent") { this.global.setRootPage(HomePage); } else if (LoginType == "Airline") {
+      this.global.setRootPage(MainMenu);
+    } else { }
   }
+
+  // testMethod() {
+
+  //   this.global.setRootPage(TSPSuccessMessage);
+
+
+  // }
 
 
 }

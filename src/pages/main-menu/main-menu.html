@@ -1,11 +1,16 @@
 <ion-header>
     <ion-navbar no-border-bottom>
         <ion-title id="Dashboard" center text-center [ngClass]="{'marginLeft70': isAndroid === true}">
-            Main Menu
+            MCSCAPL
         </ion-title>
         <ion-buttons right>
             <button id="notification-button" ion-button icon-only (click)="notifications()">
-                <ion-icon ios="ios-notifications" md="md-notifications">
+                <ion-icon ios="ios-notifications" md="md-notifications"
+                    [ngClass]="{'shake': !isNotificationSeen && !hideClass}">
+                    <ion-badge id="notifications-badge"
+                        [ngClass]="!isNotificationSeen && !hideClass ? 'notifications-badge' : 'notifications-badge-update'"
+                        color="danger" *ngIf="!isNotificationSeen" style="padding: 2px 7px;min-width: 8px;">{{count}}
+                    </ion-badge>
                 </ion-icon>
             </button>
             <button ion-button icon-only (click)="logOut()">

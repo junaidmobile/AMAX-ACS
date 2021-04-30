@@ -14,18 +14,19 @@
                 <ion-grid>
                     <ion-row>
                         <ion-col col-3>
-                            <ion-label color="primary" class="fontSize12 marginSet" fixed>AWB No.
+                            <ion-label color="primary" class="fontSize12 marginSet" fixed>MAWB No.
                                 <font color="red" class="margin12">*</font>
                             </ion-label>
                         </ion-col>
                         <ion-col ion-item col-3>
-                            <ion-input type="tel" class="fontSize12" [(ngModel)]="Prefix" placeholder="PREFIX" name="prefix"
-                                pattern="[0-9]*" maxlength="3" (ionChange)="focusNextInput()" #PrefixValue></ion-input>
+                            <ion-input type="tel" class="fontSize12" [(ngModel)]="Prefix" placeholder="PREFIX"
+                                name="prefix" pattern="[0-9]*" maxlength="3" (ionChange)="focusNextInput()"
+                                #PrefixValue></ion-input>
                         </ion-col>
                         <!-- <ion-col col-1></ion-col> -->
                         <ion-col ion-item col-4>
-                            <ion-input type="tel" class="fontSize12" [(ngModel)]="MAWBNo" placeholder="MAWB No." name="MAWBNo"
-                                pattern="[0-9]*" maxlength="8" #MAWBNoValue></ion-input>
+                            <ion-input type="tel" class="fontSize12" [(ngModel)]="MAWBNo" placeholder="MAWB No."
+                                name="MAWBNo" pattern="[0-9]*" maxlength="8" #MAWBNoValue></ion-input>
                         </ion-col>
                         <ion-col col-2>
                             <button ion-fab class="ion-fab34">
@@ -41,8 +42,8 @@
         <div *ngIf="showDiv">
             <ion-item>
                 <ion-label color="primary" class="fontSize12">ASI</ion-label>
-                <ion-input type="text" class="fontSize12" name="ASI" [(ngModel)]="timeStampASI" placeholder="Action awaiting"
-                    [disabled]="true" text-right></ion-input>
+                <ion-input type="text" class="fontSize12" name="ASI" [(ngModel)]="timeStampASI"
+                    placeholder="Action awaiting" [disabled]="true" text-right></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label color="primary" class="fontSize12">CO Request</ion-label>
@@ -56,8 +57,8 @@
             </ion-item>
             <ion-item>
                 <ion-label color="primary" class="fontSize12">TSP</ion-label>
-                <ion-input type="text" class="fontSize12" name="TSP" [(ngModel)]="timeStampTSP" placeholder="Action awaiting"
-                    [disabled]="true" text-right></ion-input>
+                <ion-input type="text" class="fontSize12" name="TSP" [(ngModel)]="timeStampTSP"
+                    placeholder="Action awaiting" [disabled]="true" text-right></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label color="primary" class="fontSize12">Cargo Acceptance</ion-label>
@@ -66,8 +67,8 @@
             </ion-item>
             <ion-item>
                 <ion-label color="primary" class="fontSize12">LEO</ion-label>
-                <ion-input type="text" class="fontSize12" name="LEO" placeholder="Action awaiting" [(ngModel)]="LeoConfirmed"
-                    [disabled]="true" text-right></ion-input>
+                <ion-input type="text" class="fontSize12" name="LEO" placeholder="Action awaiting"
+                    [(ngModel)]="LeoConfirmed" [disabled]="true" text-right></ion-input>
             </ion-item>
             <!-- <ion-item>
                     <ion-label color="primary" class="fontSize12">Security</ion-label>
@@ -79,8 +80,8 @@
                 </ion-item> -->
             <ion-item>
                 <ion-label color="primary" class="fontSize12">RCS</ion-label>
-                <ion-input type="text" class="fontSize12" name="RCS" placeholder="Action awaiting" [(ngModel)]="BAGAcceptance"
-                    [disabled]="true" text-right></ion-input>
+                <ion-input type="text" class="fontSize12" name="RCS" placeholder="Action awaiting"
+                    [(ngModel)]="BAGAcceptance" [disabled]="true" text-right></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label color="primary" class="fontSize12">EGM</ion-label>

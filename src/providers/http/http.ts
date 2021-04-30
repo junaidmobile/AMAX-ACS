@@ -22,20 +22,25 @@ export class HttpProvider {
   }
 
 
-  public getHttpRequest(service_name: string, requestMethod: RequestMethod, body?: any) {
+  public getHttpRequest(service_name: string, requestMethod: RequestMethod, body?: any, isCsc?: boolean) {
+
     let connectionStatus = navigator.onLine ? 'online' : 'offline';
     return new Promise((resolve, reject) => {
       // We're using Angular Http provider to request the data,
       // then on the response it'll map the JSON data to a parsed JS object.
       // Next we process the data and resolve the promise with the new data.
       if (connectionStatus == 'online') {
+
         let requestOptionArgs: RequestOptionsArgs;
         requestOptionArgs = {
-          url: Constants.GMAX_Service_URL + service_name,
+          url: isCsc ? Constants.CSC_Service_URL + service_name : Constants.GMAX_Service_URL + service_name,
           method: requestMethod,
           body: body,
           headers: new Headers({
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "access-control-allow-methods":
+            'GET, POST', "access-control-allow-origin": "*",
+            "Access-Control-Allow-Credentials": 'true'
             //add any extra custom headers you need
           })
         }
@@ -46,6 +51,8 @@ export class HttpProvider {
         this.http.request(service_name, requestOptionArgs)
           .map(res => res.json())
           .subscribe(data => {
+
+
             //console.log("Data ", data)
             let resolvedDataToJson;
             // we've got back the raw data, now generate the core schedule data
@@ -65,6 +72,7 @@ export class HttpProvider {
             //console.log("Error Made" + JSON.stringify(error.json()));
             let err = error.json();
             if (err.hasOwnProperty('Message')) {
+              console.log(err.Message)
               this.showErrorToast(err.Message)
             }
             loader.dismiss().then(() => reject(error));
@@ -119,7 +127,7 @@ export class HttpProvider {
 
   }
 
-  public getHttpRequest1(url: string, service_name: string, requestMethod: RequestMethod, body?: any) {
+  public getHttpRequest1(url: string, service_name: string, requestMethod: RequestMethod, body?: any, isCsc?: boolean) {
     let connectionStatus = navigator.onLine ? 'online' : 'offline';
     return new Promise((resolve, reject) => {
       if (connectionStatus == 'online') {
@@ -128,7 +136,7 @@ export class HttpProvider {
         // Next we process the data and resolve the promise with the new data.
         let requestOptionArgs: RequestOptionsArgs;
         requestOptionArgs = {
-          url: url + service_name,
+          url: isCsc ? Constants.CSC_Service_URL + service_name : Constants.GMAX_Service_URL + service_name,
           method: requestMethod,
           body: body,
           headers: new Headers({
@@ -175,6 +183,105 @@ export class HttpProvider {
     });
   }
 
+  public getHttpRequest2(url: string, service_name: string, requestMethod: RequestMethod, body?: any, isCsc?: boolean) {
+    let connectionStatus = navigator.onLine ? 'online' : 'offline';
+    return new Promise((resolve, reject) => {
+      if (connectionStatus == 'online') {
+        // We're using Angular Http provider to request the data,
+        // then on the response it'll map the JSON data to a parsed JS object.
+        // Next we process the data and resolve the promise with the new data.
+        let requestOptionArgs: RequestOptionsArgs;
+        requestOptionArgs = {
+          url: Constants.GMAX_CSC_perishabe_URL_Routing + service_name,
+          method: requestMethod,
+          body: body,
+          headers: new Headers({
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+            //add any extra custom headers you need
+          })
+        }
+
+        //show the loader before starting the request
+        let loader = this.showLoader();
+
+        this.http.request(service_name, requestOptionArgs)
+          .map(res => res.json())
+          .subscribe(data => {
+            //console.log("Data ", data)
+            let resolvedDataToJson;
+            // we've got back the raw data, now generate the core schedule data
+            // and save the data for later reference
+
+            // Dismiss the loader and return response back.
+
+            xml2js.parseString(data.d, function (err, result) {
+              console.dir(result); // Prints JSON object!
+              resolvedDataToJson = result;
+            });
+
+            loader.dismiss().then(() => resolve(resolvedDataToJson));
+
+          }, (error) => {
+            // Dismiss the loader and return error back.
+            //console.log("Error Made" + JSON.stringify(error.json()));
+            let err = error.json();
+            if (err.hasOwnProperty('Message')) {
+              this.showErrorToast(err.Message)
+            }
+            loader.dismiss().then(() => reject(error));
+
+          });
+      } else if (connectionStatus == "offline") {
+        this.showErrorMessage('No Internet Connection');
+        reject('');
+      }
+    });
+  }
+
+
+
+  public postSMS(url: string) {
+
+    let connectionStatus = navigator.onLine ? 'online' : 'offline';
+    return new Promise((resolve, reject) => {
+      if (connectionStatus == 'online') {
+        // We're using Angular Http provider to request the data,
+        // then on the response it'll map the JSON data to a parsed JS object.
+        // Next we process the data and resolve the promise with the new data.
+        let requestOptionArgs: RequestOptionsArgs;
+        requestOptionArgs = {
+          url: url,
+          headers: new Headers({
+            "Authorization": "Basic " + Constants.REST_API_KEY,
+            "Content-Type": "application/json"
+          })
+        }
+
+        //show the loader before starting the request
+        let loader = this.showLoader();
+
+        this.http.request(url)
+          .map(res => res.json())
+          .subscribe(data => {
+
+            loader.dismiss().then(() => resolve(data));
+
+          }, (error) => {
+            // Dismiss the loader and return error back.
+            //console.log("Error Made" + JSON.stringify(error.json()))
+
+            loader.dismiss().then(() => reject(error));
+
+          });
+      } else if (connectionStatus == "offline") {
+        this.showErrorMessage('No Internet Connection');
+        reject('');
+      }
+    });
+
+  }
+
   public getHttpGetRequest(url: string) {
     return this.getRequest(url, RequestMethod.Get);
   }
@@ -183,17 +290,24 @@ export class HttpProvider {
     return this.getHttpRequest(url, RequestMethod.Put, body);
   }
 
-  public getHttpPostRequest(url: string, body?: any) {
-    return this.getHttpRequest(url, RequestMethod.Post, body);
+  public getHttpPostRequest(url: string, body?: any, isCsc?: boolean) {
+
+    return this.getHttpRequest(url, RequestMethod.Post, body, isCsc);
   }
 
-  public getHttpPostRequest1(url: string, service_name: string, body?: any) {
-    return this.getHttpRequest1(url, service_name, RequestMethod.Post, body);
+  public getHttpPostRequest1(url: string, service_name: string, body?: any, csc?: boolean) {
+    return this.getHttpRequest1(url, service_name, RequestMethod.Post, body, csc);
+  }
+  public getHttpPostRequest2(url: string, service_name: string, body?: any, csc?: boolean) {
+    return this.getHttpRequest2(url, service_name, RequestMethod.Post, body, csc);
   }
 
-
+  public post(url: string) {
+    return this.postSMS(url);
+  }
   private showLoader() {
     let loader = this.loadingCtrl.create({
+      showBackdrop: true, spinner: "ios", dismissOnPageChange: true,
       content: "Loading..."
     });
 
