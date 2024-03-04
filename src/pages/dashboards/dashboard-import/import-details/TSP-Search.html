@@ -1,0 +1,209 @@
+<style>
+  .vtsummery {
+    text-align: center;
+    background: red;
+    color: #fff;
+  }
+
+  .gpstatus {
+    background-color: #444444 !important;
+    color: white !important;
+  }
+
+  .list-ios .item-block .item-inner {
+    border-bottom: transparent !important;
+  }
+
+  .flightdetail {
+    background-color: #1EA1CC !important;
+    border-radius: 10px !important;
+    color: #fff !important;
+  }
+
+  .flightdetailgray {
+    background-color: lightgray !important;
+    border-radius: 10px !important;
+    color: #000000 !important;
+  }
+
+  ion-icon {
+    color: #fff !important;
+    float: right;
+  }
+
+  .text-input {
+    text-align: right !important;
+  }
+</style>
+
+<Gmax-header [title]="title">
+</Gmax-header>
+
+<ion-content class="marginTop44">
+  <div>
+
+    <!-- <ion-row> -->
+    <!-- <div center text-center class="imgClassDashboard">
+      <img src="assets/imgs/CSIAGVKlogo.jpg" width="100%">
+    </div> -->
+    <!-- </ion-row> -->
+  </div>
+  <div>
+
+
+    <ion-grid>
+      <ion-row>
+        <ion-col col-md-5>
+          <ion-label color="primary" class="fontSize12 marginSet" fixed>TSP(BC) No.
+          </ion-label>
+        </ion-col>
+        <ion-col ion-item col-md-3>
+          <!-- <ion-input type="text" disabled="disabled" maxlength="7" style="background-color: lightgray;" [(ngModel)]="TSPPrefix"
+            class="fontSize12" placeholder="" name="TSPPrefix">
+          </ion-input> -->
+          <ion-input type="text" maxlength="7" style="background-color: lightgray;" [(ngModel)]="TSPPrefix"
+            class="fontSize12" placeholder="" name="TSPPrefix">
+          </ion-input>
+        </ion-col>
+        <ion-col ion-item col-4>
+          <ion-input type="text" maxlength="12" [(ngModel)]="TSPOTP" (ionChange)="onChange()" class="fontSize12 text-align" placeholder="OTP"
+            name="TSPOTP" #OTPValue>
+          </ion-input>
+        </ion-col>
+        <ion-col col-8>
+        </ion-col>
+        <ion-col col-2>
+          <button ion-fab class="ion-fab34">
+            <ion-icon (click)="GetTSPDetail();" name="md-search" class="margin4"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col col-2>
+          <button ion-fab class="ion-fab34">
+            <ion-icon (click)="scanBarCode();" name="md-qr-scanner" class="margin4"></ion-icon>
+          </button>
+        </ion-col>
+        <!-- <ion-col col-2>
+          <ion-label color="primary" class="fontSize12 marginSet" fixed>TSP No.
+          </ion-label>
+        </ion-col>
+        <ion-col ion-item col-6>
+          <ion-input type="text" [(ngModel)]="TSPNumber" class="fontSize12" placeholder="TSP Number" name="TSPNumber">
+          </ion-input>
+        </ion-col>
+        <ion-col col-2>
+          <button (click)="GetTSPDetail()" ion-fab class="ion-fab34">
+            <ion-icon name="md-search" class="margin4"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col col-2>
+          <button ion-fab class="ion-fab34">
+            <ion-icon (click)="scanBarCode();" name="md-qr-scanner" class="margin4"></ion-icon>
+          </button>
+        </ion-col> -->
+        <ion-col col-12 style="text-align: center;">
+          OR
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <form (ngSubmit)="GetMAWBDetail()">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-md-3>
+            <ion-label color="primary" class="fontSize12 marginSet" fixed>MAWB Number
+            </ion-label>
+          </ion-col>
+          <ion-col ion-item col-md-3>
+            <ion-input type="tel" class="fontSize12" [(ngModel)]="Prefix" placeholder="Prefix" name="prefix"
+              pattern="[0-9]*" maxlength="5" (ionChange)="focusNextInput()" #PrefixValue></ion-input>
+          </ion-col>
+          <!-- <ion-col col-1></ion-col> -->
+          <ion-col ion-item col-md-4>
+            <ion-input type="tel" class="fontSize12" [(ngModel)]="MAWBNo" placeholder="MAWB No." name="MAWBNo"
+              pattern="[0-9]*" maxlength="8" #MAWBNoValue></ion-input>
+          </ion-col>
+          <ion-col col-2>
+            <button ion-fab class="ion-fab34">
+              <ion-icon name="md-search" class="margin4"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+    <ion-list *ngIf="showDiv">
+      <ion-grid>
+        <ion-row>
+
+          <ion-col col-7>
+            <ion-item class="item " href="#">
+              HAWB List
+            </ion-item>
+          </ion-col>
+          <ion-col col-5>
+            <ion-item class="item " href="#">
+              Details
+            </ion-item>
+          </ion-col>
+          <ion-col col-12 *ngFor="let tspData of tspdetails; index as i;">
+            <ion-item *ngIf="tspData.HAWBNo != '' && tspData.CHADCubeStatus != 'false' " class="item flightdetail" href="#" (click)='goTOTSPQRCode(tspData.HAWBNo.toString());'>
+              {{tspData.HAWBNo}}
+              <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+            </ion-item>
+
+            <ion-item *ngIf="tspData.HAWBNo != '' && tspData.CHADCubeStatus == 'false'" class="item flightdetail" href="#"
+              (click)='notSubscribedMsg();'>
+              {{tspData.HAWBNo}}
+              <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+            </ion-item>
+
+            <ion-item *ngIf="tspData.HAWBNo == '' && tspData.CHADCubeStatus != 'false'" class="item flightdetail" href="#" (click)='goTOTSPQRCode(tspData.HAWBNo.toString());'>
+              <!-- {{tspData.HAWBNo}} --> Direct
+              <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+            </ion-item>
+
+            <ion-item *ngIf="tspData.HAWBNo == '' && tspData.CHADCubeStatus == 'false'" class="item flightdetail" href="#"
+              (click)='notSubscribedMsg();'>
+              <!-- {{tspData.HAWBNo}} --> Direct
+              <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+            </ion-item>
+            <!-- <ion-item *ngIf="tspData.GPStatus != 1" class="item flightdetailgray" href="#" >
+              {{tspData.HAWBNo}}
+              <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+            </ion-item> -->
+          </ion-col>
+
+
+          <!-- <ion-col col-12>
+            <ion-item class="item flightdetail" href="#" (click)="goTOTSPQRCode()">
+              BOMA 490140
+              <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+            </ion-item>
+          </ion-col>
+
+          <ion-col col-12>
+            <ion-item class="item flightdetail" href="#">
+              BOMA 490141
+              <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+            </ion-item>
+          </ion-col> -->
+
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+  </div>
+
+</ion-content>
+<ion-fab right bottom #fab1 style="bottom:38px !important">
+  <button class="pop-in" ion-fab mini color="primary" [ngClass]="{'pop-out': fabGone}" (click)="clearInputs()">
+    <ion-icon name="close"></ion-icon>
+  </button>
+</ion-fab>
+<Gmax-footer></Gmax-footer>

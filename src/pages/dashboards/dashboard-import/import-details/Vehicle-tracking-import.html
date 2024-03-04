@@ -6,49 +6,116 @@
 
         <!-- <ion-row> -->
         <div center text-center class="imgClassDashboard">
-            <img src="assets/imgs/CSIAGVKlogo.jpg" width="100%">
+            <img src="assets/imgs/CSIAGVKlogo.png" width="100%">
         </div>
         <!-- </ion-row> -->
     </div>
     <div>
-        <form (ngSubmit)="GetVehicleDetails()">
-            <ion-list>
-                <ion-grid>
-                    <ion-row>
-                        <ion-col col-3>
-                            <ion-label color="primary" class="fontSize12 marginSet" fixed>MAWB No.
-                                <font color="red" class="margin12">*</font>
-                            </ion-label>
-                        </ion-col>
-                        <ion-col ion-item col-3>
-                            <ion-input type="tel" class="fontSize12" name="prefix" [(ngModel)]="Prefix" placeholder="PREFIX"
-                                pattern="[0-9]*" maxlength="3" (ionChange)="focusNextInput()" #PrefixValue></ion-input>
-                        </ion-col>
-                        <!-- <ion-col col-1></ion-col> -->
-                        <ion-col ion-item col-4>
-                            <ion-input type="tel" class="fontSize12" name="MAWBNo" [(ngModel)]="MAWBNo" placeholder="MAWB No."
-                                pattern="[0-9]*" maxlength="8" #MAWBNoValue></ion-input>
+        <!-- <form (ngSubmit)="GetVehicleDetails()"> -->
+        <!-- <form (ngSubmit)="getVehicleDetails()"> -->
+        <ion-list>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-3>
+                        <ion-label color="primary" class="fontSize12 marginSet" fixed>MAWB No.
+                            <font color="red" class="margin12">*</font>
+                        </ion-label>
+                    </ion-col>
+                    <ion-col ion-item col-3>
+                        <ion-input type="tel" class="fontSize12" name="prefix" [(ngModel)]="Prefix" placeholder="PREFIX"
+                            pattern="[0-9]*" maxlength="5" (ionChange)="focusNextInput()" #PrefixValue></ion-input>
+                    </ion-col>
+                    <!-- <ion-col col-1></ion-col> -->
+                    <ion-col ion-item col-4>
+                        <ion-input type="tel" class="fontSize12" name="MAWBNo" [(ngModel)]="MAWBNo"
+                            placeholder="MAWB No." pattern="[0-9]*" maxlength="8" #MAWBNoValue
+                            (ionChange)="focusSpinner()"></ion-input>
 
-                        </ion-col>
-                        <ion-col col-2>
+                    </ion-col>
+                    <!-- <ion-col col-2>
                             <button ion-fab class="ion-fab34">
                                 <ion-icon name="md-search" class="margin4"></ion-icon>
                             </button>
-                        </ion-col>
-                    </ion-row>
-                </ion-grid>
-            </ion-list>
-            <div *ngIf="showDiv">
-                <ion-grid>
+                        </ion-col> -->
+                </ion-row>
+            </ion-grid>
+        </ion-list>
+
+        <ion-list>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-3>
+                        <ion-label color="primary" class="fontSize12 marginSet" fixed>HAWB No.
+                        </ion-label>
+                    </ion-col>
+                    <ion-col width="50%">
+
+                        <!-- <ion-select col-12 [(ngModel)]="HAWBNumber" (ionChange)="onServiceTypeChange(HAWBNumber,$event);"
+                            multiple="false" interface="popover">
+                            <ion-option selected value="0">Select HAWB No.</ion-option>
+                            <ion-option *ngFor="let dt of dropdownHAWB; let idx = index" [value]="dt.HAWBNo">{{dt.HAWBNo[0].toString()}}
+                            </ion-option>
+                          </ion-select> -->
+
+                        <ion-select col-10 [(ngModel)]="HAWB" (ionChange)="onHAWBChange($event)" name="hawb"
+                            multiple="false" interface="popover" #spinner>
+
+                            <ion-option selected value="0">Select</ion-option>
+                            <!-- style="border: 1px solid #cc0d0d; max-width: 95%;">slot="end" -->
+
+                            <ion-option *ngFor="let HAWB of HAWBS" [value]="HAWB">{{ HAWB }}</ion-option>
+                        </ion-select>
+                    </ion-col>
+
+                    <!-- <ion-col col-2>
+                            <button ion-fab class="ion-fab34" (click)="GetVehicleDetails()">
+                                <ion-icon name="md-search" class="margin4"></ion-icon>
+                            </button>
+                        </ion-col> -->
+                </ion-row>
+            </ion-grid>
+        </ion-list>
+
+    </div>
+
+    <!-- <ion-accordion-group ng-repeat="EVT in EVTS">
+                <ion-accordion value="EVTS">
+                    <ion-item slot="header">
+                        <ion-label>EVT number</ion-label>
+                    </ion-item> -->
+    <ion-grid>
+        <ion-list class="accordion-list">
+            <!-- First Level -->
+            <ion-list-header *ngFor="let item of EVTS; let i = index" no-lines no-padding>
+                <!-- Toggle Button -->
+                <button style="
+                background-color: #1EA1CC;color: white;
+      margin-bottom: 4px;
+      padding-left: 20px;
+                border-top-left-radius: 25px;
+                border-bottom-right-radius: 25px;
+                font-size: small;width: 100%;
+            " (click)="toggleSection(i)" detail-none
+                    [ngClass]="{'section-active': item.open, 'section': !item.open}" text-justify>
+                    <ion-icon item-left name="ios-arrow-dropright-outline" *ngIf="!item.open"></ion-icon>
+                    <ion-icon item-left name="ios-arrow-dropdown-outline" *ngIf="item.open"></ion-icon>
+                    {{ item.TokenNo[0] }}
+                </button>
+
+
+                <ion-grid *ngIf="item.open">
                     <ion-row justify-content-start>
-                        <table id="tblNews" border="1" style="width:100%;table-layout:fixed;word-break:break-word;border-color: white;margin-top: 2%;">
+                        <table id="tblNews" border="1"
+                            style="width:100%;table-layout:fixed;word-break:break-word;border-color: white;margin-top: 2%;">
                             <thead>
                                 <tr>
-                                    <th height="30" style="background-color:rgb(208, 225, 244);padding: 3px 3px 3px 0px;font-size:14px"
+                                    <th height="30"
+                                        style="background-color:rgb(208, 225, 244);padding: 3px 3px 3px 0px;font-size:14px"
                                         align="center">
                                         EVT Number
                                     </th>
-                                    <th height="30" style="background-color:rgb(208, 225, 244);padding: 3px 3px 3px 0px;font-size:14px;"
+                                    <th height="30"
+                                        style="background-color:rgb(208, 225, 244);padding: 3px 3px 3px 0px;font-size:14px;"
                                         align="center">
                                         Vehicle No.
                                     </th>
@@ -56,57 +123,155 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td height="30" style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px"
+                                    <td height="30"
+                                        style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px"
                                         align="center">
-                                        {{tableData.TokenNo}}
+                                        {{item.TokenNo}}
                                     </td>
-                                    <td height="30" style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px"
+                                    <td height="30"
+                                        style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px"
                                         align="center">
-                                        {{tableData.VehicleNo}}
+                                        {{item.VehicleNo}}
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </ion-row>
-                </ion-grid>
 
-                <!-- <ion-list> -->
-                <div *ngIf="false">
-                    <ion-item>
-                        <ion-label color="primary" class="fontSize12">Line Area</ion-label>
-                        <ion-input type="text" name="lineArea" class="fontSize12" [(ngModel)]="VehicleTrackResp.FlightNo[0]"
-                            placeholder="" [disabled]="true" maxlength="20" text-right></ion-input>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label color="primary" class="fontSize12">Gate-IN</ion-label>
-                        <ion-input type="text" name="Gate-IN" class="fontSize12" [(ngModel)]="VehicleTrackResp.FlightDt[0]"
-                            placeholder="" [disabled]="true" maxlength="20" text-right></ion-input>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label color="primary" class="fontSize12">Dock-IN</ion-label>
-                        <ion-input type="text" name="Dock-IN" class="fontSize12" [(ngModel)]="VehicleTrackResp.DN_TOTAL_NPR[0]"
-                            placeholder="" [disabled]="true" maxlength="20" text-right></ion-input>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label color="primary" class="fontSize12">Dock-OUT</ion-label>
-                        <ion-input type="text" name="Dock-OUT" class="fontSize12" [(ngModel)]="VehicleTrackResp.DN_TOT_WGHT_REC_KG[0]"
-                            placeholder="" [disabled]="true" maxlength="20" text-right></ion-input>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label color="primary" class="fontSize12">Gate-OUT</ion-label>
-                        <ion-input type="text" name="Gate-OUT" class="fontSize12" [(ngModel)]="VehicleTrackResp.Loc[0]"
-                            placeholder="" [disabled]="true" maxlength="20" text-right></ion-input>
-                    </ion-item>
-                </div>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-            </div>
-        </form>
-    </div>
+                    <ion-row>
+                        <table id="tblNews"
+                            style="width:100%;table-layout:fixed;word-break:break-word;border-color: white;margin-top: 2%;">
+
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 3px 3px 3px 0px;font-size:14px;border-bottom: 1px solid #d1d1e0;"
+                                        align="center">
+                                        Gate-IN
+                                    </td>
+                                    <td style="padding: 3px 3px 3px 0px;font-size:14px;border-bottom: 1px solid #d1d1e0;width: 50px;"
+                                        align="left">
+                                        <ion-icon *ngIf="item.IsGateIn[0]=='true'"
+                                            class="margin4 icon icon-md ion-md-checkmark-circle" name="checkmark-circle"
+                                            style="padding: 7px; color: green;">
+                                        </ion-icon>
+                                        <ion-icon *ngIf="item.IsGateIn[0]=='false'"
+                                            class="margin4 icon icon-md ion-md-close-circle" name="close-circle"
+                                            style="padding: 7px; color: red;"></ion-icon>
+
+
+                                    </td>
+                                    <td style="padding: 3px 3px 3px 10px;font-size:14px;border-bottom: 1px solid #d1d1e0;"
+                                        align="left">
+                                        {{myGateInDate[i]}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </ion-row>
+
+                    <ion-row>
+                        <table id="tblNews"
+                            style="width:100%;table-layout:fixed;word-break:break-word;border-color: white;margin-top: 2%;">
+
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 3px 3px 3px 0px;font-size:14px;border-bottom: 1px solid #d1d1e0;"
+                                        align="center">
+                                        Dock-IN
+                                    </td>
+                                    <td style="padding: 3px 3px 3px 0px;font-size:14px;border-bottom: 1px solid #d1d1e0;width: 50px;"
+                                        align="left">
+                                        <ion-icon *ngIf="item.IsDockIn[0]=='true'"
+                                            class="margin4 icon icon-md ion-md-checkmark-circle" name="checkmark-circle"
+                                            style="padding: 7px; color: green;">
+                                        </ion-icon>
+                                        <ion-icon *ngIf="item.IsDockIn[0]=='false'"
+                                            class="margin4 icon icon-md ion-md-close-circle" name="close-circle"
+                                            style="padding: 7px; color: red;"></ion-icon>
+
+                                    </td>
+                                    <td style="padding: 3px 3px 3px 10px;font-size:14px;border-bottom: 1px solid #d1d1e0;"
+                                        align="left">
+                                        {{myDockInDate[i]}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </ion-row>
+
+                    <ion-row>
+                        <table id="tblNews"
+                            style="width:100%;table-layout:fixed;word-break:break-word;border-color: white;margin-top: 2%;">
+
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 3px 3px 3px 0px;font-size:14px;border-bottom: 1px solid #d1d1e0;"
+                                        align="center">
+                                        Dock-OUT
+                                    </td>
+                                    <td style="padding: 3px 3px 3px 0px;font-size:14px;border-bottom: 1px solid #d1d1e0;width: 50px;"
+                                        align="left">
+                                        <ion-icon *ngIf="item.IsDockOut[0]=='true'"
+                                            class="margin4 icon icon-md ion-md-checkmark-circle" name="checkmark-circle"
+                                            style="padding: 7px; color: green;">
+                                        </ion-icon>
+                                        <ion-icon *ngIf="item.IsDockOut[0]=='false'"
+                                            class="margin4 icon icon-md ion-md-close-circle" name="close-circle"
+                                            style="padding: 7px; color: red;"></ion-icon>
+                                    </td>
+                                    <td style="padding: 3px 3px 3px 10px;font-size:14px;border-bottom: 1px solid #d1d1e0;"
+                                        align="left">
+                                        {{myDockOutDate[i]}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </ion-row>
+
+                    <ion-row>
+                        <table id="tblNews"
+                            style="width:100%;table-layout:fixed;word-break:break-word;border-color: white;margin-top: 2%;">
+
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 3px 3px 3px 0px;font-size:14px;border-bottom: 1px solid #d1d1e0;"
+                                        align="center">
+                                        Gate-OUT
+                                    </td>
+                                    <td style="padding: 3px 3px 3px 0px;font-size:14px;border-bottom: 1px solid #d1d1e0;width: 50px;"
+                                        align="left">
+                                        <ion-icon *ngIf="item.IsGateOut[0]=='true'"
+                                            class="margin4 icon icon-md ion-md-checkmark-circle" name="checkmark-circle"
+                                            style="padding: 7px; color: green;">
+                                        </ion-icon>
+                                        <ion-icon *ngIf="item.IsGateOut[0]=='false'"
+                                            class="margin4 icon icon-md ion-md-close-circle" name="close-circle"
+                                            style="padding: 7px; color: red;"></ion-icon>
+
+                                    </td>
+                                    <td style="padding: 3px 3px 3px 10px;font-size:14px;border-bottom: 1px solid #d1d1e0;"
+                                        align="left">
+                                        {{myGateOutDate[i]}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </ion-row>
+
+
+
+                   
+                </ion-grid>
+            </ion-list-header>
+        </ion-list>
+    </ion-grid>
+    <br>
+    <br>
+
+    <!-- </form> -->
+
+
+    <!-- <button class="button-designed-radius" ion-button round (click)="scan()">Scan</button> -->
 
 </ion-content>
 <Gmax-footer></Gmax-footer>

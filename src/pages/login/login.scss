@@ -16,16 +16,17 @@ page-login {
 }
 
 .logo {
-  width: 60px;
-  height: 60px;
+  width: 90px;
+  height: 43px;
   margin: 20px auto 0;
   border-radius: 10%;
-  background: url("../assets/imgs/icon_logo.png") no-repeat;
+  background: url("../assets/imgs/AMAX_Adani_Logo.png") no-repeat;
   background-size: 100%;
 }
 
 .text-md-light {
-  color: #F36F23;
+  // color: #F36F23;
+  color: #1EA1CC;
 }
 
 .text-white {
@@ -111,7 +112,8 @@ ion-content.content-md:not([padding]) .scroll-content {
 // }
 
 .btn-img {
-    background-color: #F36F23;
+    // background-color: #F36F23;
+    background-color: #1EA1CC;
     border: 0 none;
     color: #FFFFFF;
     height: 40px;
@@ -124,7 +126,8 @@ ion-content.content-md:not([padding]) .scroll-content {
 .imgClassLogin{
     background-color:white;
      border-bottom:solid 2px;
-     border-color:#F36F23;
+    //  border-color:#F36F23;
+     border-color:#1EA1CC;
     //  margin-top: 10px;
   }
 
@@ -145,7 +148,8 @@ ion-content.content-md:not([padding]) .scroll-content {
 }
 
 .toolbar-background {
-    background-color: #F36F23;
+    // background-color: #F36F23;
+    background-color: #1EA1CC;
   }
 
   .toolbar-title-md{
@@ -156,8 +160,10 @@ ion-content.content-md:not([padding]) .scroll-content {
 
   .button-designed-radius {
     padding: 0 6rem !important;
-    border-top-left-radius: 25px;
-    border-bottom-right-radius: 25px;
+    border-top-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-top-right-radius: 6px;
     height: 3.2rem !important;
 }
 page-login{

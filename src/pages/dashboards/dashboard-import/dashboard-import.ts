@@ -19,6 +19,8 @@ import { AWBGatePassSearch } from './import-details/AWB-GatePass';
 import { DeliveryDocket } from './import-details/Delivery-Docket';
 import { ScanTSPStaff } from './import-details/Scan-TSP-Staff';
 import { ULDLocation } from './import-details/ULD-Location';
+import { VehicleTrackingImport } from './import-details/Vehicle-tracking-import';
+import { ImportScanPage } from '../../import-scan/import-scan';
 
 @Component({
   selector: 'page-dashboard-import',
@@ -55,8 +57,10 @@ export class DashboardImport implements OnInit {
   }
 
   goToVehicleTracking() {
-    // this.global.routePage(VehicleTrackingImport);
-    this.global.showAlert("COMING SOON");
+    // this.global.routePage(ImportScanPage);
+console.log("vehicle");
+    this.global.routePage(VehicleTrackingImport);
+    // this.global.showAlert("COMING SOON");
   }
 
 

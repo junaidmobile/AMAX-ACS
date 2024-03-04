@@ -1,0 +1,140 @@
+<style>
+  table {
+    width: 100%;
+  }
+
+  td,
+  th {
+    border: solid thin #1EA1CC;
+    padding: 3px !important;
+
+  }
+
+  .text-input-md {
+    margin: 0px !important;
+  }
+
+  .border {
+    border: solid thin gray;
+    padding: 3px;
+    background-color: lightgray;
+
+  }
+
+  .text-input-ios {
+    margin: 0px !important;
+  }
+
+  .text-right {
+    text-align: right !important;
+  }
+</style>
+<Gmax-header [title]="title">
+</Gmax-header>
+
+<ion-content class="marginTop44">
+  <div>
+
+    <!-- <ion-row> -->
+    <!-- <div center text-center class="imgClassDashboard">
+      <img src="assets/imgs/CSIAGVKlogo.jpg" width="100%">
+    </div> -->
+    <!-- </ion-row> -->
+  </div>
+  <div>
+
+    <form (ngSubmit)="SearchTDGAcceptance_HHT()">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-3>
+            <ion-label color="primary" class="fontSize12 marginSet" fixed>IGM No.
+            </ion-label>
+          </ion-col>
+          <ion-col ion-item col-7>
+            <ion-input type="tel" class="fontSize12 text-right" [(ngModel)]="IGMNo" placeholder="IGM No." name="prefix"
+              pattern="[0-9]*" maxlength="20" #IGMNoValue></ion-input>
+          </ion-col>
+          <ion-col col-2>
+            <button ion-fab class="ion-fab34">
+              <ion-icon name="md-search" class="margin4"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+
+
+    <form>
+      <ion-grid>
+        <ion-row color="primary" justify-content-center>
+          <ion-col col-12>
+
+            <ion-item>
+              <ion-label>ULD</ion-label>
+              <ion-select multiple="false" interface="popover">
+                <ion-option>ULD1 </ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label>MAWB No.</ion-label>
+              <ion-select multiple="false" interface="popover">
+                <ion-option>123456789 </ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label>HAWB No.</ion-label>
+              <ion-select multiple="false" interface="popover">
+                <ion-option>HAWB123 </ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+
+        </ion-row>
+        <ion-row>
+          <ion-col col-3>
+            <ion-label color="primary" class="fontSize12 marginSet" fixed>Pakgs.
+            </ion-label>
+          </ion-col>
+          <ion-col ion-item col-3>
+            <ion-input  type="tel" class="fontSize12 text-right"  pattern="[0-9]*"
+              maxlength="20"></ion-input>
+          </ion-col>
+          <ion-col  col-3>
+            <ion-label color="primary" class="fontSize12 marginSet" fixed>Gross Wt.
+            </ion-label>
+          </ion-col>
+          <ion-col ion-item col-3>
+            <ion-input type="tel" class="fontSize12 text-right"  pattern="[0-9]*"
+              maxlength="20"></ion-input>
+          </ion-col>
+          <ion-col col-6>
+            <button ion-button block icon-start style="margin-top: 20px !important;">
+              Hold
+            </button>
+          </ion-col>
+          <ion-col col-6>
+            <button ion-button block icon-start style="margin-top: 20px !important;">
+              Release
+            </button>
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+    </form>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+  </div>
+
+</ion-content>
+<ion-fab right bottom #fab1 style="bottom:38px !important">
+  <button class="pop-in" ion-fab mini color="primary" [ngClass]="{'pop-out': fabGone}" (click)="clearInputs()">
+    <ion-icon name="close"></ion-icon>
+  </button>
+</ion-fab>
+<Gmax-footer></Gmax-footer>

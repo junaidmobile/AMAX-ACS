@@ -1,0 +1,176 @@
+<style>
+  table {
+    width: 100%;
+    border: none;
+  }
+
+  ion-select {
+    max-width: 100% !important;
+  }
+
+  td,
+  th {
+    border: solid thin #1EA1CC;
+    padding: 5px !important;
+  }
+
+  ion-icon {
+    font-size: xx-large;
+  }
+
+  .iconCenter {
+    text-align: center !important;
+  }
+
+  qrcode {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+  }
+
+  .select-ios {
+    padding: 1px !important;
+  }
+
+  ion-select .select-text {
+    font-size: 1.5rem !important;
+  }
+
+  ion-label {
+    font-size: 15px;
+    font-weight: normal !important;
+  }
+
+  qrcode {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+  }
+</style>
+<!-- <Gmax-header [title]="title">
+</Gmax-header> -->
+<!-- above lines commented and below header added by Himesh on 11/11/2020 -->
+
+<ion-header style="position: fixed;">
+  <ion-navbar color={{color}} hideBackButton="true">
+    <ion-title id="Dashboard" center text-center>
+      {{title}}
+    </ion-title>
+    <ion-buttons right>
+      <!-- <button ion-button icon-only (click)="notifications()">
+          <ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
+      </button> -->
+      <button ion-button icon-only (click)="homeButton()">
+        <ion-icon ios="ios-home" md="md-home"></ion-icon>
+    </button>
+
+      <button ion-button icon-only (click)="logOut()">
+          <ion-icon ios="ios-power" md="md-power"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="marginTop44">
+  <div>
+
+    <!-- <ion-row> -->
+    <div center text-center class="imgClassDashboard">
+      <img src="assets/imgs/CSIAGVKlogo.png" width="100%">
+    </div>
+    <!-- </ion-row> -->
+  </div>
+  <div>
+
+    <ion-list>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-12>
+            <table>
+              <tr>
+                <!-- <td>
+                  Vehicle Number
+                </td> -->
+                <td *ngIf="barcodeArr[0].slice(0,3) != 'IPH' && barcodeArr[0].slice(0,3) != 'ITR'">
+                    Vehicle Number
+                  </td>
+                  <td *ngIf="barcodeArr[0].slice(0,3) == 'IPH'">
+                    Delivery
+                  </td>
+                  <td *ngIf="barcodeArr[0].slice(0,3) == 'ITR'">
+                    Trolley Number
+                  </td>
+                <td *ngIf="barcodeArr[0].slice(0,3) != 'IPH' ">
+                  <!-- {{gadiNo | slice:0:2}}&nbsp;{{gadiNo | slice:2:4}}&nbsp;{{gadiNo | slice:4:6}}&nbsp;{{gadiNo | slice:6:10}} -->
+                  <!-- {{gadiNo}} -->
+                  <div *ngFor="let GN of gadiNoRPT;i as index">
+                    <span> {{GN}}</span>
+                  </div>
+                </td>
+                <td *ngIf="barcodeArr[0].slice(0,3) == 'IPH'">
+                  By Hand
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Token Number
+                </td>
+                <td>
+                  <div *ngFor="let barcode of barcodeArr;i as index">
+                    <span> {{barcode}}</span>
+                  </div>
+
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  Warehouse
+                </td>
+                <td>
+                  <!-- {{Shed}} -->
+                  <div *ngFor="let shedo of shedRPT;i as index">
+                    <span> {{shedo}}</span>
+                  </div>
+                </td>
+
+            </table>
+          </ion-col>
+          <br>
+          <br>
+          <br>
+          <br>
+
+          <ion-item style="text-align: center;" *ngFor="let barcode of barcodeArr;i as index">
+            <ngx-barcode col-12 [bc-value]="barcode" [bc-display-value]="barcode"></ngx-barcode>
+          </ion-item>
+          <br>
+          <br>
+          <ion-col col-12>
+            <button (click)="backToImp()" ion-button block icon-start style="margin-top: 20px !important;">
+              Back to Active Tokens
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+  </div>
+
+</ion-content>
+<!-- <ion-fab right bottom #fab1 style="bottom:38px !important">
+  <button class="pop-in" ion-fab mini color="primary" [ngClass]="{'pop-out': fabGone}">
+    <ion-icon name="close"></ion-icon>
+  </button>
+</ion-fab> -->
+<Gmax-footer></Gmax-footer>

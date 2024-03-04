@@ -1,0 +1,17 @@
+<!-- <domain-config cleartextTrafficPermitted="true">
+
+        <domain includeSubdomains="true">localhost</domain>
+       
+    <domain includeSubdomains="true">http://52.172.36.110/</domain>
+    </domain-config> -->
+
+    <network-security-config>
+<base-config cleartextTrafficPermitted="true">
+    <trust-anchors>
+        <certificates src="system" />
+    </trust-anchors>
+</base-config>
+
+<domain-config cleartextTrafficPermitted="true">
+    <domain includeSubdomains="true">https://cargo.gvk.com/</domain>
+</domain-config> </network-security-config>

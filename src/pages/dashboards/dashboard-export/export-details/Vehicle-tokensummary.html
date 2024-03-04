@@ -1,0 +1,174 @@
+<style>
+  .vtsummery {
+    text-align: center;
+    background: red;
+    color: #fff;
+  }
+</style>
+<Gmax-header [title]="title">
+</Gmax-header>
+
+<ion-content class="marginTop44">
+  <div>
+
+    <!-- <ion-row> -->
+    <div center text-center class="imgClassDashboard">
+      <img src="assets/imgs/CSIAGVKlogo.png" width="100%">
+    </div>
+    <!-- </ion-row> -->
+  </div>
+  <div>
+    <form (ngSubmit)="Getvehicletokensummary()">
+
+      <ion-list>
+        <ion-grid>
+          <ion-row>
+
+            <ion-item>
+              <ion-label>From Date</ion-label>
+              <ion-datetime displayFormat="MMM DD, YYYY" name="fromDate" [(ngModel)]="_fromDate"></ion-datetime>
+            </ion-item>
+            <ion-item>
+              <ion-label>To Date</ion-label>
+              <ion-datetime displayFormat="MMM DD, YYYY" name="toDate" [(ngModel)]="_toDate"></ion-datetime>
+            </ion-item>
+            <ion-item>
+              <ion-label>Custodian </ion-label>
+              <ion-select (ionChange)="onCustodianChange($event);" placeholder="Select">
+                <ion-option *ngFor="let dt of custodianData" [value]="dt.code">{{dt.custname}}</ion-option>
+                <!-- <ion-option value="H">MIAL Heavy</ion-option>
+                <ion-option value="C">CSC Perishable</ion-option>
+                <ion-option value="A">AI General</ion-option>
+                <ion-option value="P">AI APEDA</ion-option>
+                <ion-option value="T">ALL</ion-option> -->
+              </ion-select>
+            </ion-item>
+            <button ion-button block icon-start style="margin-top: 20px !important;">
+              Search&nbsp;&nbsp;&nbsp;
+              <ion-icon name="search"></ion-icon>
+
+            </button>
+          </ion-row>
+        </ion-grid>
+      </ion-list>
+    </form>
+    <div>
+      <ion-grid *ngIf="showDiv" style="margin-top: -20px !important;">
+        <ion-row justify-content-start>
+
+          <table id="tblNews" border="1"
+            style="width:100%;table-layout:fixed;word-break:break-word;border-color: white;margin-top: 2%;">
+            <thead>
+
+              <tr>
+                <td height="30" colspan="4" class="vtsummery">
+                  Vehicle Token Summary
+                </td>
+              </tr>
+              <tr class="vtsummeryth">
+                <td height="30" colspan="2" class="padd-td">
+                  From Date :
+                </td>
+                <td height="30" colspan="2" class="padd-td">
+                  {{_fromDate  | date:'mediumDate'}}
+                </td>
+              </tr>
+              <tr class="vtsummeryth">
+                <td height="30" colspan="2" class="padd-td">
+                  To Date :
+                </td>
+                <td height="30" colspan="2" class="padd-td">
+                  {{_toDate  | date:'mediumDate'}}
+                </td>
+              </tr>
+              <tr class="vtsummeryth">
+                <td height="30" colspan="2" class="padd-td">
+                  Custodian :
+                </td>
+                <td height="30" colspan="2" class="padd-td">
+                  {{_custodian}}
+                </td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="background-color: #cfd8dc;">
+                <th height="30">
+                  Slot
+                </th>
+                <th height="30">
+                  Vehicle Count
+                </th>
+                <th height="30">
+                  Pieces
+                </th>
+                <th height="30">
+                  GrWt(Tones)
+                </th>
+              </tr>
+              <tr *ngFor="let sltDtl of slotDetail">
+                <td height="30" style="padding: 5px !important;text-align: right !important;">
+                  {{ sltDtl.Slot}}
+                </td>
+                <td height="30" style="padding: 5px !important;text-align: right !important;">
+                  {{ sltDtl.MLVCT}}
+                </td>
+                <td height="30" style="padding: 5px !important;text-align: right !important;">
+                  {{sltDtl.MLPcs}}
+                </td>
+                <td height="30" style="padding: 5px !important;text-align: right !important;">
+                  {{sltDtl.MLGWt}}
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </ion-row>
+      </ion-grid>
+
+      <!-- <ion-list> -->
+      <!-- <div *ngIf="showDiv">
+                    <ion-item *ngIf="vehicleModel.LaneMarkingArea != ''">
+                        <ion-label color="primary" class="fontSize12">Line Area</ion-label>
+                        <ion-input type="text" name="lineArea" class="fontSize12"
+                            [(ngModel)]="vehicleModel.LaneMarkingArea" placeholder="" [disabled]="true" maxlength="20"
+                            text-right></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="vehicleModel.GateIn != ''">
+                        <ion-label color="primary" class="fontSize12">Gate-IN</ion-label>
+                        <ion-input type="text" name="Gate-IN" class="fontSize12" [(ngModel)]="vehicleModel.GateIn"
+                            placeholder="" [disabled]="true" maxlength="20" text-right></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="vehicleModel.DockIn != ''">
+                        <ion-label color="primary" class="fontSize12">Dock-IN</ion-label>
+                        <ion-input type="text" name="Dock-IN" class="fontSize12" [(ngModel)]="vehicleModel.DockIn"
+                            placeholder="" [disabled]="true" maxlength="20" text-right></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="vehicleModel.DockOut != ''">
+                        <ion-label color="primary" class="fontSize12">Dock-OUT</ion-label>
+                        <ion-input type="text" name="Dock-OUT" class="fontSize12" [(ngModel)]="vehicleModel.DockOut"
+                            placeholder="" [disabled]="true" maxlength="20" text-right></ion-input>
+                    </ion-item>
+
+                    <ion-item *ngIf="vehicleModel.GateOut != ''">
+                        <ion-label color="primary" class="fontSize12">Gate-OUT</ion-label>
+                        <ion-input type="text" name="Gate-OUT" class="fontSize12" [(ngModel)]="vehicleModel.GateOut"
+                            placeholder="" [disabled]="true" maxlength="20" text-right></ion-input>
+                    </ion-item> -->
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+  </div>
+
+</ion-content>
+<ion-fab right bottom #fab1 style="bottom:38px !important">
+  <button class="pop-in" ion-fab mini color="primary" [ngClass]="{'pop-out': fabGone}" (click)="clearInputs()">
+    <ion-icon name="close"></ion-icon>
+  </button>
+</ion-fab>
+<Gmax-footer></Gmax-footer>

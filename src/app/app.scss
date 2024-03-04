@@ -40,6 +40,10 @@ tr {
   font-size: 1em;
 }
 
+.errorbox{
+  text-decoration-color: red;
+}
+
 // POP-IN (FLOAT ACTION BUTTON EFFECT) -------------
 .pop-in {
   animation: pop-in 0.65s;
@@ -81,7 +85,7 @@ tr {
 }
 
 .gmaxBGColor {
-  background-color: #f36f23;
+  background-color: #1EA1CC;
 }
 
 .cscBGColor {
@@ -93,4 +97,31 @@ tr {
 }
 .segment-md .segment-button {
   text-transform: initial !important;
+}
+.toolbar-background {
+  background: rgb(29,122,215);
+  background: linear-gradient(90deg, rgba(29,122,215,1) 0%, rgba(160,24,149,1) 100%, rgba(0,212,255,1) 100%);
+}
+
+.alertLogout {
+  background: rgb(29,122,215);
+  background: linear-gradient(90deg, rgba(29,122,215,1) 0%, rgba(160,24,149,1) 100%, rgba(0,212,255,1) 100%);
+}
+
+.alertCustomCss {
+  color: white; // text color for basic alerts
+  button {
+      // color: white !important;
+      // background-color: color($colors, secondary, base) !important;
+  }
+  .alert-message {
+      // color: white; // text color for confirm alerts
+  }
+  .alert-wrapper {
+      // background-color: color($colors, dark, base);
+  }
+  .alert-head {
+    background: rgb(29,122,215);
+    background: linear-gradient(90deg, rgba(29,122,215,1) 0%, rgba(160,24,149,1) 100%, rgba(0,212,255,1) 100%);
+}
 }

@@ -46,7 +46,8 @@ import { PipesModule } from '../pipes/pipes.module';
 import { IssueDOImport } from '../pages/dashboards/dashboard-import/import-details/Issue-DO';
 import { HeaderDirective } from '../directives/header/header';
 import { UpperCaseText } from '../directives/upper-case/upper-case';
-import { OneSignal } from '@ionic-native/onesignal';
+ import { HTTP } from '@ionic-native/http';
+// import { OneSignal } from '@ionic-native/onesignal';
 
 import { PushNotificationServiceProvider } from '../providers/push-notification-service/push-notification-service';
 import { AWBTrackingCSC } from '../pages/dashboards/csc/export-details/AWB-tracking';
@@ -101,6 +102,25 @@ import { TSPHAWBDetail } from '../pages/dashboards/dashboard-import/import-detai
 import { VTGenerateBarCode } from '../pages/dashboards/dashboard-import/import-details/VT-Generate-BarCode';
 import { AIVTList } from '../pages/dashboards/dashboard-import/import-details/AI-VT-List';
 import { AIBarcode } from '../pages/dashboards/dashboard-import/import-details/AI-Barcode';
+import { ApprovedGatePassCountPage } from '../pages/approved-gate-pass-count/approved-gate-pass-count';
+import { RevokeGatePassPage } from '../pages/revoke-gate-pass/revoke-gate-pass';
+import { ImportScanPage } from '../pages/import-scan/import-scan';
+import { UsersService } from '../../src/providers/users.service';
+import { TestPage } from '../pages/test/test';
+import { TokenScanningPage } from '../pages/dashboards/token-scanning/token-scanning';
+
+import { WhHomepagePage } from '../pages/wh-homepage/wh-homepage';
+import { ExportBinningPage } from '../pages/export-binning/export-binning';
+import { ExportAcceptancePage } from '../pages/export-acceptance/export-acceptance';
+import { ExportScanningPage } from '../pages/export-scanning/export-scanning';
+import { ExportAwbacceptancePage } from '../pages/export-awbacceptance/export-awbacceptance';
+import { ExportUnscannedawbPage} from '../pages/export-unscannedawb/export-unscannedawb';
+import { ExportScreeningPage } from '../pages/export-screening/export-screening';
+import { ExportCartingchallanPage } from '../pages/export-cartingchallan/export-cartingchallan';
+
+import { ExportScangroupidCcPage } from '../pages/export-scangroupid-cc/export-scangroupid-cc';
+import { ExportScangroupidSPage } from '../pages/export-scangroupid-s/export-scangroupid-s';
+// import { expo}
 
 @NgModule({
   declarations: [
@@ -143,7 +163,9 @@ import { AIBarcode } from '../pages/dashboards/dashboard-import/import-details/A
     ApproveDelivery, DOCSUplaod, VTBarcodeDetail, DOCSUploadOC, GPDetailDetach, TGDAcceptance,
     ULDLocation, VehicleTokenDriverDetails, ActiveSingleGatePass,
     VehicleTokensAirIndia, GPDetailBarcode, TSPSuccessMessage, TSPHAWBDetail, VTGenerateBarCode,
-    AIVTList,AIBarcode
+    AIVTList,AIBarcode, ApprovedGatePassCountPage, RevokeGatePassPage, TestPage, ImportScanPage,TokenScanningPage
+ ,WhHomepagePage,ExportBinningPage , ExportAcceptancePage , ExportScanningPage,ExportAwbacceptancePage, ExportUnscannedawbPage
+ ,ExportScreeningPage,ExportCartingchallanPage,ExportScangroupidCcPage,ExportScangroupidSPage
   ],
   imports: [
     HttpClientModule,
@@ -202,18 +224,21 @@ import { AIBarcode } from '../pages/dashboards/dashboard-import/import-details/A
     ApproveDelivery, DOCSUplaod, VTBarcodeDetail, DOCSUploadOC, GPDetailDetach, TGDAcceptance,
     ULDLocation, VehicleTokenDriverDetails, ActiveSingleGatePass,
     VehicleTokensAirIndia, GPDetailBarcode, TSPSuccessMessage, TSPHAWBDetail, VTGenerateBarCode,
-    AIVTList,AIBarcode
+    AIVTList,AIBarcode, ApprovedGatePassCountPage, RevokeGatePassPage, TestPage, 
+    ImportScanPage,TokenScanningPage,WhHomepagePage,ExportBinningPage, ExportAcceptancePage , ExportScanningPage,ExportAwbacceptancePage,ExportUnscannedawbPage
+    ,ExportScreeningPage,ExportCartingchallanPage,ExportScangroupidCcPage,ExportScangroupidSPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     BarcodeScanner,
-
+    UsersService,
+    HTTP,
     { provide: ErrorHandler, useClass: IonicErrorHandler }, HttpProvider, Network,
     NetworkProvider,
     GlobalProvider,
     DatePicker,
-    OneSignal,
+    // OneSignal,
 
     PushNotificationServiceProvider, DatePipe
   ]

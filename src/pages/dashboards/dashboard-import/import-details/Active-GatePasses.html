@@ -1,0 +1,35 @@
+<ion-list class="accordion-list">
+  <button ion-item (click)="showDetailField = !showDetailField" detail-none
+    [ngClass]="{'section-active': showDetailField, 'section': !showDetailField}" text-justify>
+    <ion-icon item-left name="ios-arrow-dropright-outline" *ngIf="!showDetailField"></ion-icon>
+    <ion-icon item-left name="ios-arrow-dropdown-outline" *ngIf="showDetailField"></ion-icon>
+    098-01010202
+
+  </button>
+  <ion-list *ngIf="showDetailField" id="details">
+    <ion-item>
+      <!-- <ion-label color="primary">BOMA-410490</ion-label>
+                  <ion-input type="text" name="aircompany"
+                        text-right></ion-input> -->
+      <ion-checkbox></ion-checkbox>
+      <ion-label> BOMA-410490</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-list>
+
+<ion-list>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6>
+        <button ion-button block icon-start style="margin-top: 20px !important;">
+          Deselect All
+        </button>
+      </ion-col>
+      <ion-col col-6>
+        <button (click)=" tempnextbtn();" ion-button block icon-start style="margin-top: 20px !important;">
+          Next
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-list>

@@ -12,8 +12,7 @@ import { GlobalProvider } from '../../../../providers/global/global';
 import moment from 'moment';
 import { Constants } from '../../../../constant';
 
-export class ExportVehicle { pi_ArrAWBNo: any; isDesktop: boolean;pi_strUserName: any;
- }
+export class ExportVehicle { pi_ArrAWBNo: any; isDesktop: boolean }
 export class VehicleModel { LaneMarkingArea: any; GateIn: any; DockIn: any; DockOut: any; GateOut: any }
 @Component({
     selector: 'page-export-Vehicle-tracking',
@@ -32,7 +31,6 @@ export class VehicleTracking implements OnInit {
     @ViewChild('PrefixValue') PrefixInput;
     @ViewChild('MAWBNoValue') myInput;
     title: String;
-  private _strUserID: any;
     constructor(public navCtrl: NavController, public alertCtrl: AlertController, public http: HttpProvider, public global: GlobalProvider) {
         this.exportVehicle = new ExportVehicle();
         this.vehicleModel = new VehicleModel();
@@ -42,7 +40,6 @@ export class VehicleTracking implements OnInit {
 
 
     ngOnInit() {
-      this._strUserID = JSON.parse(this.global.get('userResp')).UserName[0];
 
     }
 
@@ -59,7 +56,6 @@ export class VehicleTracking implements OnInit {
 
         this.exportVehicle.pi_ArrAWBNo = this.Prefix + this.MAWBNo;
         this.exportVehicle.isDesktop = false;
-        this.exportVehicle.pi_strUserName = this._strUserID;//'horizon'// this._strUserID;
         this.fetchVehicleDetails();
 
     }
@@ -126,7 +122,7 @@ export class VehicleTracking implements OnInit {
 
 
     focusNextInput() {
-        if (this.Prefix.length >= 3) {
+        if (this.Prefix.length == 3) {
             this.myInput.setFocus();
         }
     }

@@ -1,0 +1,470 @@
+<style>
+  .marginSet {
+    padding-left: 0px !important;
+    margin: 12px 0px 11px 0px !important;
+  }
+
+  /* .select-md {
+    padding: 13px 0px 13px 16px !important;
+  } */
+  
+
+
+  ion-select {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    overflow: hidden;
+    max-width: 85% !important;
+  }
+
+  /* .select-md .select-icon {
+    position: relative;
+    width: 22px !important;
+    height: 19px;
+  } */
+
+
+  .select-md .select-icon {
+    position: relative!important;
+    width: 22px!important;
+    height: 19px!important;
+    padding: 8px 0px 8px 8px!important;
+}
+
+</style>
+
+
+<Gmax-header [title]="title">
+</Gmax-header>
+
+<ion-content class="marginTop44">
+  <div>
+
+
+
+    <!-- <ion-row> -->
+    <div center text-center class="imgClassDashboard">
+      <img src="assets/imgs/CSIAGVKlogo.png" width="100%">
+    </div>
+    <!-- </ion-row> -->
+  </div>
+  <div>
+    <!-- <form (ngSubmit)="GetBarcodeDetails()"> -->
+    <ion-list>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-3>
+            <ion-label color="primary" class="fontSize12 marginSet" fixed>Terminal Type.
+              <font color="red" class="margin12">*</font>
+            </ion-label>
+          </ion-col>
+          <ion-col col-9>
+            <ion-select multiple="false" interface="popover" [(ngModel)]="selectedTerminalType"
+              (ionChange)="onSelectChangeTT($event)" placeholder="Select Terminal Type">
+              <ion-option value="SL">Select</ion-option>
+              <ion-option value="MCSCL" [selected]="selectedTerminalType == MCSCL">MCSC-Light</ion-option>
+              <ion-option value="MCSCH" [selected]="selectedTerminalType == MCSCH">MCSC-Heavy & Bonded</ion-option>
+              <ion-option value="MCSCP" [selected]="selectedTerminalType == MCSCP">MCSC-Perishable(CSC
+                -PER)</ion-option>
+              <ion-option value="AIGEN" [selected]="selectedTerminalType == AIGEN">AI-GEN</ion-option>
+              <ion-option value="AIAPD" [selected]="selectedTerminalType == AIAPD">AI-APEDA</ion-option>
+
+
+            </ion-select>
+          </ion-col>
+
+
+        </ion-row>
+
+        <ion-row>
+          <ion-col col-3>
+            <ion-label color="primary" class="fontSize12 marginSet" fixed>Token Type.
+              <font color="red" class="margin12">*</font>
+            </ion-label>
+          </ion-col>
+          <ion-col col-9>
+            <ion-select multiple="false" interface="popover" [(ngModel)]="selectedVehicleType"
+              (ionChange)="onSelectChangeVT($event)" placeholder="Select Token Type">
+              <ion-option value="S">Select</ion-option>
+              <ion-option value="V" [selected]="selectedVehicleType == V">Vehicle</ion-option>
+              <ion-option value="T" [disabled]="chkDisable()" [selected]="selectedVehicleType == T">Trolley</ion-option>
+              <ion-option value="H" [disabled]="chkDisable()" [selected]="selectedVehicleType == H">Hand</ion-option>
+
+
+            </ion-select>
+          </ion-col>
+
+
+        </ion-row>
+        <ion-row>
+          <ion-col col-3>
+            <ion-label color="primary" class="fontSize12 marginSet" fixed>Token No.
+              <font color="red" class="margin12">*</font>
+            </ion-label>
+          </ion-col>
+          <ion-col ion-item col-5>
+            <ion-input type="text" class="fontSize12" name="prefix" autocapitalize="characters" [(ngModel)]="Prefix"
+              placeholder="PREFIX" maxlength="12" (ionChange)="focusNextInput($event)" #PrefixValue></ion-input>
+          </ion-col>
+          <!-- <ion-col col-1></ion-col>  -->
+          <ion-col ion-item col-4>
+            <ion-input type="tel" class="fontSize12" name="MAWBNo" [(ngModel)]="MAWBNo" placeholder="OTP" 
+           autofocus #MAWBNoValue (ionChange)="switch($event)"></ion-input>
+
+               <!-- (blur)="scanBarcodeTest();" -->
+          </ion-col>
+          <ion-row *ngIf="showAdditional">
+          <!-- <ion-row>  -->
+            <ion-col col-12>
+
+              <ion-input type="tel" class="fontSize12" name="SannedToeknNo" placeholder="SannedToeknNo"
+                [(ngModel)]="SannedToeknNo" maxlength="54" #SannedToeknNoValue></ion-input>
+            </ion-col>
+          </ion-row>
+
+
+
+        </ion-row>
+        <ion-row>
+          <ion-col col-8>
+          </ion-col>
+          <ion-col col-2>
+            <button ion-fab class="ion-fab34" (click)="GetBarcodeDetails()">
+              <ion-icon name="md-search" class="margin4"></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col col-2>
+            <button ion-fab class="ion-fab34">
+              <ion-icon (click)="scanBarcode();" name="md-qr-scanner" class="margin4"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+
+    <div *ngIf="showDiv">
+      <ion-grid>
+        <ion-row justify-content-start>
+          <table id="tblNews" border="1"
+            style="width:100%;table-layout:fixed;word-break:break-word;border-color: white;margin-top: 2%;">
+            <!-- <thead>
+                <tr>
+                  <th height="30" style="background-color:rgb(208, 225, 244);padding: 3px 3px 3px 0px;font-size:14px"
+                    align="center">
+                    EVT Number
+                  </th>
+                  <th height="30" style="background-color:rgb(208, 225, 244);padding: 3px 3px 3px 0px;font-size:14px;"
+                    align="center">
+                    Vehicle No.
+                  </th>
+                </tr>
+              </thead> -->
+            <tbody>
+              <tr>
+                <td height="30" style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px" align="center">
+                  Vehicle Number
+                </td>
+                <td height="30" style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px" align="center">
+                  {{tableData.VehicleNo}}
+                </td>
+              </tr>
+              <tr>
+                <td height="30" style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px" align="center">
+                  VT Number
+                </td>
+                <td height="30" style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px" align="center">
+                  {{tableData.TokenNo}}
+                </td>
+              </tr>
+              <tr>
+                <td height="30" style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px" align="center">
+                  Airport Shed
+                </td>
+                <td height="30" style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px" align="center">
+                  {{tableData.Shed}}
+                </td>
+              </tr>
+
+
+
+              <tr>
+                <td height="30" style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px" align="center">
+                  Driver/Operator Name
+                </td>
+                <td height="30" style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px" align="center">
+                  {{tableData.DriverName}}
+                </td>
+              </tr>
+
+              <tr>
+                <td height="30" style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px" align="center">
+                  License/Permit Number
+                </td>
+                <td height="30" style="background: rgb(224, 243, 215);padding-left: 4px;font-size:14px" align="center">
+                  {{tableData.LicenseNo}}
+                </td>
+              </tr>
+
+
+
+
+
+
+
+            </tbody>
+          </table>
+        </ion-row>
+      </ion-grid>
+      <ion-item style="text-align: center;">
+        <ngx-barcode col-8 [bc-value]="scannedBarCode" [bc-display-value]="scannedBarCode"></ngx-barcode>
+      </ion-item>
+
+
+
+      <ion-grid *ngIf="showDiv">
+        <ion-row style="border-bottom: 1px solid #d1d1e0;"> <ion-col>
+
+
+            <button *ngIf="VehicleTrackResp.IsGateIn == '0' && userRole == 'MainGateIn'" (click)="performEvent();"
+              style="background-color: green;  height:  40px;color: white;  border-radius: 5px; padding: 7px; text-align: left;width: 90%"
+              class="fontSize12">
+              Main Gate-IN
+            </button>
+
+            <ion-label *ngIf="VehicleTrackResp.IsGateIn == '1' || userRole != 'MainGateIn' "
+              style="background-color: gray;  color: white;   height:  40px; border-radius: 5px; padding: 7px; text-align: left;width: 90%"
+              class="fontSize12">
+              Main Gate-IN
+            </ion-label>
+
+          </ion-col>
+
+          <ion-col style="margin-top: 10px;">
+            <ion-icon *ngIf="VehicleTrackResp.IsGateIn == '1'" class="margin4 icon icon-md ion-md-checkmark-circle"
+              name="checkmark-circle" style="padding: 7px; color: green;"></ion-icon>
+          </ion-col>
+          <ion-col style="margin-top: 10px;">
+            <ion-label test-right class="fontSize12">
+              {{ myGateInDate }}
+            </ion-label>
+          </ion-col>
+        </ion-row>
+
+
+        <ion-row style="border-bottom: 1px solid #d1d1e0;"> <ion-col>
+
+
+            <button
+              *ngIf="VehicleTrackResp.IsGateIn == '1' && userRole == 'Dock' && VehicleTrackResp.IsDockIn == '0' && VehicleTrackResp.IsGateOut == '0' "
+              (click)="performEvent();"
+              style="background-color: green;  height:  40px;color: white;  border-radius: 5px; padding: 7px; text-align: left;width: 90%"
+              class="fontSize12">
+              Dock-IN
+            </button>
+
+            <ion-label
+              *ngIf="VehicleTrackResp.IsDockIn == '1' || userRole != 'Dock' ||VehicleTrackResp.IsGateIn == '0' || VehicleTrackResp.IsGateOut == '1'"
+              style="background-color: gray;  color: white;   height:  40px; border-radius: 5px; padding: 7px; text-align: left;width: 90%"
+              class="fontSize12">
+              Dock-IN
+            </ion-label>
+
+          </ion-col>
+
+          <ion-col style="margin-top: 10px;">
+            <ion-icon *ngIf="VehicleTrackResp.IsDockIn == '1'" class="margin4 icon icon-md ion-md-checkmark-circle"
+              name="checkmark-circle" style="padding: 7px; color: green;"></ion-icon>
+          </ion-col>
+          <ion-col style="margin-top: 10px;">
+            <ion-label test-right class="fontSize12">
+              {{ myDockInDate}}
+            </ion-label>
+          </ion-col>
+        </ion-row>
+
+
+
+        <ion-row style="border-bottom: 1px solid #d1d1e0;">
+          <ion-col>
+
+
+            <button
+              *ngIf="VehicleTrackResp.IsGateIn == '1' && userRole == 'Dock' && VehicleTrackResp.IsDockIn == '1' && VehicleTrackResp.IsDockOut == '0' "
+              (click)="performEvent();"
+              style="background-color: green;  height:  40px;color: white;  border-radius: 5px; padding: 7px; text-align: left;width: 90%"
+              class="fontSize12">
+              Dock-OUT
+            </button>
+
+            <ion-label
+              *ngIf="VehicleTrackResp.IsGateIn == '0' || VehicleTrackResp.IsDockIn == '0' || userRole != 'Dock' || VehicleTrackResp.IsDockOut == '1' "
+              style="background-color: gray;  color: white;   height:  40px; border-radius: 5px; padding: 7px; text-align: left;width: 90%"
+              class="fontSize12">
+              Dock-OUT
+            </ion-label>
+
+          </ion-col>
+
+          <ion-col style="margin-top: 10px;">
+            <ion-icon *ngIf="VehicleTrackResp.IsDockOut == '1'" class="margin4 icon icon-md ion-md-checkmark-circle"
+              name="checkmark-circle" style="padding: 7px; color: green;"></ion-icon>
+          </ion-col>
+          <ion-col style="margin-top: 10px;">
+            <ion-label test-right class="fontSize12">
+              {{ myDockOutDate }}
+            </ion-label>
+          </ion-col>
+        </ion-row>
+
+
+
+
+
+
+        <ion-row style="border-bottom: 1px solid #d1d1e0;"> <ion-col>
+
+
+            <button
+              *ngIf="VehicleTrackResp.IsGateOut == '0' && userRole == 'MainGateOut' && VehicleTrackResp.IsGateIn == '1'"
+              (click)="performEvent();"
+              style="background-color: green;  height:  40px;color: white;  border-radius: 5px; padding: 7px; text-align: left;width: 90%"
+              class="fontSize12">
+              Main Gate-OUT
+            </button>
+
+            <ion-label
+              *ngIf="VehicleTrackResp.IsGateOut == '1' || userRole != 'MainGateOut' || VehicleTrackResp.IsGateIn == '0' "
+              style="background-color: gray;  color: white;  height:  40px; border-radius: 5px; padding: 7px; text-align: left;width: 90%"
+              class="fontSize12">
+              Main Gate-OUT
+            </ion-label>
+
+          </ion-col>
+
+          <ion-col style="margin-top: 10px;">
+            <ion-icon *ngIf="VehicleTrackResp.IsGateOut == '1'" class="margin4 icon icon-md ion-md-checkmark-circle"
+              name="checkmark-circle" style="padding: 7px; color: green;"></ion-icon>
+          </ion-col>
+          <ion-col style="margin-top: 10px;">
+            <ion-label test-right class="fontSize12">
+              {{ myGateOutDate}}
+            </ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <!--<ion-grid *ngIf="showDiv">
+           <ion-row style="border-bottom: 1px solid #d1d1e0;">
+            <ion-col>
+              <ion-label color="primary" class="fontSize12">Line Area</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-icon *ngIf="VehicleTrackResp.IsDLMArea[0]=='1'"
+                class="margin4 icon icon-md ion-md-checkmark-circle" name="checkmark-circle"
+                style="padding: 7px; color: green;"></ion-icon>
+             <ion-icon *ngIf="VehicleTrackResp.IsDLMArea[0]=='false'" class="margin4 icon icon-md ion-md-close-circle"
+                name="close-circle" style="padding: 7px; color: red;"></ion-icon> 
+            </ion-col>
+            <ion-col>
+              <ion-label class="fontSize12">
+                {{ VehicleTrackResp.DLMAreaDate }}
+              </ion-label>
+            </ion-col>
+          </ion-row> <ion-row style="border-bottom: 1px solid #d1d1e0;">
+            <ion-col>
+              <ion-label *ngIf="VehicleTrackResp.IsGateIn == '1'"
+                style="background-color: green; color: white; height: 60%; border-radius: 5px; padding: 7px;"
+                class="fontSize12">
+                Main Gate-IN
+              </ion-label>
+              <ion-label *ngIf="VehicleTrackResp.IsGateIn == '0'"
+                style="background-color: gray; color: white; height: 60%; border-radius: 5px; padding: 7px;"
+                class="fontSize12">
+                Main Gate-IN
+              </ion-label>
+            </ion-col>
+            <ion-col style="margin-top: 10px;">
+              <ion-icon *ngIf="VehicleTrackResp.IsGateIn == '1'" class="margin4 icon icon-md ion-md-checkmark-circle"
+                name="checkmark-circle" style="padding: 7px; color: green;"></ion-icon>
+            </ion-col>
+            <ion-col style="margin-top: 10px;">
+              <ion-label test-right class="fontSize12">
+                {{ myGateInDate }}
+              </ion-label>
+            </ion-col>
+          </ion-row>
+          <ion-row style="border-bottom: 1px solid #d1d1e0;">
+            <ion-col>
+              <ion-label *ngIf="VehicleTrackResp.IsDockIn == '1'"
+                style="background-color: green; color: white; height: 60%; border-radius: 5px; padding: 7px;"
+                class="fontSize12">Dock-IN</ion-label>
+              <ion-label *ngIf="VehicleTrackResp.IsDockIn == '0'"
+                style="background-color: gray; color: white; height: 60%; border-radius: 5px; padding: 7px;"
+                class="fontSize12">Dock-IN</ion-label>
+            </ion-col>
+            <ion-col style="margin-top: 10px;">
+              <ion-icon *ngIf="VehicleTrackResp.IsDockIn == '1'" class="margin4 icon icon-md ion-md-checkmark-circle"
+                name="checkmark-circle" style="padding: 7px; color: green;"></ion-icon>
+            </ion-col>
+            <ion-col style="margin-top: 10px;">
+              <ion-label class="fontSize12">
+                {{ myDockInDate}}
+              </ion-label>
+            </ion-col>
+          </ion-row>
+          <ion-row style="border-bottom: 1px solid #d1d1e0;">
+            <ion-col>
+              <ion-label *ngIf="VehicleTrackResp.IsDockOut == '1'"
+              style="background-color: green; color: white; height: 60%; border-radius: 5px; padding: 7px;"
+              class="fontSize12">Dock-OUT</ion-label>
+              <ion-label class="fontSize12" *ngIf="VehicleTrackResp.IsDockOut == '0'"
+                style="background-color: gray; color: white; height: 60%; border-radius: 5px; padding: 7px;">Dock-OUT
+              </ion-label>
+            </ion-col>
+            <ion-col style="margin-top: 10px;">
+              <ion-icon *ngIf="VehicleTrackResp.IsDockOut == '1'" class="margin4 icon icon-md ion-md-checkmark-circle"
+                name="checkmark-circle" style="padding: 7px; color: green;"></ion-icon>
+            </ion-col>
+            <ion-col style="margin-top: 10px;">
+              <ion-label class="fontSize12">
+                {{ myDockOutDate }}
+              </ion-label>
+            </ion-col>
+          </ion-row>
+          <ion-row style="border-bottom: 1px solid #d1d1e0;">
+            <ion-col>
+              <ion-label *ngIf="VehicleTrackResp.IsGateOut == '1'"
+              style="background-color: green; color: white; height: 60%; border-radius: 5px; padding: 7px;"
+              class="fontSize12">Main Gate-OUT</ion-label>
+              <ion-label *ngIf="VehicleTrackResp.IsGateOut == '0'" style="background-color: gray; color: white; height: 60%; border-radius: 5px; padding: 7px;"
+                class="fontSize12">Main Gate-OUT</ion-label>
+            </ion-col>
+            <ion-col style="margin-top: 10px;">
+              <ion-icon *ngIf="VehicleTrackResp.IsGateOut == '1'" class="margin4 icon icon-md ion-md-checkmark-circle"
+                name="checkmark-circle" style="padding: 7px; color: green;"></ion-icon>
+            </ion-col>
+            <ion-col style="margin-top: 10px;">
+              <ion-label class="fontSize12">
+                {{ myGateOutDate}}
+              </ion-label>
+            </ion-col>
+          </ion-row>
+
+
+        </ion-grid> -->
+    </div>
+    <!-- </form> -->
+  </div>
+
+  <!-- <button class="button-designed-radius" ion-button round (click)="scan()">Scan</button> -->
+  <br>
+  <br><br>
+  <br>
+</ion-content>
+<ion-fab right bottom #fab1 style="bottom:38px !important">
+  <button class="pop-in" ion-fab mini color="primary" [ngClass]="{'pop-out': fabGone}" (click)="clearInputs()">
+    <ion-icon name="close"></ion-icon>
+  </button>
+</ion-fab>
+<Gmax-footer></Gmax-footer>

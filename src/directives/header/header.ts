@@ -25,12 +25,19 @@ export class HeaderDirective implements OnInit {
   }
 
   ngOnInit() {
-    this.color = this.isCsc ? "primaryCsc" : "primary";
+    // this.color = this.isCsc ? "primaryCsc" : "primary";
     console.log("isCsc ", this.color);
   }
 
   logOut() {
     this.global.confirmlogOut();
+    this.global.store('officer', '');
+    this.global.store('designation', '');
+    this.global.store('offType', '');
+
+    // if(this.global.get('userOffType') == '5'){
+    //   this.global.store('userOffType', '');
+    // }
   }
 
   notifications() {

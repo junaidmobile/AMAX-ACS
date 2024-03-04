@@ -1,0 +1,237 @@
+<style>
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td,
+  th {
+
+    padding: 0.2rem;
+
+  }
+
+  .tblClass td,
+  th {
+    border: 1px solid #999;
+    padding: 0.2rem;
+
+  }
+
+  th {
+    text-align: center;
+  }
+
+  ion-icon {
+    font-size: large;
+  }
+
+  ion-label {
+    font-size: large;
+    font-weight: bold;
+  }
+
+  .iconCenter {
+    text-align: center !important;
+  }
+</style>
+<Gmax-header [title]="title">
+</Gmax-header>
+
+<ion-content class="marginTop44">
+  <div>
+
+    <!-- <ion-row> -->
+    <!-- <div center text-center class="imgClassDashboard">
+      <img src="assets/imgs/CSIAGVKlogo.jpg" width="100%">
+    </div> -->
+    <!-- </ion-row> -->
+  </div>
+  <div *ngIf="showDiv">
+
+    <ion-grid>
+      <table>
+        <tr>
+          <td>
+            MAWB Number
+          </td>
+          <td>
+            {{MAWBNo | slice:0:3}}&nbsp;{{MAWBNo | slice:3:11}}
+          </td>
+        </tr>
+        <tr *ngIf="HAWBNo != null && HAWBNo != ''">
+          <td>
+            HAWB Number
+          </td>
+          <td>
+            {{HAWBNo}}
+          </td>
+        </tr>
+
+      </table>
+    </ion-grid>
+
+
+    <ion-list>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-12>
+            <table class="tblClass">
+              <thead>
+                <tr style="background-color: lightgray;">
+                  <th>
+                    Milestone
+                  </th>
+                  <th>
+                    Status
+                  </th>
+                  <th>
+                    Date Time
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let mileDetail of mileStoneData">
+                  <td>
+                    {{mileDetail.EventDescdd}}
+                  </td>
+                  <td class="iconCenter">
+                    <ion-icon *ngIf="mileDetail.StatusDet == 'Done'" ios="ios-checkmark" md="md-checkmark"></ion-icon>
+                    <ion-icon
+                      *ngIf="mileDetail.StatusDet == 'Pending' && mileDetail.EventCode != 'TSP'  && mileDetail.EventCode != 'OOC' && mileDetail.EventCode != 'Recon'"
+                      ios="ios-close" md="md-close">
+                    </ion-icon>
+
+                    <ion-icon *ngIf="mileDetail.StatusDet == 'Pending' && mileDetail.EventCode == 'TSP'" ios="ios-send"
+                      (click)="navToCreateTSPPAge()" md="md-send" style='color:#1EA1CC;'>
+                    </ion-icon>
+                    
+                    <!-- old --> 
+                   <ion-icon *ngIf="mileDetail.StatusDet == 'Pending' && mileDetail.EventCode == 'OOC'"
+                      ios="ios-document-outline" (click)="navToDocsUploadOC()" md="md-send" style='color:#1EA1CC;'>
+                    </ion-icon>
+
+                    <!-- new -->
+                    <ion-icon *ngIf="mileDetail.EventDescdd == 'Document Upload' && mileDetail.StatusDet == 'Done' && mileDetail.EventCode == 'Recon'"
+                      ios="ios-document-outline" (click)="navToDocsUploadRecon()" md="md-send" style='color:#1EA1CC;'>
+                    </ion-icon>
+                    <!-- <ion-icon *ngIf="oocBtn" ios="ios-document-outline" (click)="navToDocsUploadOC()" md="md-send" style='color:#F36F23;'>
+                    </ion-icon> -->
+
+                    <!-- new2 -->
+                    <!-- <ion-icon *ngIf="mileDetail.EventDescdd == 'Document Upload' && mileDetail.StatusDet == 'Done' && mileDetail.EventCode == 'Recon'"
+                      ios="ios-eye-outline" (click)="navToDocsUploadRecon()" md="md-eye" style='color:#000000;'>
+                    </ion-icon> -->
+
+                    <ion-icon *ngIf="mileDetail.StatusDet == 'Pending' && mileDetail.EventCode == 'Recon'"
+                      ios="ios-document-outline" (click)="navToDocsUploadRecon()" md="md-send" style='color:#1EA1CC;'>
+                    </ion-icon>
+                    <!-- <ion-icon *ngIf="mileDetail.StatusDet == 'Pending' && mileDetail.EventCode == 'Due Charges'"
+                      ios="ios-document-outline" (click)="navToCreateTSPPAge()" md="md-send" style='color:#F36F23;'>
+                    </ion-icon> -->
+                  </td>
+                  <td>
+                    {{mileDetail.EventDt}}
+                  </td>
+                </tr>
+                <tr *ngIf="global.TSPBool"> 
+                  <!-- new global added -->
+                  <!-- *ngIf="TSPBool" on above -->
+                  <td>
+                    <!-- {{duecharge}} -->
+                    Due Charges
+                  </td>
+                  <td style="text-align: center !important;">
+                    <ion-icon ios="ios-send" (click)="navToCreateTSPPAge()" md="md-send" style='color:#1EA1CC;'>
+                    <!-- *ngIf="TSPBool" on above added on 22/12 by Himesh for defect 157099 -->
+                    </ion-icon>
+                  </td>
+                  <td></td>
+                </tr>
+
+
+                <!-- <tr *ngIf="tspStatus != 'Pending' && TSPBool == true">
+                  <td>
+                    Due Charges
+                  </td>
+                  <td style="text-align: center !important;">
+                    <ion-icon ios="ios-checkmark" md="md-checkmark"></ion-icon>
+                  </td>
+                  <td></td>
+                </tr> -->
+
+
+                <!-- <tr *ngIf="!TSPBool">
+                  <td>
+                    {{duecharge}}
+                  </td>
+                  <td style="text-align: center !important;">
+                    <ion-icon ios="ios-send" (click)="navToCreateTSPPAge()" md="md-send" style='color:#F36F23;'>
+                    </ion-icon>
+                  </td>
+                  <td></td>
+                </tr> -->
+              </tbody>
+            </table>
+          </ion-col>
+          <form col-12 (ngSubmit)="goTOGatePassQRCode()">
+            <ion-grid>
+              <ion-row>
+                <!-- <ion-col col-4>
+                  <ion-label color="primary" class="fontSize12 marginSet" fixed>Mobile Number
+                  </ion-label>
+                </ion-col>
+                <ion-col ion-item col-8>
+                  <ion-input type="tel" [(ngModel)]="MobileNumber" class="fontSize12" placeholder="Mobile Number"
+                    pattern="[0-9]*" maxlength="10" (ionChange)="focusNextInput()" name="MobileNumber" #_MobileNumber>
+                  </ion-input>
+                </ion-col> -->
+                <ion-col col-4 style="display: none;">
+                  <ion-label color="primary" class="fontSize12 marginSet" fixed>OC Number
+                  </ion-label>
+                </ion-col>
+                <ion-col col-8 style="display: none;">
+                  <ion-input type="tel" class="fontSize12" placeholder="OC Number" pattern="[0-9]*" maxlength="20"
+                    name="OCNumber" #_OCNumber></ion-input>
+                </ion-col>
+                <ion-col col-4 style="display: none;">
+                  <ion-label color="primary" class="fontSize12 marginSet" fixed>Delivered To
+                  </ion-label>
+                </ion-col>
+                <ion-col col-8 style="display: none;">
+                  <ion-input type="text" [(ngModel)]="PartyName" class="fontSize12" placeholder="Party Name"
+                    maxlength="30" name="PartyName" #_PartyName></ion-input>
+                </ion-col>
+                <ion-col col-12>
+                  <button [disabled]="GPButton == '0'" ion-button block icon-start style="margin-top: 20px !important;">
+                    Generate Gate Pass
+                  </button>
+                  <!-- in above line of code oocBtn condition was added on 16th Dec as generate gate pass was not
+                  getting enabled after ooc docs uploaded
+                  added again on 01/03
+                && oocBtn == true -->
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+          </form>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+  </div>
+
+</ion-content>
+<!-- <ion-fab right bottom #fab1 style="bottom:38px !important">
+  <button class="pop-in" ion-fab mini color="primary" [ngClass]="{'pop-out': fabGone}">
+    <ion-icon name="close"></ion-icon>
+  </button>
+</ion-fab> -->
+<Gmax-footer></Gmax-footer>

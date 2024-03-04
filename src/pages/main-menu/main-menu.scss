@@ -2,14 +2,16 @@
     margin-top: 10px;
 }
 
-.toolbar-background {
-    background-color: #F36F23;
-  }
+// .toolbar-background {
+//     // background-color: #F36F23;
+//     background-color: #1EA1CC;
+//   }
 
   .imgClassDashboard{
     background-color:white;
      border-bottom:solid 2px;
-     border-color:#F36F23;
+    //  border-color:#F36F23;
+     border-color: #1EA1CC;
     //  margin-top: 10px;
   }
 
@@ -36,6 +38,8 @@
     padding-left: 14px;
     margin: 12px 0px 11px 0px !important;
   }
+
+  
 
 //   input[type="text"]
 // {
@@ -68,8 +72,10 @@ ion-content.content-md:not([padding]) .scroll-content {
 }
 
 .button-designed-radius {
-  border-top-left-radius: 25px;
-  border-bottom-right-radius: 25px;
+  border-top-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+  border-top-right-radius: 6px;
 }
 
 .alert-title{
@@ -79,11 +85,13 @@ ion-content.content-md:not([padding]) .scroll-content {
 
 .alert-md .alert-head{
   color: #ffffff;
-  background-color: #F36F23;
+  // background-color: #F36F23;
+  background-color: #1EA1CC;
   padding: 20px 24px 20px !important;
 }
 .select-md .select-icon .select-icon-inner{
-  color: #F36F23 !important;
+  // color: #F36F23 !important;
+  color: #1EA1CC !important;
 }
 .select-text{
   font-size: 1.3rem !important;
@@ -107,7 +115,8 @@ ion-content.content-md:not([padding]) .scroll-content {
   background-color: beige !important;
 }
 .list-ios .item-block .item-inner{
-  border-bottom: 0.55px solid #f36f23 !important;
+  // border-bottom: 0.55px solid #f36f23 !important;
+  border-bottom: 0.55px solid #1EA1CC !important;
 }
 
 main-menu{
@@ -167,6 +176,11 @@ main-menu{
 
 .toolbar-md{
   min-height: 30px !important;
+}
+
+.target-class {
+  // width: 20px;
+  background-color: #b8f2fa !important;
 }
 
 

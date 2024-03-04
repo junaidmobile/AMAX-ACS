@@ -6,32 +6,76 @@
 **/
 export class Constants {
   ExportDashboardArray: any;
-  public static expDashboardImages: Array<Object> = [{ "img": "assets/imgs/Jobgrey.png" }, { "img": "assets/imgs/Statusgrey.png" }, { "img": "assets/imgs/EGM_orange.png" }, { "img": "assets/imgs/FAQorange.png" }, { "img": "assets/imgs/ApplChgsOrng.png" }, { "img": "assets/imgs/Icon_VehicleTracking.png" }, { "img": "assets/imgs/TDGAcceptance_Orange2.png" }];
+  public static expDashboardImages: Array<Object> = [{ "img": "assets/imgs/Jobgrey.png" },
+  { "img": "assets/imgs/Statusgrey.png" },
+  { "img": "assets/imgs/EGM_orange.png" },
+  { "img": "assets/imgs/FAQorange.png" },
+  { "img": "assets/imgs/ApplChgsOrng.png" },
+  { "img": "assets/imgs/Icon_VehicleTracking.png" },
+  { "img": "assets/imgs/TDGAcceptance_Orange2.png" },
+  { "img": "assets/imgs/tokenscan.png" },
+  { "img": "assets/imgs/Acceptance.png" }
+    , { "img": "assets/imgs/Binning.png" }
+    , { "img": "assets/imgs/CartingChallan.png" }
+    , { "img": "assets/imgs/Screening.png" }
+    , { "img": "assets/imgs/Splitting.png" }
+    , { "img": "assets/imgs/Landside.png" }
+    , { "img": "assets/imgs/Airside.png" }];
   public static expCSCDashboardImages: Array<Object> = [{ "img": "assets/imgs/AWB-Tracking.jpg" }, { "img": "assets/imgs/vehicle-tracking.jpg" }, { "img": "assets/imgs/EGM-csc.jpg" }];
   public static ImportImages: Array<Object> = [{ "img": "assets/imgs/Jobgrey.png" }, { "img": "assets/imgs/Statusgrey.png" }, { "img": "assets/imgs/IGM_orange.png" }, { "img": "assets/imgs/FAQorange.png" }, { "img": "assets/imgs/ApplChgsOrng.png" }, { "img": "assets/imgs/IssueDO.png" }, { "img": "assets/imgs/DeliveryDocket_orange.png" }];
   public static OthersImages: Array<Object> = [{ "img": "assets/imgs/PDorange.png" }, { "img": "assets/imgs/Calculatororange.png" }, { "img": "assets/imgs/Conractorange.png" }];
   public static getContactUsJSON = [{ "name": "GMAX Queries", "children": [{ "name": "Contact_No", "Contact_no": ["91-22 4113 4113"], "Extensions": ["4103", "4183", "4171", "4102", "4173"], "GalaxySupport": "9820120701", }, { "name": "Email_Id", "emailIds": ["Gmax.support@gvk.com", "Galaxy.support@kalelogistics.in"] }] }, { "name": "Accounts / Finance - Queries", "children": [{ "name": "Contact_No", "Contact_no": ["02266859841", "02266859840", "02266850632"], "Extensions": [], }, { "name": "Email_Id", "emailIds": ["Cargo.accounts@gvk.com"] }] }, { "name": "Import Operations - Queries", "children": [{ "name": "Contact_No", "Contact_no": ["02266851345", "02266851347", "02266851379", "9167213667"], "Extensions": [], }, { "name": "Email_Id", "emailIds": ["Shiftops.imports@gvk.com"] }] }, { "name": "Export Operations - Queries", "children": [{ "name": "Contact_No", "Contact_no": ["02266851364", "02266851382", "02266851349", "9167213623", "9167213694", "9930144171", "9930095673"], "Extensions": [], }, { "name": "Email_Id", "emailIds": ["Shiftops.exports@gvk.com"] }] }, { "name": "MIAL Cargo Pass Section", "children": [{ "name": "Contact_No", "Contact_no": ["02266851386"], "Extensions": [], }, { "name": "Email_Id", "emailIds": ["Passsection.cargo@gvk.com", "Rafiq.shaikh@gvk.com"] }] }];
   //– No enquiry for Airport Entry Permit (AEP)
 
+
   // GMAX_LIVE_URL
-  public static get GMAX_Service_URL(): string { return "http://cargo.gvk.com/gmaxmobapp/hhtservice.asmx/"; };
-
+  //public static get GMAX_Service_URL(): string { return "https://uat.gvk.com/cmsgenws/HHTService.asmx/"; };
   //public static get GMAX_Service_URL(): string { return "http://113.193.225.59:8080/MIALHHT/HHTService.asmx/"; };
-  //public static get GMAX_Service_URL(): string { return "http://104.211.186.140/HHTWS/HHTService.asmx/"; }; /// UAT
-  //public static get GMAX_Service_URL(): string { return "http://113.193.225.59:8080/MIALHHT/HHTService.asmx/"; };
-  //public static get GMAX_Service_URL(): string { return "https://cargo.gvk.com/gmaxhhtnew/hhtservice.asmx/"; }; // Live
+  //public static get GMAX_Service_URL(): string { return "http://104.211.186.140/HHTWS/HHTService.asmx/"; };
+  // public static get GMAX_Service_URL(): string { return "http://113.193.225.59:8080/MIALHHT/HHTService.asmx/"; }; //old one
+  ///public static get GMAX_Service_URL(): string { return "http://10.22.3.165/OldWebservice/HHTService.asmx/"; };
+
+  // public static get GMAX_Service_URL(): string { return "http://104.211.186.140/HHTWS/HHTService.asmx/"; }; //new provided as on 22/02
+  //http://104.211.186.140/HHTWS/HHTService.asmx
+
+  // UAT URL 20-05-2022
+
+  public static get GMAX_Service_URL(): string { return "https://GalaxyMIALUAT.KaleLogistics.Com/CSCGENHHTWS/HHTService.asmx/"; }; //new provided as on 01/04
+
+
+  // UAT URL AMAX ADDED for SCREENING SCREEN 17-04-2023
+
+  public static get AMAX_Service_URL(): string { return "https://GalaxyMIALUAT.KaleLogistics.Com/AMAXScreningAPI/api/Screning/"; }; //new provided by AMAR INGLE 
+//https://galaxymialuat.kalelogistics.com/AMAXScreningAPI/api/Screning/GetScreeningDetails?MAWBNo=77781181111
+
+
+  // LIVE URL 20-05-2022
+  //public static get GMAX_Service_URL(): string { return "https://cargo.gvk.com/gmaxmobapp/hhtservice.asmx/"; };
+
+  // LIVE URL 01-07-2022
+  //public static get GMAX_Service_URL(): string { return "https://mialcargo.adaniairports.com/gmaxmobapp/hhtservice.asmx/"; };
+
+  // public static get GMAX_Service_URL(): string { return "http://10.22.3.165/OldWebservice/HHTService.asmx/"; }; //new provided as on 31/05 temp...
 
 
 
 
-// GMAX_LIVE_URL
-//  public static get CSC_Service_URL(): string { return "http://galaxybom.cscindia.in/CMSCSCPERBOMWS/HHTService.asmx/"; };
-  public static get CSC_Service_URL(): string { return "http://galaxybom.cscindia.in/gmaxcscperws/hhtservice.asmx/"; };
 
-  // Export local
-  public static get GMAX_CSC_perishabe_URL(): string { return "http://galaxybom.cscindia.in/gmaxcscperws/hhtservice.asmx/"; };
 
-  public static get GMAX_CSC_perishabe_URL_Routing(): string { return "http://galaxybom.cscindia.in/gmaxcscperws/hhtservice.asmx/"; };
+  public static get CSC_Service_URL(): string { return "http://galaxybom.cscindia.in/CMSCSCPERBOMWS/HHTService.asmx/"; };//new
+  // public static get CSC_Service_URL(): string { return "http://galaxybom.cscindia.in/gmaxcscperws/hhtservice.asmx/"; }; //old
+
+  // http://galaxybom.cscindia.in/gmaxcscperws/hhtservice.asmx
+
+
+  // Export
+  public static get GMAX_CSC_perishabe_URL(): string { return "http://galaxybom.cscindia.in/CMSCSCPERBOMWS/HHTService.asmx/"; };//new
+  // public static get GMAX_CSC_perishabe_URL(): string { return "http://13.71.113.217/gmaxmobapp/hhtservice.asmx/"; };//old
+  // http://13.71.113.217/gmaxmobapp/hhtservice.asmx/
+
+  public static get GMAX_CSC_perishabe_URL_Routing(): string { return "http://galaxybom.cscindia.in/CMSCSCPERBOMWS/HHTService.asmx/"; };//new
+  // public static get GMAX_CSC_perishabe_URL_Routing(): string { return "http://113.193.225.52/cscperrouting/srvmobile.asmx/"; }; //old
+  // http://113.193.225.52/cscperrouting/srvmobile.asmx/
 
   //
 
@@ -66,19 +110,20 @@ export class Constants {
   // All Services names includes in this below object
   public static GMAX_Services = {
     "Login": {
-      "validateUser": "ValidatePDAUserCredentials"
+      "validateUser": "ValidatePDAUserCredentials",
+      "GetAppVersion": "GetMobileAppVersion",
+      "SaveCustomsLoginDetails_HHT": "SaveCustomsLoginDetails_HHT"
     },
     "Exports": {
       "AWB_tracking": "GetAirWayBillHistoryForHHT",
-      "AWB_temp": "GetAWBTempDetailsForHHT",
       "EGM": "GetEGMdetailsByAWBForHHT",
       "Vehicle_tracking": "GetVehicleDetailsByAWBForHHT",
       "Vehicle_tokensummary": "GetSlotDetailsHHT",
       "GetGHARoutingDetails_tt": "GetGHARoutingDetails",
       "GetC2KDetails_tt": "GetC2KDetails",
       "GetAirWayBillByAWBForHHT_get": "GetAirWayBillByAWBForHHT",
-      "CreateTDGAcceptance_HHT_Save": "CreateTDGAcceptance_HHT"
-
+      "CreateTDGAcceptance_HHT_Save": "CreateTDGAcceptance_HHT",
+      "Vehicle_tracking_new": "GetVehicleTrackingDetails_HHT",
 
     },
     "Imports": {
@@ -87,10 +132,11 @@ export class Constants {
         "AWB_details": "GetHawbMasterDataForHHT"
       },
       "IGM": "GetIGMdetailsByAWBForHHT",
-      "Vehicle_tracking": "",
+      // "Vehicle_tracking": "GetVehicleDetailsByAWBForHHT", //newly added, confirm with Heena
+      "Vehicle_tracking": "GetVehicleTrackingDetails_HHT", //newly added, confirm with Heena
       "IssueDOStatus": "ConsoleDOStatus_ForHHT",
       "GetTSPDetails_HHT_for_AWBTSP": "GetImpTSPDetails_HHT",
-      "GetHAWBNosBasedOnMAWBNos_HHT_MAWB": "GetHAWBNosBasedOnMAWBNos_HHT",
+      "GetHAWBNosBasedOnMAWBNos_HHT_MAWB": "GetHAWBNosBasedOnMAWBNos_HHT",// Get House no from Master
       "GetHawbStatusBasedOnHAWBNo_HHT_HAWB": "GetHawbStatusBasedOnHAWBNo_HHT",
       "IMPCreateGP_HHT_BarCode": "IMPCreateGP_HHT",
       "ExamPiecesPercentage": "ExamPiecesPercentage",
@@ -109,8 +155,11 @@ export class Constants {
       "ImpCancelToken_HHT_Cancel": "ImpCancelToken_HHT",
       "IsTherePaymentDues_HHT_Due": "IsTherePaymentDues_HHT",
       "IMPCreateToken_HHT_VTGen": "IMPCreateToken_HHT",
+      "IMPUpdateToken_HHT_VTGen": "IMPUpdateToken_HHT",
       "getprefix_forshed": "getprefix",
-      "FileSave_Upload": "FileSave"
+      "FileSave_Upload": "FileSave",
+      "GetVerifiedGPCntByCustomsOfficer_HHT": "GetVerifiedGPCntByCustomsOfficer_HHT"
+
 
 
     },

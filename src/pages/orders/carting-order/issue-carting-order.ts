@@ -250,7 +250,7 @@ export class IssueCartingOrder implements OnInit {
     }
 
     focusNextInput() {
-        if (this.Prefix.length >= 3) {
+        if (this.Prefix.length == 3) {
             this.myInput.setFocus();
         }
     }

@@ -1,0 +1,779 @@
+<style>
+  .label-md {
+    margin: 0px;
+  }
+
+  .label-ios {
+    margin: 0px;
+  }
+
+  .text-input-ios {
+    margin: 0px;
+  }
+
+
+  ion-label[fixed] {
+    width: 100%;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  td,
+  th {
+    border: solid thin #1EA1CC;
+    padding: 5px !important;
+
+  }
+
+  .float-right {
+    margin-top: 15px !important;
+  }
+</style>
+
+
+<Gmax-header [title]="title">
+</Gmax-header>
+
+<ion-content class="marginTop44">
+
+  
+  <!-- <ion-grid>
+        <ion-row>
+          <ion-col col-12>
+            <table>
+              <tr>
+                <td>
+                  <ion-label>AWB Number</ion-label>
+                </td>
+                <td>
+                  <input type="text" formControlName="MAWBNo" [(ngModel)]="MAWBNo" [readonly]="readOnly">
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <ion-label>HAWB Number</ion-label>
+                </td>
+                <td>
+                  <input type="text" formControlName="HAWbNo" [(ngModel)]="HAWbNo" [readonly]="readOnly">
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <ion-label>NoP</ion-label>
+                </td>
+                <td>
+                  <input type="number" formControlName="pieces" [(ngModel)]="Pieces">
+                </td>
+              </tr>
+
+              <td>
+                <ion-label>Gr.Wt</ion-label>
+              </td>
+              <td>
+                <input type="number" formControlName="GrWt" [(ngModel)]="GrWt">Kgs.
+              </td>
+              <tr>
+                <td>
+                  <ion-label>Vehicle Number</ion-label>
+                </td>
+                <td>
+                  <input type="text" formControlName="vehicleNo" [(ngModel)]="vehicleNo">
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <ion-label>Driver Name</ion-label>
+                </td>
+                <td>
+                  <input type="text" formControlName="driverName" [(ngModel)]="driverName">
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <ion-label>License number</ion-label>
+                </td>
+                <td>
+                  <input type="text" formControlName="licenseNo" [(ngModel)]="licenseNo">
+                </td>
+              </tr>
+              <tr>
+              <tr>
+                <td>
+                  <ion-label>Mobile number</ion-label>
+                </td>
+                <td>
+                  <input type="number" formControlName="mobNo" [(ngModel)]="mobNo" maxlength="10" minlength="10">
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <ion-label>Notify ( Non Smart phone)</ion-label>
+                <td>
+                  <ion-checkbox class="float-right" formControlName="notify" [checked]="unchecked" [(ngModel)]="notify">
+                  </ion-checkbox>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <ion-label>MIAL Shed</ion-label>
+                </td>
+                <td>
+                  <ion-select col-12 formControlName="shedType" [(ngModel)]="shedType"
+                    (ionChange)="onServiceTypeChange($event);" multiple="false" interface="popover">
+                    <ion-option selected value="0">Select Shed</ion-option>
+                    <ion-option *ngFor="let dt of objshedType; let idx = index" [value]="dt.HAWBNo">
+                      {{dt.ITC_CLEARANCE_NAME[0].toString()}}
+                    </ion-option>
+                  </ion-select>
+
+                </td>
+              </tr>
+            </table>
+          </ion-col>
+        </ion-row>
+      </ion-grid> -->
+
+      <ion-grid>
+        <ion-row>
+          <ion-col col-3>
+              <ion-label color="primary" class="fontSize12 marginSet" fixed>Delivery By
+                </ion-label>
+          </ion-col>
+          <ion-col col-3>
+              <!-- <ion-label color="primary" class="fontSize12 marginSet" fixed>Delivery By
+                </ion-label> -->
+          </ion-col>
+          <ion-col col-6>
+            <ion-select [disabled]="vtDetails != 0" [ngModel]="selectedOption" col-12 (ionChange)="onDeliveryOptionSelected($event)" interface="popover">
+                <!-- <ion-option selected value="0">Select Delivery option</ion-option> -->
+              <ion-option  value="H">Hand</ion-option>
+              <ion-option value="T">Trolley</ion-option>
+              <ion-option value="V">Vehicle</ion-option>
+            </ion-select>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+  <ion-grid *ngIf="selectedOption == 'V'">
+    <ion-row>
+      <ion-col col-12>
+        <table>
+          <tr>
+            <td>AWB Number</td>
+            <td *ngIf="vtDetails == 0">{{MAWBNo}}</td>
+            <td *ngIf="vtDetails != 0">{{edAWB}}</td>
+          </tr>
+          <tr *ngIf="HAWbNo != ''">
+            <td>HAWB Number</td>
+            <td *ngIf="vtDetails == 0"> {{HAWbNo}}</td>
+            <td *ngIf="vtDetails != 0"> {{edHAWB}}</td>
+          </tr>
+          <tr>
+            <td>NoP</td>
+            <td *ngIf="vtDetails == 0" style="text-align: right;">{{PiecesShow}}</td>
+            <td *ngIf="vtDetails != 0" style="text-align: right;">{{edPieces}}</td>
+
+            <!-- <td style="text-align: right;">{{PiecesShow}}</td> -->
+            <!-- <td *ngIf="vtDetails != 0" style="text-align: right;">{{this.vtDetails.Pieces}}</td> -->
+          </tr>
+          <tr>
+            <td>Gr. Wt.</td>
+            <td *ngIf="vtDetails == 0" style="text-align: right;">{{GrWtShow}} Kgs.</td>
+            <td *ngIf="vtDetails != 0" style="text-align: right;">{{edGrWt}} Kgs.</td>
+          </tr>
+        </table>
+
+        <!-- <table>
+          <tr>
+            <td>NoP</td>
+            <td style="text-align: right;">{{Pieces}}</td>
+            <td>Gr. Wt.</td>
+            <td style="text-align: right;">{{GrWt}} Kgs.</td>
+          </tr>
+        </table>
+      (change)="showButton();"
+      -->
+      </ion-col>
+
+      <ion-col col-4>
+        <ion-label color="primary" class="fontSize12 marginSet" fixed>Token NoP & Wt.</ion-label>
+      </ion-col>
+      <ion-col *ngIf="vtDetails == 0" col-4 [formGroup]="vForm">
+        <input type="number" autofocus (change)="onChangeNoP();" maxlength="10" [(ngModel)]="objVT.pieces"
+          formControlName ="entPieces" [formControl] = "vForm.controls['entPieces']"
+          
+          style="width: 90%;text-align: right;" #piecesval>
+      </ion-col>
+      <!-- (keypress)="numberOnlyValidation($event)" on 207 -->
+      <ion-col *ngIf="vtDetails == 0" col-4 [formGroup]="vForm">
+        <input type="number" pattern="^\d*(\.\d{0,3})?$" (change)="onChangeNoP();" [(ngModel)]="objVT.GrWt" formControlName="entWt" maxlength="10"
+        
+        style="width: 90%;text-align: right;">
+      </ion-col>
+
+      <!-- (keypress)="numberOnlyValidation($event)" on 213   -->
+
+      <ion-col *ngIf="vtDetails != 0" col-4 [formGroup]="vForm">
+        <input disabled = "vtDetails != '0'" type="text" autofocus (change)="onChangeNoP();" maxlength="10" [(ngModel)]="objVT.pieces"
+          formControlName ="entPieces" [formControl] = "vForm.controls['entPieces']"
+          value="{{edVTNop}}"
+          style="width: 90%;text-align: right;" #piecesval>
+      </ion-col>
+      <ion-col *ngIf="vtDetails != 0" col-4 [formGroup]="vForm">
+        <input disabled = "vtDetails != '0'" type="text" pattern="^\d*(\.\d{0,3})?$" (change)="onChangeNoP();" [(ngModel)]="objVT.GrWt" formControlName="entWt" maxlength="10"
+      style="width: 90%;text-align: right;" value="{{edVTWt}}">
+      </ion-col>
+
+
+      <ion-col col-5>
+        <ion-label color="primary" class="fontSize12 marginSet" fixed>Vehicle Number
+        </ion-label>
+      </ion-col>
+      <ion-col *ngIf="vtDetails == 0" ion-item col-7>
+        <ion-input type="text" maxlength="15" autocapitalize="characters" class="ion-text-uppercase"
+          (change)="special_charVN(objVT.vehicleNo)" [(ngModel)]="objVT.vehicleNo">
+        </ion-input>
+      </ion-col>
+      <ion-col *ngIf="vtDetails != 0" ion-item col-7>
+        <ion-input type="text" maxlength="15" autocapitalize="characters" class="ion-text-uppercase"
+      [(ngModel)]="edVehicleNo">
+        </ion-input>
+      </ion-col>
+      <!-- (change)="special_charVN(edVehicleNo)" on line 237 -->
+
+      <ion-col col-5>
+        <ion-label color="primary" class="fontSize12 marginSet" fixed>Driver Name</ion-label>
+      </ion-col>
+      <ion-col *ngIf="vtDetails == 0" ion-item col-7>
+        <ion-input type="text" maxlength="20" autocapitalize="characters" class="ion-text-uppercase"
+          (change)="special_charDN($event)" [(ngModel)]="objVT.driverName">
+        </ion-input>
+      </ion-col>
+        <ion-col *ngIf="vtDetails != 0" ion-item col-7>
+          <ion-input type="text" maxlength="20" autocapitalize="characters" class="ion-text-uppercase"
+        (change)="special_charDN($event)" [(ngModel)]="objVT.driverName">
+          </ion-input>
+
+      </ion-col>
+      <ion-col col-5>
+        <ion-label color="primary" class="fontSize12 marginSet" fixed>Licence Number
+        </ion-label>
+      </ion-col>
+      <ion-col *ngIf="vtDetails == 0" ion-item col-7>
+        <ion-input type="text" maxlength="30" autocapitalize="characters" (change)="special_charLN($event)"
+          [(ngModel)]="objVT.licenseNo">
+        </ion-input>
+      </ion-col>
+      <ion-col *ngIf="vtDetails != 0" ion-item col-7>
+        <ion-input type="text" maxlength="30" autocapitalize="characters" (change)="special_charLN($event)"
+      [(ngModel)]="objVT.licenseNo">
+        </ion-input>
+      </ion-col>
+
+      <ion-col col-5>
+        <ion-label color="primary" class="fontSize12 marginSet" fixed>Mobile Number
+        </ion-label>
+      </ion-col>
+      <ion-col *ngIf="vtDetails == 0" ion-item col-7>
+        <ion-input type="tel" pattern="[0-9]*" (change)="mobileChange($event)" maxlength="10" [(ngModel)]="objVT.mobNo"
+          maxlength="10" minlength="10" 
+          (change)="showButton();">
+        </ion-input>
+      </ion-col>
+      <ion-col *ngIf="vtDetails != 0" ion-item col-7>
+        <ion-input type="tel" pattern="[0-9]*" (change)="mobileChange($event)" maxlength="10" [(ngModel)]="objVT.mobNo"
+      maxlength="10" minlength="10"
+          (change)="showButton();">
+        </ion-input>
+      </ion-col>
+
+      <ion-col col-5>
+        <ion-label color="primary" class="fontSize12 marginSet" fixed>Additional Mobile Number
+        </ion-label>
+      </ion-col>
+      <ion-col *ngIf="vtDetails == 0" ion-item col-7>
+        <ion-input type="tel" pattern="[0-9]*" (change)="mobileChange($event)" maxlength="10" [(ngModel)]="objVT.addmobNo"
+          maxlength="10" minlength="10" 
+          (change)="showButton();">
+        </ion-input>
+      </ion-col>
+      <ion-col *ngIf="vtDetails != 0" ion-item col-7>
+        <ion-input type="tel" pattern="[0-9]*" (change)="mobileChange($event)" maxlength="10" [(ngModel)]="objVT.addmobNo"
+      maxlength="10" minlength="10"
+          (change)="showButton();">
+        </ion-input>
+      </ion-col>
+
+      <ion-col col-6>
+        <ion-label color="primary" style="white-space: inherit !important;" class="fontSize12 marginSet" fixed>Notify
+          (Non smart phone)</ion-label>
+      </ion-col>
+      <ion-col col-2>
+        <ion-checkbox class="float-right" [checked]="unchecked" [(ngModel)]="objVT.IsConsignee"
+          (ionChange)="onChange($event)">
+        </ion-checkbox>
+      </ion-col>
+
+      <ion-col col-4>
+        <button type="button" class="btn btn-primary mb-2" style="margin-left:auto;line-height: 3;"
+          (click)="addVehicle(1);" [disabled]="vehicleDisable == '1'">+ Add
+          Vehicle</button>
+          <!-- it had freezeShed() method on click event -->
+      </ion-col>
+
+      <ion-col col-7>
+        <ion-label color="primary" class="fontSize12 marginSet" fixed>Warehouse
+        </ion-label>
+      </ion-col>
+      <ion-col *ngIf="vtDetails == 0" col-5>
+        <ion-select style="max-width: 100%;" disabled="{{freeze}}" col-12 [(ngModel)]="objVT.shedType"
+          (ionChange)="onServiceTypeChange($event);" interface="popover">
+          <ion-option *ngFor="let dt of objshedType; let idx = index" selected="idx===0"
+            value={{dt.ITC_CLEARANCE_NAME}}>
+            {{dt.ITC_CLEARANCE_NAME[0]}}
+          </ion-option>
+        </ion-select>
+
+
+        <!-- <ion-select style="max-width: 100%;" col-12 [(ngModel)]="objVT.shedType"
+          (ionChange)="onServiceTypeChange($event);" interface="popover">
+          <ion-option selected value="0">Select Shed</ion-option>
+          <ion-option *ngFor="let dt of objshedType; let idx = index" selected="{{(idx==0)}}"
+            [value]="dt.ITC_CLEARANCE_NAME">
+            {{dt.ITC_CLEARANCE_NAME[0]}}
+          </ion-option>
+        </ion-select> -->
+      </ion-col>
+      <ion-col *ngIf="vtDetails != 0" col-5>
+        <ion-select disabled = "vtDetails != '0'" style="max-width: 100%;" col-12 [(ngModel)]="objVT.shedType"
+          (ionChange)="onServiceTypeChange($event);" interface="popover">
+      <ion-option *ngFor="let dt of objshedType; let idx = index"
+            value={{dt.ITC_CLEARANCE_NAME}}>
+            <!-- {{dt.ITC_CLEARANCE_NAME[0]}} -->
+            <!--  on line 329 disabled="{{freeze}}" -->
+            {{edShed[0].split(',')[0]}}
+          </ion-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- mediaPlaybackRequiresUserAction this was from xcode line 164 CDVWKWebViewEngine.m -->
+
+
+  <ion-grid *ngIf="selectedOption == 'H'">
+      <ion-row>
+        <ion-col col-12>
+          <table>
+            <tr>
+              <td>AWB Number</td>
+              <td *ngIf="vtDetails == 0">{{MAWBNo}}</td>
+              <td *ngIf="vtDetails != 0">{{edAWB}}</td>
+            </tr>
+            <tr *ngIf="HAWbNo != ''">
+              <td>HAWB Number</td>
+              <td *ngIf="vtDetails == 0"> {{HAWbNo}}</td>
+              <td *ngIf="vtDetails != 0"> {{edHAWB}}</td>
+            </tr>
+            <tr>
+              <td>NoP</td>
+              <td *ngIf="vtDetails == 0" style="text-align: right;">{{PiecesShow}}</td>
+              <td *ngIf="vtDetails != 0" style="text-align: right;">{{edPieces}}</td>
+  
+              <!-- <td style="text-align: right;">{{PiecesShow}}</td> -->
+              <!-- <td *ngIf="vtDetails != 0" style="text-align: right;">{{this.vtDetails.Pieces}}</td> -->
+            </tr>
+            <tr>
+              <td>Gr. Wt.</td>
+              <td *ngIf="vtDetails == 0" style="text-align: right;">{{GrWtShow}} Kgs.</td>
+              <td *ngIf="vtDetails != 0" style="text-align: right;">{{edGrWt}} Kgs.</td>
+            </tr>
+          </table>
+  
+        </ion-col>
+  
+        <ion-col col-4>
+          <ion-label color="primary" class="fontSize12 marginSet" fixed>Token NoP & Wt.</ion-label>
+        </ion-col>
+        <ion-col *ngIf="vtDetails == 0" col-4 [formGroup]="vForm">
+          <input type="text" autofocus (change)="onChangeNoP();" maxlength="10" [(ngModel)]="objVT.pieces"
+            formControlName ="entPieces" [formControl] = "vForm.controls['entPieces']"
+            
+            style="width: 90%;text-align: right;" #piecesval>
+        </ion-col>
+        <ion-col *ngIf="vtDetails == 0" col-4 [formGroup]="vForm">
+          <input type="text" pattern="^\d*(\.\d{0,3})?$" (change)="onChangeNoP();" [(ngModel)]="objVT.GrWt" formControlName="entWt" maxlength="10"
+            style="width: 90%;text-align: right;">
+        </ion-col>
+  
+        <ion-col *ngIf="vtDetails != 0" col-4 [formGroup]="vForm">
+          <input disabled = "vtDetails != '0'" type="text" autofocus (change)="onChangeNoP();" maxlength="10" [(ngModel)]="objVT.pieces"
+            formControlName ="entPieces" [formControl] = "vForm.controls['entPieces']"
+            value="{{edVTNop}}"
+            style="width: 90%;text-align: right;" #piecesval>
+        </ion-col>
+        <ion-col *ngIf="vtDetails != 0" col-4 [formGroup]="vForm">
+          <input disabled = "vtDetails != '0'" type="text" pattern="^\d*(\.\d{0,3})?$" (change)="onChangeNoP();" [(ngModel)]="objVT.GrWt" formControlName="entWt" maxlength="10"
+        style="width: 90%;text-align: right;" value="{{edVTWt}}">
+        </ion-col>
+  
+  
+        <!-- <ion-col col-5>
+          <ion-label color="primary" class="fontSize12 marginSet" fixed>Vehicle Number
+          </ion-label>
+        </ion-col>
+        <ion-col *ngIf="vtDetails == 0" ion-item col-7>
+          <ion-input type="text" maxlength="15" autocapitalize="characters" class="ion-text-uppercase"
+            (change)="special_charVN(objVT.vehicleNo)" [(ngModel)]="objVT.vehicleNo">
+          </ion-input>
+        </ion-col>
+        <ion-col *ngIf="vtDetails != 0" ion-item col-7>
+          <ion-input type="text" maxlength="15" autocapitalize="characters" class="ion-text-uppercase"
+        (change)="special_charVN(objVT.vehicleNo)" 
+        [(ngModel)]="objVT.vehicleNo">
+          </ion-input>
+        </ion-col> -->
+  
+        <ion-col col-5>
+          <ion-label color="primary" class="fontSize12 marginSet" fixed>Operator Name</ion-label>
+        </ion-col>
+        <ion-col *ngIf="vtDetails == 0" ion-item col-7>
+          <ion-input type="text" maxlength="20" autocapitalize="characters" class="ion-text-uppercase"
+            (change)="special_charDN($event)" [(ngModel)]="objVT.driverName">
+          </ion-input>
+        </ion-col>
+          <ion-col *ngIf="vtDetails != 0" ion-item col-7>
+            <ion-input type="text" maxlength="20" autocapitalize="characters" class="ion-text-uppercase"
+          (change)="special_charDN($event)" [(ngModel)]="objVT.driverName">
+            </ion-input>
+  
+        </ion-col>
+        <ion-col col-5>
+          <ion-label color="primary" class="fontSize12 marginSet" fixed>MIAL Cargo Entry <br/> Permit Number
+          </ion-label>
+        </ion-col>
+        <ion-col *ngIf="vtDetails == 0" ion-item col-7>
+          <ion-input type="text" maxlength="30" autocapitalize="characters" (change)="special_charLN($event)"
+            [(ngModel)]="objVT.licenseNo">
+          </ion-input>
+        </ion-col>
+        <ion-col *ngIf="vtDetails != 0" ion-item col-7>
+          <ion-input type="text" maxlength="30" autocapitalize="characters" (change)="special_charLN($event)"
+        [(ngModel)]="objVT.licenseNo">
+          </ion-input>
+        </ion-col>
+  
+        <ion-col col-5>
+          <ion-label color="primary" class="fontSize12 marginSet" fixed>Mobile Number
+          </ion-label>
+        </ion-col>
+        <ion-col *ngIf="vtDetails == 0" ion-item col-7>
+          <ion-input type="tel" pattern="[0-9]*" (change)="mobileChange($event)" maxlength="10" [(ngModel)]="objVT.mobNo"
+            maxlength="10" minlength="10"
+            (change)="showButton();">
+          </ion-input>
+        </ion-col>
+        <ion-col *ngIf="vtDetails != 0" ion-item col-7>
+          <ion-input type="tel" pattern="[0-9]*" (change)="mobileChange($event)" maxlength="10" [(ngModel)]="objVT.mobNo"
+        maxlength="10" minlength="10"
+            (change)="showButton();">
+          </ion-input>
+        </ion-col>
+
+        <ion-col col-5>
+          <ion-label color="primary" class="fontSize12 marginSet" fixed>Additional Mobile Number
+          </ion-label>
+        </ion-col>
+        <ion-col *ngIf="vtDetails == 0" ion-item col-7>
+          <ion-input type="tel" pattern="[0-9]*" (change)="mobileChange($event)" maxlength="10" [(ngModel)]="objVT.addmobNo"
+            maxlength="10" minlength="10"
+            (change)="showButton();">
+          </ion-input>
+        </ion-col>
+        <ion-col *ngIf="vtDetails != 0" ion-item col-7>
+          <ion-input type="tel" pattern="[0-9]*" (change)="mobileChange($event)" maxlength="10" [(ngModel)]="objVT.addmobNo"
+        maxlength="10" minlength="10"
+            (change)="showButton();">
+          </ion-input>
+        </ion-col>
+  
+        <ion-col col-6>
+          <ion-label color="primary" style="white-space: inherit !important;" class="fontSize12 marginSet" fixed>Notify
+            (Non smart phone)</ion-label>
+        </ion-col>
+        <ion-col col-2>
+          <ion-checkbox class="float-right" [checked]="unchecked" [(ngModel)]="objVT.IsConsignee"
+            (ionChange)="onChange($event)">
+          </ion-checkbox>
+        </ion-col>
+  
+        <ion-col col-4>
+          <button type="button" class="btn btn-primary mb-2" style="margin-left:auto;line-height: 3;"
+            (click)="addVehicle(1);" [disabled]="vehicleDisable == '1'">+ Add
+            Hand</button>
+            <!-- it had freezeShed() method on click event -->
+        </ion-col>
+  
+        <ion-col col-7>
+          <ion-label color="primary" class="fontSize12 marginSet" fixed>Warehouse
+          </ion-label>
+        </ion-col>
+        <ion-col *ngIf="vtDetails == 0" col-5>
+          <ion-select style="max-width: 100%;" disabled="{{freeze}}" col-12 [(ngModel)]="objVT.shedType"
+            (ionChange)="onServiceTypeChange($event);" interface="popover">
+            <ion-option *ngFor="let dt of objshedType; let idx = index" selected="idx===0"
+              value={{dt.ITC_CLEARANCE_NAME}}>
+              {{dt.ITC_CLEARANCE_NAME[0]}}
+            </ion-option>
+          </ion-select>
+  
+  
+        </ion-col>
+        <ion-col *ngIf="vtDetails != 0" col-5>
+          <ion-select disabled = "vtDetails != '0'" style="max-width: 100%;" col-12 [(ngModel)]="objVT.shedType"
+            (ionChange)="onServiceTypeChange($event);" interface="popover">
+        <ion-option *ngFor="let dt of objshedType; let idx = index"
+              value={{dt.ITC_CLEARANCE_NAME}}>
+              <!-- {{dt.ITC_CLEARANCE_NAME[0]}} -->
+              <!-- disabled="{{freeze}}" on line 494 -->
+              {{edShed[0].split(',')[0]}}
+            </ion-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid *ngIf="selectedOption == 'T'">
+        <ion-row>
+          <ion-col col-12>
+            <table>
+              <tr>
+                <td>AWB Number</td>
+                <td *ngIf="vtDetails == 0">{{MAWBNo}}</td>
+                <td *ngIf="vtDetails != 0">{{edAWB}}</td>
+              </tr>
+              <tr *ngIf="HAWbNo != ''">
+                <td>HAWB Number</td>
+                <td *ngIf="vtDetails == 0"> {{HAWbNo}}</td>
+                <td *ngIf="vtDetails != 0"> {{edHAWB}}</td>
+              </tr>
+              <tr>
+                <td>NoP</td>
+                <td *ngIf="vtDetails == 0" style="text-align: right;">{{PiecesShow}}</td>
+                <td *ngIf="vtDetails != 0" style="text-align: right;">{{edPieces}}</td>
+    
+                <!-- <td style="text-align: right;">{{PiecesShow}}</td> -->
+                <!-- <td *ngIf="vtDetails != 0" style="text-align: right;">{{this.vtDetails.Pieces}}</td> -->
+              </tr>
+              <tr>
+                <td>Gr. Wt.</td>
+                <td *ngIf="vtDetails == 0" style="text-align: right;">{{GrWtShow}} Kgs.</td>
+                <td *ngIf="vtDetails != 0" style="text-align: right;">{{edGrWt}} Kgs.</td>
+              </tr>
+            </table>
+    
+          </ion-col>
+    
+          <ion-col col-4>
+            <ion-label color="primary" class="fontSize12 marginSet" fixed>Token NoP & Wt.</ion-label>
+          </ion-col>
+          <ion-col *ngIf="vtDetails == 0" col-4 [formGroup]="vForm">
+            <input type="text" autofocus (change)="onChangeNoP();" maxlength="10" [(ngModel)]="objVT.pieces"
+              formControlName ="entPieces" [formControl] = "vForm.controls['entPieces']"
+              
+              style="width: 90%;text-align: right;" #piecesval>
+          </ion-col>
+          <ion-col *ngIf="vtDetails == 0" col-4 [formGroup]="vForm">
+            <input type="text" pattern="^\d*(\.\d{0,3})?$" (change)="onChangeNoP();" [(ngModel)]="objVT.GrWt" formControlName="entWt" maxlength="10"
+              style="width: 90%;text-align: right;">
+          </ion-col>
+    
+          <ion-col *ngIf="vtDetails != 0" col-4 [formGroup]="vForm">
+            <input disabled = "vtDetails != '0'" type="text" autofocus (change)="onChangeNoP();" maxlength="10" [(ngModel)]="objVT.pieces"
+              formControlName ="entPieces" [formControl] = "vForm.controls['entPieces']"
+              value="{{edVTNop}}"
+              style="width: 90%;text-align: right;" #piecesval>
+          </ion-col>
+          <ion-col *ngIf="vtDetails != 0" col-4 [formGroup]="vForm">
+            <input disabled = "vtDetails != '0'" type="text" pattern="^\d*(\.\d{0,3})?$" (change)="onChangeNoP();" [(ngModel)]="objVT.GrWt" formControlName="entWt" maxlength="10"
+          style="width: 90%;text-align: right;" value="{{edVTWt}}">
+          </ion-col>
+
+          <ion-col col-5>
+          <ion-label color="primary" class="fontSize12 marginSet" fixed>Trolley Number
+          </ion-label>
+        </ion-col>
+        <ion-col *ngIf="vtDetails == 0" ion-item col-7>
+          <ion-input type="text" maxlength="15" autocapitalize="characters" class="ion-text-uppercase"
+          (change)="special_charTN(objVT.vehicleNo)" [(ngModel)]="objVT.vehicleNo">
+          </ion-input>
+        </ion-col>
+        <ion-col *ngIf="vtDetails != 0" ion-item col-7>
+          <ion-input type="text" maxlength="15" autocapitalize="characters" class="ion-text-uppercase" 
+        [(ngModel)]="edVehicleNo">
+          </ion-input>
+        </ion-col>
+        
+          <ion-col col-5>
+            <ion-label color="primary" class="fontSize12 marginSet" fixed>Operator Name</ion-label>
+          </ion-col>
+          <ion-col *ngIf="vtDetails == 0" ion-item col-7>
+            <ion-input type="text" maxlength="20" autocapitalize="characters" class="ion-text-uppercase"
+              (change)="special_charDN($event)" [(ngModel)]="objVT.driverName">
+            </ion-input>
+          </ion-col>
+            <ion-col *ngIf="vtDetails != 0" ion-item col-7>
+              <ion-input type="text" maxlength="20" autocapitalize="characters" class="ion-text-uppercase"
+            (change)="special_charDN($event)" [(ngModel)]="objVT.driverName">
+              </ion-input>
+    
+          </ion-col>
+          <ion-col col-5>
+            <ion-label color="primary" class="fontSize12 marginSet" fixed>MIAL Cargo Entry <br/> Permit Number
+            </ion-label>
+          </ion-col>
+          <ion-col *ngIf="vtDetails == 0" ion-item col-7>
+            <ion-input type="text" maxlength="30" autocapitalize="characters" (change)="special_charLN($event)"
+              [(ngModel)]="objVT.licenseNo">
+            </ion-input>
+          </ion-col>
+          <ion-col *ngIf="vtDetails != 0" ion-item col-7>
+            <ion-input type="text" maxlength="30" autocapitalize="characters" (change)="special_charLN($event)"
+          [(ngModel)]="objVT.licenseNo">
+            </ion-input>
+          </ion-col>
+    
+          <ion-col col-5>
+            <ion-label color="primary" class="fontSize12 marginSet" fixed>Mobile Number
+            </ion-label>
+          </ion-col>
+          <ion-col *ngIf="vtDetails == 0" ion-item col-7>
+            <ion-input type="tel" pattern="[0-9]*" (change)="mobileChange($event)" maxlength="10" [(ngModel)]="objVT.mobNo"
+              maxlength="10" minlength="10"
+              (change)="showButton();">
+            </ion-input>
+          </ion-col>
+          <ion-col *ngIf="vtDetails != 0" ion-item col-7>
+            <ion-input type="tel" pattern="[0-9]*" (change)="mobileChange($event)" maxlength="10" [(ngModel)]="objVT.mobNo"
+          maxlength="10" minlength="10"
+              (change)="showButton();">
+            </ion-input>
+          </ion-col>
+
+          <ion-col col-5>
+            <ion-label color="primary" class="fontSize12 marginSet" fixed>Additional Mobile Number
+            </ion-label>
+          </ion-col>
+          <ion-col *ngIf="vtDetails == 0" ion-item col-7>
+            <ion-input type="tel" pattern="[0-9]*" (change)="mobileChange($event)" maxlength="10" [(ngModel)]="objVT.addmobNo"
+              maxlength="10" minlength="10"
+              (change)="showButton();">
+            </ion-input>
+          </ion-col>
+          <ion-col *ngIf="vtDetails != 0" ion-item col-7>
+            <ion-input type="tel" pattern="[0-9]*" (change)="mobileChange($event)" maxlength="10" [(ngModel)]="objVT.addmobNo"
+          maxlength="10" minlength="10"
+              (change)="showButton();">
+            </ion-input>
+          </ion-col>
+    
+          <ion-col col-6>
+            <ion-label color="primary" style="white-space: inherit !important;" class="fontSize12 marginSet" fixed>Notify
+              (Non smart phone)</ion-label>
+          </ion-col>
+          <ion-col col-2>
+            <ion-checkbox class="float-right" [checked]="unchecked" [(ngModel)]="objVT.IsConsignee"
+              (ionChange)="onChange($event)">
+            </ion-checkbox>
+          </ion-col>
+    
+          <ion-col col-4>
+            <button type="button" class="btn btn-primary mb-2" style="margin-left:auto;line-height: 3;"
+              (click)="addVehicle(1);" [disabled]="vehicleDisable == '1'">+ Add Trolley
+              </button> 
+          </ion-col>
+          <!-- it was + Add Vehicle -->
+          <!-- it had freezeShed() method on click event -->
+    
+          <ion-col col-7>
+            <ion-label color="primary" class="fontSize12 marginSet" fixed>Warehouse
+            </ion-label>
+          </ion-col>
+          <ion-col *ngIf="vtDetails == 0" col-5>
+            <ion-select style="max-width: 100%;" disabled="{{freeze}}" col-12 [(ngModel)]="objVT.shedType"
+              (ionChange)="onServiceTypeChange($event);" interface="popover">
+              <ion-option *ngFor="let dt of objshedType; let idx = index" selected="idx===0"
+                value={{dt.ITC_CLEARANCE_NAME}}>
+                {{dt.ITC_CLEARANCE_NAME[0]}}
+              </ion-option>
+            </ion-select>
+    
+    
+          </ion-col>
+          <ion-col *ngIf="vtDetails != 0" col-5>
+            <ion-select disabled = "vtDetails != '0'" style="max-width: 100%;" col-12 [(ngModel)]="objVT.shedType"
+              (ionChange)="onServiceTypeChange($event);" interface="popover">
+          <ion-option *ngFor="let dt of objshedType; let idx = index"
+                value={{dt.ITC_CLEARANCE_NAME}}>
+                <!-- {{dt.ITC_CLEARANCE_NAME[0]}} -->
+                <!-- disabled="{{freeze}}" on line 657 -->
+                {{edShed[0].split(',')[0]}}
+              </ion-option>
+            </ion-select>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  
+
+  <ion-list>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12 *ngIf="this.global.edTokenFlag != 1">
+          <button [disabled]="GPButton == '0'" ion-button block icon-start (click)="IMPCreateToken_HHT()"
+            style="margin-top: 20px !important;" type="submit">
+            Generate Token
+          </button>
+        </ion-col>
+
+        <!-- <ion-col ngIf="this.global.edTokenFlag == 1" col-3>
+
+        </ion-col> -->
+        <ion-col style="text-align:center" *ngIf="this.global.edTokenFlag == 1">
+          <h6>Please click on +Add before Save</h6>
+        </ion-col>
+        <!-- <ion-col ngIf="this.global.edTokenFlag == 1" col-3>
+          
+        </ion-col> -->
+        <ion-col col-12 *ngIf="this.global.edTokenFlag == 1">
+            <button [disabled]="GPButton == '0'" ion-button block icon-start (click)="IMPUpdateToken_HHT()"
+              style="margin-top: 20px !important;" type="submit">
+              Save Token
+            </button>
+            <!--  on line 682 -->
+          </ion-col>
+
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+
+
+</ion-content>
+<ion-fab right bottom #fab1 style="bottom:38px !important">
+  <button class="pop-in" ion-fab mini color="primary" [ngClass]="{'pop-out': fabGone}" (click)="clearInputs()">
+    <ion-icon name="close"></ion-icon>
+  </button>
+</ion-fab>
+<Gmax-footer></Gmax-footer>

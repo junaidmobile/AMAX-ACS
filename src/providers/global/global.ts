@@ -16,9 +16,30 @@ import { Constants } from '../../constant';
 export class GlobalProvider {
   /*Configuration of the app build */
   appBuildConfig = {
-    version: 'V1.1.2',
+    version: 'V1.47.0',
     fullYear: (new Date).getFullYear().toString()
   }
+  
+
+  generateGP;
+  showPieces;
+  showWt;
+  
+  oocBtn;
+
+  dueBtn;
+
+  showSegment;
+  edTokenFlag;
+  multiGpSingleVT;
+  
+  oocCount:any = 0;
+
+  TSPBool: boolean;
+
+  checkRMS: boolean;
+
+  appVersion: any = '1.47.0';
   constructor(public http: HttpClient, private app: App, public alertCtrl: AlertController, public toastCtrl: ToastController, public platform: Platform) {
   }
 
@@ -42,6 +63,7 @@ export class GlobalProvider {
     let alert = this.alertCtrl.create({
       title: 'Logout',
       message: 'Do you want to Logout?',
+      cssClass: 'alertCustomCss',
       buttons: [{
         text: "Confirm",
         handler: () => { window.localStorage.removeItem('isLogged'); this.routePage(LoginPage) }
@@ -99,7 +121,6 @@ export class GlobalProvider {
 
   /* Encrypt and store the local storage data*/
   store(key: string, value: any) {
-
     let encryptedData = CryptoJS.AES.encrypt(JSON.stringify(value), Constants.SECRET_KEY).toString();
     window.localStorage.setItem(key, encryptedData);
   }

@@ -10,8 +10,7 @@ import { NavController, AlertController } from 'ionic-angular';
 import { HttpProvider } from '../../../providers/http/http';
 import { GlobalProvider } from '../../../providers/global/global';
 import { Constants } from '../../../constant';
-export class DeliveryOrder { strMAWBNO: any; strHAWBNO: any; intIGMNo: any; intIGMYear: any;pi_strUserName: any;
- }
+export class DeliveryOrder { strMAWBNO: any; strHAWBNO: any; intIGMNo: any; intIGMYear: any }
 @Component({
     selector: 'page-issue-delivery-order',
     templateUrl: 'issue-delivery-order.html'
@@ -31,7 +30,6 @@ export class IssueDeliveryOrder implements OnInit {
     masterDataResp: any;
     isDOCreated: boolean;
     HAWBNO: any;
-  private _strUserName: any;
     constructor(public navCtrl: NavController, public alertCtrl: AlertController, public http: HttpProvider, public global: GlobalProvider) {
         this.deliveryOrder = new DeliveryOrder();
         this.appBuildConfig = this.global.appBuildConfig;
@@ -39,7 +37,7 @@ export class IssueDeliveryOrder implements OnInit {
 
     // On Page Load
     ngOnInit() {
-      this._strUserName = JSON.parse(this.global.get('userResp')).UserName[0];
+
     }
 
     // fetch DO Details for  IGMNo. and MAWBNo.
@@ -65,21 +63,16 @@ export class IssueDeliveryOrder implements OnInit {
 
     // fetching details
     getDetails() {
-debugger
         this.showDiv = false;
         this.deliveryOrder.strMAWBNO = this.Prefix + this.MAWBNo;
         this.deliveryOrder.intIGMNo = (this.IGMNo == undefined || this.IGMNo == '') ? 0 : this.IGMNo;
         this.deliveryOrder.strHAWBNO = (this.HAWBNO == undefined) ? '' : this.HAWBNO;
         this.deliveryOrder.intIGMYear = new Date().getFullYear();
-        this.deliveryOrder.pi_strUserName = this._strUserName
-        console.log("Response : ");
         this.http.getHttpPostRequest(Constants.GMAX_Services.Orders.deliveryOrder.delivery_Order_Details, this.deliveryOrder).then((response) => {
-            console.log("Response : ", JSON.stringify(response));
+            //console.log("Response : ", JSON.stringify(response));
             if (response != null && response != "" && response.hasOwnProperty('NewDataSet') && response["NewDataSet"] != '') {
                 this.showDiv = true;
-
                 let dataSet = response['NewDataSet'];
-                console.log(dataSet)
                 if (dataSet.hasOwnProperty('Table')) {
                     let table = dataSet['Table'][0];
                     this.masterDataResp = table;
@@ -160,7 +153,7 @@ debugger
 
     // set Input Focus
     focusNextInput() {
-        if (this.Prefix.length >= 3) {
+        if (this.Prefix.length == 3) {
             this.myInput.setFocus();
         }
     }

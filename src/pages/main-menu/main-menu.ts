@@ -49,7 +49,7 @@ export class MainMenu implements OnInit {
     this.LoginType = this.global.get('LoginType');
     this.isAndroid = global._platform('android', 'mobileweb');
     this.checkLoginType();
-    this.fetchNotifications();
+    // this.fetchNotifications();
     this.getNotificationStatus();
     this.notificationCountReceived();
   }
@@ -58,7 +58,7 @@ export class MainMenu implements OnInit {
     if (this.global.isNative()) {
       // this.statusBar.styleLightContent();
       this.statusBar.overlaysWebView(false);
-      this.statusBar.backgroundColorByHexString('#ff8641');
+      this.statusBar.backgroundColorByHexString('#1EA1CC');
     }
   }
 

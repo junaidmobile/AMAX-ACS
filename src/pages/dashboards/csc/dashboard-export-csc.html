@@ -1,0 +1,25 @@
+<ion-content class="has-subheader">
+    <div center text-center class="imgClassDashboard" style="padding-top: 112px;">
+        <img src="assets/imgs/csc.jpg" width="100%">
+    </div>
+
+    <ion-grid class="gridProperAlign">
+        <ion-row>
+            <ion-col class="colProperAlign" (click)="goToAWBTracking()">
+                <img [src]="ExpDashImages[0].img">
+            </ion-col>
+            <ion-col class="colProperAlign" (click)="goToVehicleTracking()">
+                <img [src]="ExpDashImages[1].img">
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="colProperAlign" (click)="goToEGM()">
+                <img [src]="ExpDashImages[2].img">
+            </ion-col>
+            <ion-col class="colProperAlign"></ion-col>
+        </ion-row>
+
+
+
+    </ion-grid>
+</ion-content>

@@ -1,0 +1,87 @@
+<style>
+  ion-label {
+    white-space: inherit !important;
+  }
+</style>
+<!-- <Gmax-header [title]="title">
+</Gmax-header> -->   
+<!-- above lines commented and below header added by Himesh on 10/11/2020 -->
+
+<ion-header style="position: fixed;">
+  <ion-navbar color={{color}} hideBackButton="true">
+    <ion-title id="Dashboard" center text-center>
+      {{title}}
+    </ion-title>
+    <ion-buttons right>
+      <!-- <button ion-button icon-only (click)="notifications()">
+          <ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
+      </button> -->
+      <button ion-button icon-only (click)="homeButton()">
+        <ion-icon ios="ios-home" md="md-home"></ion-icon>
+    </button>
+
+      <button ion-button icon-only (click)="logOut()">
+          <ion-icon ios="ios-power" md="md-power"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="marginTop44">
+  <div>
+
+    <!-- <ion-row> -->
+    <!-- <div center text-center class="imgClassDashboard">
+      <img src="assets/imgs/CSIAGVKlogo.jpg" width="100%">
+    </div> -->
+    <!-- </ion-row> -->
+  </div>
+  <div>
+
+
+    <ion-list>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-12 text-center style="margin-top: 85px;">
+            <ion-icon style="color: green; font-size: 60px" class="ioniconclass" ios="ios-checkmark-circle-outline"
+              md="ios-checkmark-circle-outline">
+            </ion-icon>
+            <ion-label>
+
+              <!-- Pre-deposit account maintained with the GHA has been deducted with amount {{amount}} for invoice no.
+              {{tspNo}}. -->
+
+              Pre-deposit account maintained with the CTO is deducted with ₹ {{amount}} against invoice number
+              {{tspNo}}.
+
+
+            </ion-label>
+          </ion-col>
+          <br>
+          <br>
+          <ion-col col-12>
+            <button (click)="backToImp()" ion-button block icon-start style="margin-top: 20px !important;">
+              Back to Milestone Status
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+  </div>
+
+</ion-content>
+<!-- <ion-fab right bottom #fab1 style="bottom:38px !important">
+  <button class="pop-in" ion-fab mini color="primary" [ngClass]="{'pop-out': fabGone}" (click)="clearInputs()">
+    <ion-icon name="close"></ion-icon>
+  </button>
+</ion-fab> -->
+<Gmax-footer></Gmax-footer>

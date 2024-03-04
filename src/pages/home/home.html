@@ -1,0 +1,27 @@
+<Gmax-header [title]="title" id="gradBackground">
+</Gmax-header>
+
+
+<ion-content class="marginTop120 login auth-page">
+
+  <ion-list>
+
+    <ion-item class="itemfirst">
+      <ion-label>MCSCAPL</ion-label>
+      <button ion-button item-end (click)="routePage('MainMenu')">
+        <ion-icon name="arrow-forward" item-start color="white"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="cscHide">
+    <ion-item class="itemSecond">
+      <ion-label>MCSCCCS-Pharma Excellence Center</ion-label>
+      <button id="cscPharmaBtn" ion-button item-end (click)="routePage('CscMainMenuPage')">
+        <ion-icon name="arrow-forward" item-start color="white"></ion-icon>
+      </button>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>

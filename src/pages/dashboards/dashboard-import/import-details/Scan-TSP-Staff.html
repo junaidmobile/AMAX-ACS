@@ -1,0 +1,84 @@
+<style>
+  .item {
+    background-color: #1EA1CC !important;
+    border-radius: 10px !important;
+    color: #fff !important;
+  }
+
+  ion-icon {
+    color: #fff !important;
+    float: right;
+  }
+</style>
+
+
+
+
+<Gmax-header [title]="title">
+</Gmax-header>
+
+
+<ion-content class="marginTop44">
+  <div>
+
+    <!-- <ion-row> -->
+    <div center text-center class="imgClassDashboard">
+      <img src="assets/imgs/CSIAGVKlogo.png" width="100%">
+    </div>
+    <!-- </ion-row> -->
+  </div>
+  <ion-grid>
+    <ion-row>
+
+      <!-- <ion-col col-12>
+        <ion-item class="item item-icon-right" href="#" (click)="goToScanTSPDetail()">
+          Scan TSP
+          <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+        </ion-item>
+      </ion-col> -->
+
+      <ion-col col-12 *ngIf="DOStat == 5">
+        <ion-item class="item item-icon-right" href="#" (click)="goToApproveDelivery()">
+          Approve Delivery
+          <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-12 *ngIf="DOStat == 5">
+        <ion-item class="item item-icon-right" href="#" (click)="goToReports()">
+          Reports
+          <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+        </ion-item>
+      </ion-col>
+
+      <!-- Madhuri 1-02-2022 -->
+      <!-- <ion-col col-12 *ngIf="DOStat == 3"> -->
+      <ion-col col-12 *ngIf="DOStat == 3 && showRevokeGatepass">
+
+        <ion-item class="item item-icon-right" href="#" (click)="goToRevokeGatePass()">
+          Revoke Gate Pass
+          <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-12 *ngIf="DOStat == 3 && showRecordDelivery">
+        <ion-item class="item item-icon-right" href="#" (click)="goToRecordDelivery()">
+          Record Delivery
+          <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-12 *ngIf="DOStat == 3 && isAccessToken">
+        <ion-item class="item item-icon-right" href="#" (click)="goToAccessVehicleToken()">
+          Access Token
+          <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- <qrcode [qrdata]="myAngularxQrCode" [width]="256" [errorCorrectionLevel]="'M'"></qrcode> -->
+
+</ion-content>
+
+<Gmax-footer></Gmax-footer>

@@ -17,6 +17,8 @@ import { Notifications } from '../../notifications/notifications';
 import { CscMainMenuPage } from '../../csc-main-menu/csc-main-menu';
 import { VehicleTokenSummary } from './export-details/Vehicle-tokensummary';
 import { TGDAcceptance } from '../dashboard-import/import-details/TGD-Acceptance';
+import { TokenScanningPage } from '../token-scanning/token-scanning';
+import { WhHomepagePage } from '../../wh-homepage/wh-homepage';
 @Component({
   selector: 'page-dashboard-export',
   templateUrl: 'dashboard-export.html'
@@ -59,7 +61,6 @@ export class DashboardExport implements OnInit {
     this.global.routePage(EGM);
   }
 
-
   goToFAQ() {
     this.global.routePage(FAQ);
   }
@@ -82,6 +83,14 @@ export class DashboardExport implements OnInit {
 
   goToLocation() {
     // this.global.routePage(VehicleTokenSummary);
+  }
+
+  goToTokenScanning() {
+    this.global.routePage(TokenScanningPage);
+  }
+
+  gotoLandside() {
+    this.global.routePage(WhHomepagePage);
   }
 
 }

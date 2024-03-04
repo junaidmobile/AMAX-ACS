@@ -15,12 +15,13 @@ import { NetworkProvider } from '../providers/network/network';
 import { GlobalProvider } from '../providers/global/global';
 import { PushNotificationServiceProvider } from '../providers/push-notification-service/push-notification-service';
 import { HomePage } from '../pages/home/home';
+import { ActiveSingleGatePass } from '../pages/dashboards/dashboard-import/import-details/Active-Single-GatePass';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: any = LoginPage;
+  rootPage: any =LoginPage;
   @ViewChild('myNav') nav: NavController;
   constructor(
     platform: Platform,
@@ -36,12 +37,12 @@ export class MyApp {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-
+      splashScreen.hide();
       // Status Bar
       if (this.global.isNative()) {
         // this.statusBar.styleLightContent();
         this.statusBar.overlaysWebView(false);
-        this.statusBar.backgroundColorByHexString('#ff8641');
+        this.statusBar.backgroundColorByHexString('#1EA1CC');
 
         // Splashscreen Hide
         splashScreen.hide();

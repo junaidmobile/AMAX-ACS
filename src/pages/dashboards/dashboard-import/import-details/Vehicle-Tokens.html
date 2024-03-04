@@ -1,0 +1,286 @@
+<style>
+  .float-right {
+    float: right;
+  }
+
+  .float-left {
+    float: left;
+  }
+
+  .text-center {
+    text-align: center;
+    padding: 5px;
+  }
+
+  .list-ios {
+    margin: -1px 0 0px !important;
+  }
+
+  .list-ios .item-block .item-inner {
+    border-bottom: 0.55px solid #c8c7cc !important;
+  }
+
+  .flightdetail {
+    background-color: #1EA1CC !important;
+    border-radius: 10px !important;
+    color: #fff !important;
+    margin-bottom: -10px;
+  }
+</style>
+<Gmax-header [title]="title">
+</Gmax-header>
+
+<ion-content class="marginTop44">
+  <ion-segment style="background-color: #1EA1CC;" mode='md' [(ngModel)]="segment">
+    <ion-segment-button value="GPList" (click)="GetImpActiveGPDetails_HHT();">
+      Gate Passes &nbsp;
+      <ion-badge id="notifications-badge" color="danger">{{gpCount}}</ion-badge>
+    </ion-segment-button>
+    <ion-segment-button value="VTList" (click)="GetImpActiveTokenDetails_HHT();">
+      Tokens &nbsp;
+      <ion-badge id="notifications-badge" color="danger">{{vtCount}}</ion-badge>
+    </ion-segment-button>
+  </ion-segment>
+  <ion-content [ngSwitch]="segment">
+    <!-- <ion-grid *ngSwitchCase="'GPList'">
+      <ion-list class="accordion-list" *ngFor="let _MAWBNo of MAWBList; let i = index">
+        <button id="{{ 'MAWB_' + i }}" ion-item
+          (click)="showSearchField =!showSearchField;getMAWBNo(_MAWBNo.MAWBNo.toString())" detail-none
+          [ngClass]="{'section-active': showSearchField, 'section': !showSearchField}" text-justify>
+          <ion-icon item-left name="ios-arrow-dropright-outline" *ngIf="!showSearchField"></ion-icon>
+          <ion-icon item-left name="ios-arrow-dropdown-outline" *ngIf="showSearchField"></ion-icon>
+          {{_MAWBNo.MAWBNo }}
+        </button>
+        <ion-list [hidden]="!showSearchField">
+          <ion-grid style="background: white;">
+            <ion-row>
+              <ion-col col-12 *ngFor="let j of startupsLinks; let i = index">
+                <ion-label id="{{ 'HAWB_' + i }}"> {{j.HAWBNo}}
+                  <ion-checkbox class="float-right" name='chkMAWB' [(ngModel)]="chkMAWB"></ion-checkbox>
+                </ion-label>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-list>
+      </ion-list>
+    </ion-grid> -->
+
+    <ion-grid *ngSwitchCase="'GPList'">
+      <!-- <ion-item padding *ngFor="let d of data; let i = index">
+        <ion-icon color="primary" item-right [name]="d.icon" (click)="toggleDetails(d);getMAWBNo(d.title.toString());">
+        </ion-icon>
+        {{d.title}}
+        <div *ngFor="let j of startupsLinks">
+          <ion-label id="idMAWB" *ngIf="d.showDetails"> {{j.HAWBNo}}
+            <ion-checkbox class="float-right" name='chkMAWB' [(ngModel)]="chkMAWB"></ion-checkbox>
+          </ion-label>
+        </div>
+      </ion-item> -->
+      <div style="height: 62vh;overflow-y: scroll;">
+        <ion-list *ngFor="let d of data; let i = index">
+          <ion-label id="{{ 'HAWB_' + i }}">
+            <ion-icon color="primary" item-right [name]="d.icon">
+            </ion-icon>&nbsp; &nbsp; &nbsp;
+            {{d.title}}
+            <ion-checkbox (ionChange)="toggleDetails(d);checked($event, d.title.toString());" class="float-right"
+              name='chkMAWB' id="HAWBID_{{d.title}}" [(ngModel)]="d.selected"></ion-checkbox>
+          </ion-label>
+          <ion-row *ngIf="d.showDetails && (d.title == MAWBNo)" id="{{ 'HAWBDIV_' + i }}" style="background: white;">
+            <ion-col col-12 *ngFor="let j of filterHAWBLst">
+              <ion-label *ngIf="j.HAWBNo != ''" id="{{ 'HAWB_' + i }}"> {{j.HAWBNo}}
+                <ion-checkbox class="float-right" name='chkMAWB' id="HAWBID_{{j.HId}}"
+                  (ionChange)="onChange(j.HAWBNo,j.MAWbNo, $event.checked)" [checked]="check"></ion-checkbox>
+              </ion-label>
+            </ion-col>
+          </ion-row>
+        </ion-list>
+        <ion-list *ngIf="data.length == 0">
+
+          <ion-item style="text-align: center;">
+            <h1>{{GPError}}</h1>
+            <ngx-barcode col-12 [bc-value]="staticbarcode"></ngx-barcode>
+            <h3>{{msg}}</h3>
+          <h3>{{msg2}}</h3>
+          </ion-item>
+
+        </ion-list>
+        <!-- <span style="color:red;text-align:center;">{{GPError}}</span> -->
+      </div>
+      <ion-list *ngIf="data.length != 0">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-6>
+              <button [disabled]="!showDeselect" (click)="deSelectAll();" ion-button block icon-start style="margin-top: 20px !important;">
+                Deselect All
+              </button>
+            </ion-col>
+            <ion-col col-6>
+              <button [disabled]="!showNext" (click)="Next();" ion-button block icon-start style="margin-top: 20px !important;">
+                Next
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-list>
+
+
+      <!-- <ion-item *ngFor="let d of data; let i = index">
+              <ion-label id="{{ 'HAWB_' + i }}">
+                <ion-icon color="primary" item-right [name]="d.icon">
+                </ion-icon>
+                {{d.title}}=={{i}}
+                 <ion-checkbox (ionChange)="checked($event, d.title.toString())"  class="float-right" name='chkMAWB'
+            id="HAWBID_{{d.title}}"></ion-checkbox>
+              </ion-label>
+              <ion-item *ngFor="let j of filterHAWBLst">
+                <ion-label *ngIf="j.HAWBNo != ''" id="{{ 'HAWB_' + i }}"> {{j.HAWBNo}}
+                  <ion-checkbox (change)="onChange(d.HAWBNo, $event.target.checked)" class="float-right" name='chkMAWB' id="HAWBID_{{j.HId}}"></ion-checkbox>
+                </ion-label>
+              </ion-item>>
+        </ion-item> -->
+
+      <!-- {{temp_MAWBList | json}}
+
+      <ion-row class="form-check" *ngFor="let hb of HAWBList">
+        <ion-col col-12>
+          <ion-label> {{hb.MAWbNo}}
+            <input class="float-right" (change)="onChange(hb.HId, $event.target.checked)" name='chkMAWB' type="checkbox"
+              id="HAWBID_{{hb.HId}}">
+          </ion-label>
+
+          <ion-label class="form-check-label">
+            {{hb.HAWBNo}}
+            <input class="float-right" *ngIf="hb.HAWBNo != ''" class="form-check-input"
+              (change)="onChange(hb.HId, $event.target.checked)" name="{{ hb.HAWBNo }}" type="checkbox" id="{{hb.HId}}">
+
+          </ion-label>
+        </ion-col>
+      </ion-row> -->
+
+      <!-- <ion-list *ngFor="let d of HAWBList; let i = index">
+        <ion-row id="{{ 'HAWBDIV_' + i }}" style="background: white;">
+          <ion-col col-12>
+            <ion-label> {{d.MAWbNo}}
+              <ion-checkbox class="float-right" name='chkMAWB' id="HAWBID_{{d.HId}}"></ion-checkbox>
+            </ion-label>
+            <ion-label *ngIf="d.HAWBNo != ''"> {{d.HAWBNo}}
+              <ion-checkbox (change)="onChange(d.HAWBNo, $event.target.checked)"
+              class="float-right" name='chkMAWB' id="HAWBID_{{d.HId}}"></ion-checkbox>
+            </ion-label>
+
+          </ion-col>
+        </ion-row>
+      </ion-list> -->
+
+    </ion-grid>
+
+    <!-- <ion-list *ngSwitchCase="'GPList'">
+      <ion-card *ngFor="let d of MAWBList; let i = index">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-4>
+              <ion-label color="primary" class="fontSize12 marginSet" fixed>  {{d.MAWBNo}}
+              </ion-label>
+            </ion-col>
+            <ion-col col-4 *ngFor="let d of HAWBList; let i = index">
+              <ion-label color="primary" class="fontSize12 marginSet" fixed>{{d.HAWBNo}}
+              </ion-label>
+            </ion-col>
+            <ion-col col-4>
+              <ion-checkbox class="float-right" name='chkMAWB' [(ngModel)]="chkMAWB"></ion-checkbox>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+    </ion-list> -->
+
+    <ion-grid *ngSwitchCase="'VTList'">
+      <div style="height: 68vh;overflow-y: scroll;">
+        <ion-list *ngIf="vtNullFlag == false && activeVTs.length != 0">
+          <!-- <ion-item padding *ngFor="let d of aarry">
+          <ion-icon color="primary" item-right [name]="d.icon2" (click)="toggleDetails2(d)"></ion-icon>
+          {{d.title2}}
+          <div *ngIf="d.showDetails2">
+            {{d.details2}}
+          </div>
+        </ion-item> -->
+          <table style="width: 100%;margin-bottom: -13px;">
+            <tr>
+              <td>
+                <!-- <span style="padding-left: 25px;">Vehicle Number</span> -->
+                <span style="padding-left: 25px;">Delivery By</span>
+              </td>
+              <td>
+                <span style="padding-left: 25px;"> Details</span>
+                <!-- right align above part -->
+              </td>
+            </tr>
+          </table>
+          <ion-col col-12 *ngFor="let vtData of activeVTs;">
+            <!-- activeVTs on line 219 instead of VTtData -->
+            <!-- index as i; -->
+            <!-- <ion-item *ngIf="vtData.VehicleNo != '-- -- -- ----'" class="item flightdetail" href="#" (click)='goTOVTPQRCode(vtData.TokenNo.toString(),vtData.GPNo.toString());'>
+              {{vtData.VehicleNo}}
+              <ion-icon class="float-right" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+            </ion-item>
+
+            <ion-item *ngIf="vtData.VehicleNo == '-- -- -- ----'" class="item flightdetail" href="#" (click)='goTOVTPQRCode(vtData.TokenNo.toString(),vtData.GPNo.toString());'>
+              By Hand
+              <ion-icon class="float-right" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+            </ion-item> -->
+
+            <ion-item *ngIf="vtData.TokenNo[0].slice(0,3) == 'IVT'" class="item flightdetail" href="#" (click)='goTOVTPQRCode(vtData.TokenNo.toString(),vtData.GPNo.toString());'>
+                {{vtData.VehicleNo}}
+                <ion-icon class="float-right" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+              </ion-item>
+
+              <ion-item *ngIf="vtData.TokenNo[0].slice(0,3) == 'ITR'" class="item flightdetail" href="#" (click)='goTOVTPQRCode(vtData.TokenNo.toString(),vtData.GPNo.toString());'>
+                {{vtData.VehicleNo[0].split("--").join(" ")}}
+                <ion-icon class="float-right" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+              </ion-item>
+  
+              <ion-item *ngIf="vtData.TokenNo[0].slice(0,3) == 'IPH'" class="item flightdetail" href="#" (click)='goTOVTPQRCode(vtData.TokenNo.toString(),vtData.GPNo.toString());'>
+                By Hand
+                <ion-icon class="float-right" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+              </ion-item>
+          </ion-col>
+
+
+
+
+        </ion-list>
+        <ion-list *ngIf="vtNullFlag == true || activeVTs.length == 0">
+
+          <ion-item style="text-align: center;">
+            <h2>{{vtGPError}}</h2>
+            <ngx-barcode col-12 [bc-value]="vtstaticbarcode"></ngx-barcode>
+            <h3>{{vtmsg}}</h3>
+            <h3>{{vtmsg2}}</h3>
+          </ion-item>
+
+        </ion-list>
+      </div>
+      <ion-col col-12>
+        <button (click)="backToDelDoc();" ion-button block icon-start style="margin-top: 20px !important;">
+          Back to Delivery Docket
+        </button>
+      </ion-col>
+    </ion-grid>
+
+
+  </ion-content>
+
+</ion-content>
+
+
+<Gmax-footer></Gmax-footer>
+
+
+<!-- <ion-label id="idMAWB"> HAWB1
+            <ion-checkbox class="float-right" name='chkMAWB' [(ngModel)]="chkMAWB"></ion-checkbox>&nbsp;&nbsp;
+          </ion-label> -->
+
+<!-- <div *ngFor="let qualifica of data.HAWBNo">
+            <label *ngIf="d.showDetails"></label>
+            {{d.HAWBNo}}
+          </div> -->

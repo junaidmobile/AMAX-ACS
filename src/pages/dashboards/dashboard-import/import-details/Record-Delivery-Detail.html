@@ -1,0 +1,259 @@
+<style>
+  .itemClass {
+    background-color: #1EA1CC !important;
+    border-radius: 10px !important;
+    color: #fff !important;
+  }
+
+  ion-icon {
+    color: #fff !important;
+    float: right;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  td,
+  th {
+    border: solid thin #1EA1CC;
+    padding: 5px !important;
+
+  }
+
+  .text-right {
+    text-align: right !important;
+  }
+</style>
+<Gmax-header [title]="title">
+</Gmax-header>
+
+
+<ion-content class="marginTop44">
+  <div>
+
+    <!-- <ion-row> -->
+    <!-- <div center text-center class="imgClassDashboard">
+      <img src="assets/imgs/CSIAGVKlogo.jpg" width="100%">
+    </div> -->
+    <!-- </ion-row> -->
+  </div>
+  <div>
+
+
+    <ion-list *ngIf="showDiv">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-12>
+            <table>
+              <tr>
+                <td>
+                  MAWB Number
+                </td>
+                <td>
+                  {{MAWBNo | slice:0:3}}&nbsp;{{MAWBNo | slice:3:11}}
+                </td>
+              </tr>
+              <tr *ngIf="HAWBNo != null && HAWBNo != ''">
+                <td>
+                  HAWB Number
+                </td>
+                <td>
+                  {{HAWBNo}}
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  IGM Number
+                </td>
+                <td>
+                  {{IGM}}
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  NoP.
+                </td>
+                <td class="text-right">
+                  {{NoPdis}}
+                </td>
+              </tr>
+              <tr>
+                  <td>
+                    NoP. Delivered
+                  </td>
+                  <td class="text-right">
+                    {{NopDelivered}}
+                  </td>
+                </tr>
+              <tr>
+                <td>
+                  OoC Number.
+                </td>
+                <td class="text-right">
+                  {{OCNumber}}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  CB Unique ID.
+                </td>
+                <td class="text-right">
+                  {{chanumber}}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  CB Details.
+                </td>
+                <td>
+                  {{CHAName}}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Cardex Number
+                </td>
+                <td>
+                  {{CardexNumber}}
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  GP Number
+                </td>
+                <td>
+                  {{GatepassNo}}
+                </td>
+              </tr>
+
+              <tr>
+                <td *ngIf="VTNo.slice(0,3) != 'IPH' && VTNo.slice(0,3) != 'ITR'">
+                  Vehicle Number
+                </td>
+                <td *ngIf="VTNo.slice(0,3) == 'IPH'">
+                  Delivery
+                </td>
+                <td *ngIf="VTNo.slice(0,3) == 'ITR'">
+                  Trolley Number
+                </td>
+  
+                <td *ngIf="VTNo.slice(0,3) != 'IPH'">
+
+                  <div *ngFor="let GN of GPdetails;i as index">
+                    <span *ngIf="GN['GPDeliveryStatus'] == 'Verified' || GN['GPDeliveryStatus'] == 'Part Delivered'"> {{GN['ITD_VEHICLENO_C']}}</span>
+                  </div>
+                  <!-- {{VehicleNo}} -->
+                  <!-- {{VehicleNo | slice:0:2}}&nbsp;{{VehicleNo | slice:2:4}}&nbsp;{{VehicleNo | slice:4:6}}&nbsp;{{VehicleNo | slice:6:10}} -->
+                </td>
+                <td *ngIf="VTNo.slice(0,3) == 'IPH'">
+                  By Hand
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  Token Number
+                </td>
+                <td>
+                  <!-- {{VTNo}} -->
+                  <div *ngFor="let GN of GPdetails;i as index">
+                    <span *ngIf="GN['GPDeliveryStatus'] == 'Verified' || GN['GPDeliveryStatus'] == 'Part Delivered'"> {{GN['ITD_TOKENNO_C']}}</span>
+                  </div>
+                </td>
+              </tr>
+
+
+
+            </table>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <form (ngSubmit)="GetMAWBDetail()">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-6>
+              <ion-label color="primary" class="fontSize12 marginSet" fixed>NoP Delivered
+              </ion-label>
+            </ion-col>
+            <ion-col *ngIf="GPdetails2 != undefined" ion-item col-6>
+              <!-- <ion-input type="tel" class="fontSize12 text-right" [(ngModel)]="NoP"  name="NoP"
+              pattern="[0-9]*" maxlength="5" #NoPVal></ion-input> -->
+              <input type="tel"  id="NoP" class="fontSize12" [(ngModel)]="NoP" (change)="countChange($event)" name="NoP"
+                pattern="[0-9]*" style='width: 50%;text-align: right; padding: 2px;' maxlength="5" autofocus #NoPVal>
+
+                <!-- disabled on 175 -->
+              <label color="primary" class="fontSize12 marginSet" fixed>{{NoPdis - NopDelivered}}</label>
+              <!-- no minus on above line, only NoPdis -->
+            </ion-col>
+
+            <!-- new ion-col -->
+            <ion-col *ngIf="GPdetails2 == undefined" ion-item col-6>
+                <!-- <ion-input type="tel" class="fontSize12 text-right" [(ngModel)]="NoP"  name="NoP"
+                pattern="[0-9]*" maxlength="5" #NoPVal></ion-input> -->
+                <input type="tel"  id="NoP" class="fontSize12" [(ngModel)]="NoP" (change)="countChange($event)" name="NoP"
+                  pattern="[0-9]*" style='width: 50%;text-align: right; padding: 2px;' maxlength="5" autofocus #NoPVal>
+  
+                  <!-- disabled on 175 -->
+                <label color="primary" class="fontSize12 marginSet" fixed>{{NoPdis}}</label>
+                <!-- no minus on above line, only NoPdis -->
+              </ion-col>
+
+            <!-- <ion-col ion-item col-3>
+            <ion-input type="tel" disabled="true" class="fontSize12 text-right" [(ngModel)]="NoPdis" placeholder=""
+              name="NoPdis" pattern="[0-9]*"></ion-input>
+              <label color="primary" class="fontSize12 marginSet" fixed>{{NoPdis}}</label>
+          </ion-col> -->
+            <ion-col col-4>
+              <ion-label color="primary" class="fontSize12 marginSet" fixed>Remarks
+              </ion-label>
+            </ion-col>
+            <ion-col col-8>
+              <ion-item>
+                <ion-textarea autocapitalize="characters" [(ngModel)]="Remark" [ngModelOptions]="{standalone: true}">
+                </ion-textarea>
+              </ion-item>
+            </ion-col>
+            <table style="width:100%">
+                <tr>
+                    <th>Sr.No</th>
+                    <th>NoP Delivered</th>
+                    <th>Delivery Date/Time</th>
+                    <th>Delivered To</th>
+                </tr>
+                <tr *ngFor="let data of GPdetails2; let i = index">
+                <td>{{i + 1}}</td>
+                <td>{{data.GPDelPieces}}</td>
+                <td>{{data.GPDelDateTime | date: 'dd/MM/yyyy HH:mm'}}</td>
+                <td>{{data.GPDelTo}}</td>
+                </tr>
+            </table>
+            <ion-col col-12>
+              <button [disabled]="isInputValid()" ion-button block icon-start style="margin-top: 20px !important;">
+                Record Delivery
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </ion-list>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+  </div>
+
+</ion-content>
+<!-- <ion-fab right bottom #fab1 style="bottom:38px !important">
+  <button class="pop-in" ion-fab mini color="primary" [ngClass]="{'pop-out': fabGone}" (click)="clearInputs()">
+    <ion-icon name="close"></ion-icon>
+  </button>
+</ion-fab> -->
+<Gmax-footer></Gmax-footer>

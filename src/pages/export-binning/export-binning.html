@@ -1,0 +1,209 @@
+<style>
+  .itemClass {
+    background-color: #1EA1CC !important;
+    border-radius: 10px !important;
+    color: #fff !important;
+  }
+
+
+  ion-icon {
+    color: #fff !important;
+    float: right;
+  }
+
+
+  table {
+    width: 100%;
+  }
+
+  td,
+  th {
+    border: solid thin #999;
+    padding: 5px !important;
+
+  }
+
+  .text-right {
+    text-align: right !important;
+  }
+
+  .button-designed-radius_smallb {
+    /* padding: 0 6rem !important; */
+    border-top-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-top-right-radius: 6px;
+    height: 3.2rem !important;
+    width: 90px !important;
+  }
+
+  .select-md {
+    padding: 0px 0px 0px 0px;
+}
+
+
+ion-select {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.select-md .select-icon {
+    position: relative;
+    width: 22px !important;
+    height: 19px;
+}
+</style>
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Binning</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+
+<ion-content padding>
+  <!-- <form #myForm="ngForm" (ngSubmit)="saveLocationData()"> -->
+  <!-- <div class="row marginTop23" style="border: 1px solid;border-radius: 5px;border-color: #999;">
+    <ion-input type="text" class="fontSize12" name="groupid" [(ngModel)]="groupid" maxlength="16" #GRPID></ion-input>
+  </div> -->
+
+  
+  <ion-row>
+    <ion-col col-10>
+  <ion-item>
+    <ion-label floating>
+      Group ID
+    </ion-label>
+    <!-- (blur)="getGroupIDDetails();" -->
+    <ion-input type="text" class="fontSize12" name="groupID" [(ngModel)]="binninggroupid" (blur)="scanGroupID();" maxlength="16"  autofocus 
+    (ionChange)="switch($event)" #groupID></ion-input>
+  </ion-item></ion-col>
+  <ion-col col-2  style="margin-top: 20px;">
+    <button ion-fab class="ion-fab34" (click)="getGroupIDDetails()">
+      <ion-icon name="md-search" class="margin4"></ion-icon>
+    </button>
+  </ion-col></ion-row>
+<!-- (blur)="getGroupIDDetails();"
+  <ion-input type="tel" class="fontSize12" name="MAWBNo" [(ngModel)]="MAWBNo" placeholder="OTP"
+   (blur)="scanBarcodeTest();" autofocus 
+  #MAWBNoValue (ionChange)="switch($event)"></ion-input> -->
+
+
+
+
+  <!-- <div class="row"> -->
+  <ion-row>
+    <ion-col col-4 style="padding: 0%;">
+      <ion-item>
+        <ion-label floating>
+          Location
+        </ion-label>
+        <ion-input type="text" name="location" [(ngModel)]="locCode"   [disabled]="true" maxlength="20" #loc></ion-input></ion-item>
+
+
+    
+    </ion-col>
+    <ion-col col-8 style=" padding: 0px 0px 0px 10px;">
+      <!-- <ion-item>
+        <ion-label floating>
+          Location
+        </ion-label>
+        <ion-input type="text" name="location1" maxlength="20" #loc1></ion-input></ion-item> -->
+        
+    </ion-col></ion-row>
+
+    <!-- <ion-searchbar [debounce]="1000" (ionChange)="handleChange($event)"></ion-searchbar> -->
+<ion-row>
+
+
+  <ion-col col-8 style=" padding: 0px 0px 0px 0px;">
+  <ion-searchbar placeholder="new Location" name ="sb" [(ngModel)]="searchValue" (ionChange)="filterList()"></ion-searchbar>
+</ion-col>
+<ion-col col-4 style=" padding: 0px 0px 0px 10px;">
+  <!-- <ion-list>
+    <ion-item *ngFor="let result of filteredList">
+      <ion-label>{{ result.LD_LocationCode_C }}</ion-label>
+    </ion-item>
+  </ion-list> -->
+  <ion-item>
+    <ion-select color="primary" placeholder="Select" text-center name="eqt" multiple="false"  [(ngModel)]="eqtValue"
+      (ionChange)="fetchLocationDetails($event)">
+
+      <ion-option *ngFor="let eqtr of filteredList">{{eqtr.LD_LocationCode_C}}</ion-option>
+    </ion-select>
+  </ion-item></ion-col>
+
+</ion-row>
+   
+
+
+
+
+
+  
+  <!-- </div> -->
+
+  <!-- <div class="row" style="border: 1px solid;border-radius: 5px;border-color: #999;">
+    <ion-input type="text" class="fontSize12" name="nog" [(ngModel)]="nog" maxlength="16" 
+      #NOG></ion-input>
+  </div> -->
+
+
+  <ion-item>
+    <ion-label floating>
+      NOG
+    </ion-label>
+    <ion-input type="text" class="fontSize12" name="nog"  [disabled]="true" [(ngModel)]="nog" maxlength="16" #NOG></ion-input>
+  </ion-item>
+
+
+
+  <ion-row style="margin-left: 5px;">
+
+    <button id="btnMove"  class="button-designed-radius" ion-button (click) = "saveLocationData()">
+      Move
+    </button>
+
+    <button id="btnClear" class="button-designed-radius" ion-button (click) = "clearAllValues()">
+      Clear
+    </button>
+
+  </ion-row>
+
+  <ion-row>
+    <ion-grid>
+      <ion-row justify-content-start>
+        <table id="tblNews" border="1"
+          style="width:100%;table-layout:fixed;word-break:break-word;border-color: white;margin-top: 2%;">
+          <thead>
+            <tr>
+              <th height="30" style="background-color:#ebebeb;padding: 3px 3px 3px 0px;font-size:14px" align="center">
+                MAWB
+              </th>
+              <th height="30" style="background-color:#ebebeb;padding: 3px 3px 3px 0px;font-size:14px;" align="center">
+                NoP
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td height="30" style="padding-left: 4px;font-size:14px" align="center"> {{ awbNumber }}
+              </td>
+              <td height="30" style="padding-left: 4px;font-size:14px" align="center">{{ pieces }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </ion-row>
+    </ion-grid>
+  </ion-row>
+  <!-- </form> -->
+
+
+</ion-content>

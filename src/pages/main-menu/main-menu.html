@@ -4,7 +4,7 @@
             MCSCAPL
         </ion-title>
         <ion-buttons right>
-            <button id="notification-button" ion-button icon-only (click)="notifications()">
+            <!-- <button id="notification-button" ion-button icon-only (click)="notifications()">
                 <ion-icon ios="ios-notifications" md="md-notifications"
                     [ngClass]="{'shake': !isNotificationSeen && !hideClass}">
                     <ion-badge id="notifications-badge"
@@ -12,13 +12,13 @@
                         color="danger" *ngIf="!isNotificationSeen" style="padding: 2px 7px;min-width: 8px;">{{count}}
                     </ion-badge>
                 </ion-icon>
-            </button>
+            </button> -->
             <button ion-button icon-only (click)="logOut()">
                 <ion-icon ios="ios-power" md="md-power"></ion-icon>
             </button>
         </ion-buttons>
     </ion-navbar>
-    <ion-toolbar no-border-top mode='md'>
+    <ion-toolbar class="target-class" no-border-top mode='md'>
         <ion-segment mode='md' [(ngModel)]="selectedSegment" (ionChange)="onSegmentChanged($event)">
             <ion-segment-button value="Exports" *ngIf="LoginType == 'Agent'">
                 Exports

@@ -1,0 +1,219 @@
+<style>
+  .itemClass {
+    background-color: #1EA1CC !important;
+    border-radius: 10px !important;
+    color: #fff !important;
+  }
+
+
+
+  ion-icon {
+    color: #fff !important;
+    float: right;
+  }
+
+  .button-designed-radius_smallb {
+    /* padding: 0 6rem !important; */
+    border-top-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-top-right-radius: 6px;
+    height: 3.2rem !important;
+    width: 90px !important;
+  }
+
+  .button-designed-radius_bigb {
+    /* padding: 0 6rem !important; */
+    border-top-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-top-right-radius: 6px;
+    height: 3.2rem !important;
+    width: 150px !important;
+  }
+
+  .button-designed-radius {
+    padding: 0 6rem !important;
+    border-top-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-top-right-radius: 6px;
+    height: 3.2rem !important;
+
+    width: 150px !important;
+  }
+</style>
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Carting Challan</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-row>
+    <ion-col col-10>
+      <ion-item>
+        <ion-label floating>
+          Scan AWB
+        </ion-label>
+        <ion-input type="text" class="fontSize12" (ionChange)="switchAWB($event)" (blur)="scanAWBNO();"
+          [(ngModel)]="awbno" name="awbnoACC" maxlength="16"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col col-2 style="margin-top: 20px;">
+      <button ion-fab class="ion-fab34" (click)="getAwbDetails()">
+        <ion-icon name="md-search" class="margin4"></ion-icon>
+      </button>
+    </ion-col></ion-row>
+
+  <ion-row>
+    <ion-col col-6 style="padding: 0%;">
+      <ion-item>
+        <ion-label floating>
+          Pieces
+        </ion-label>
+        <ion-input type="text" name="pieces" type="number" pattern="[0-9]*" maxlength="20" [(ngModel)]="pieces"
+          [disabled]="true"></ion-input></ion-item>
+    </ion-col>
+
+    <ion-col col-6 style=" padding: 0px 0px 0px 10px;">
+      <ion-item>
+        <ion-label floating>
+          GR. WT.
+        </ion-label>
+        <ion-input type="text" name="grwt" maxlength="20" type="number" pattern="[0-9]*" [(ngModel)]="grwt"
+          [disabled]="true"></ion-input></ion-item>
+    </ion-col>
+  </ion-row>
+
+
+
+  <ion-row>
+    <ion-col col-6 style="padding: 0%;">
+      <ion-item>
+        <ion-label floating>
+          Origin
+        </ion-label>
+        <ion-input type="text" name="org" maxlength="20" [(ngModel)]="origin" [disabled]="true"></ion-input></ion-item>
+    </ion-col>
+
+    <ion-col col-6 style=" padding: 0px 0px 0px 10px;">
+      <ion-item>
+        <ion-label floating>
+          Destination
+        </ion-label>
+        <ion-input type="text" name="dest" [(ngModel)]="destination" [disabled]="true"></ion-input></ion-item>
+    </ion-col>
+  </ion-row>
+
+
+  <ion-row>
+    <ion-col col-6 style="padding: 0%;">
+      <ion-item>
+        <ion-label floating>
+          Flight No.
+        </ion-label>
+        <ion-input type="text" name="flightno" maxlength="20" [(ngModel)]="flno"
+          [disabled]="true"></ion-input></ion-item>
+    </ion-col>
+
+    <ion-col col-6 style=" padding: 0px 0px 0px 10px;">
+      <ion-item>
+        <ion-label floating>
+          Flight Date
+        </ion-label>
+        <ion-input type="text" name="flightdate" [(ngModel)]="fldt" [disabled]="true"></ion-input></ion-item>
+    </ion-col>
+  </ion-row>
+
+
+  <ion-row>
+    <ion-col col-6 style="padding: 0%;">
+      <ion-item>
+        <ion-label floating>
+          Handover Date
+        </ion-label>
+        <ion-input type="text" name="hodt" maxlength="20" [(ngModel)]="hoDate" [disabled]="true"></ion-input></ion-item>
+    </ion-col>
+
+    <ion-col col-6 style=" padding: 0px 0px 0px 10px;">
+      <ion-item>
+        <ion-label floating>
+          Handover Time
+        </ion-label>
+        <ion-input type="text" name="hotm" [(ngModel)]="hoTime" [disabled]="true"></ion-input></ion-item>
+    </ion-col>
+  </ion-row>
+
+
+  <ion-row>
+    <ion-col col-6 style="padding: 0%;">
+      <ion-item>
+        <ion-label floating>
+          Carting Date
+        </ion-label>
+        <ion-input type="text" name="cdt" maxlength="20" [(ngModel)]="cDate" [disabled]="true"></ion-input></ion-item>
+    </ion-col>
+
+    <ion-col col-6 style=" padding: 0px 0px 0px 10px;">
+      <ion-item>
+        <ion-label floating>
+          Carting Time
+        </ion-label>
+        <ion-input type="text" name="ctim" [(ngModel)]="cTime" [disabled]="true"></ion-input></ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-label color="primary" class="fontSize12 marginSet" fixed>Remarks
+      </ion-label>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+
+    <ion-col>
+      <ion-item>
+        <ion-textarea autocapitalize="characters" [(ngModel)]="Remark" [ngModelOptions]="{standalone: true}">
+        </ion-textarea>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+
+  <ion-row style="margin-bottom: 10px;margin-top: 10px;">
+
+
+
+    <button id="btnClear" class="button-designed-radius" ion-button (click)="clearAllValues()">
+      Clear
+    </button>
+
+    <button id="btnNext" class="button-designed-radius" ion-button (click)="openNextForm()"
+      [disabled]="isNextDisabled()">
+      Next
+    </button>
+
+  </ion-row>
+
+  <ion-row style="margin-bottom: 10px;margin-top: 10px;">
+
+    <button id="btnExit" class="button-designed-radius" ion-button (click)="exitForm()">
+      Exit
+    </button>
+
+
+    <button id="btnCancel" class="button-designed-radius" ion-button (click)="holdCarting()"
+      [disabled]="isCancelDisabled()">
+      Cancel Carting
+    </button>
+
+  </ion-row>
+
+</ion-content>

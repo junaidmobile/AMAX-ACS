@@ -1,0 +1,299 @@
+<style>
+  .gpstatusgray {
+    background-color: #7f7f7f !important;
+    color: white !important;
+    border-bottom: none;
+  }
+
+  .gpstatusgreen {
+    background-color: green !important;
+    color: white !important;
+    border-bottom: none;
+  }
+
+  .list-ios .item-block .item-inner {
+    border-bottom: transparent !important;
+  }
+
+  .flightdetail {
+    background-color: #1EA1CC !important;
+    border-radius: 10px !important;
+    color: #fff !important;
+    border-bottom: none;
+  }
+
+  .flightdetailgray {
+    background-color: #7f7f7f !important;
+    border-radius: 10px !important;
+    color: #ffffff !important;
+    border-bottom: none;
+  }
+
+  .ioniconclass {
+    color: #fff !important;
+    float: right;
+  }
+
+  .ioniconclassstatus {
+    color: #fff !important;
+    float: center !important;
+    font-size: 20px;
+  }
+
+  .text-input {
+    text-align: right !important;
+  }
+</style>
+<Gmax-header [title]="title">
+</Gmax-header>
+
+<ion-content class="marginTop44">
+  <div>
+
+    <!-- <ion-row> -->
+    <!-- <div center text-center class="imgClassDashboard">
+      <img src="assets/imgs/CSIAGVKlogo.jpg" width="100%">
+    </div> -->
+    <!-- </ion-row> -->
+  </div>
+  <div>
+
+    <!-- <ion-row>
+      <ion-col col-3>
+        <ion-label color="primary" class="fontSize12 marginSet" fixed>GP No.
+        </ion-label>
+      </ion-col>
+      <ion-col ion-item col-5>
+        <ion-input type="text" disabled maxlength="7" style="background-color: lightgray;" [(ngModel)]="GPPrefix"
+          class="fontSize12 " placeholder="" name="GPPrefix">
+        </ion-input>
+      </ion-col>
+      <ion-col ion-item col-4>
+        <ion-input type="text" maxlength="4" [(ngModel)]="GPOTP" class="fontSize12 text-align" placeholder="OTP"
+          name="GPOTP">
+        </ion-input>
+      </ion-col>
+      <ion-col col-8>
+      </ion-col>
+      <ion-col col-2>
+        <button ion-fab class="ion-fab34">
+          <ion-icon (click)="GetTSPDetail();" name="md-search" class="margin4"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-2>
+        <button ion-fab class="ion-fab34">
+          <ion-icon (click)="scanBarCode();" name="md-qr-scanner" class="margin4"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-12 style="text-align: center;">
+        OR
+      </ion-col>
+    </ion-row> -->
+
+
+    <form (ngSubmit)="GetMAWBDetail();">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-md-3>
+            <ion-label color="primary" class="fontSize12 marginSet" fixed>MAWB Number
+            </ion-label>
+          </ion-col>
+          <ion-col ion-item col-md-3>
+            <ion-input type="tel" class="fontSize12" [(ngModel)]="Prefix" placeholder="Prefix" name="prefix"
+              pattern="[0-9]*" maxlength="5" (ionChange)="focusNextInput()" #PrefixValue></ion-input>
+          </ion-col>
+          <!-- <ion-col col-1></ion-col> -->
+          <ion-col ion-item col-md-4>
+            <ion-input type="tel" class="fontSize12" [(ngModel)]="MAWBNo" placeholder="MAWB No." name="MAWBNo"
+              pattern="[0-9]*" maxlength="8" #MAWBNoValue></ion-input>
+          </ion-col>
+          <ion-col col-2>
+            <button ion-fab class="ion-fab34">
+              <ion-icon name="md-search" class="margin4"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+    <ion-list *ngIf="showDiv">
+      <ion-grid>
+        <table style="width: 100%;">
+          <tr style="background-color: lightgray;text-align: center;">
+            <td *ngIf="HAWBCheck != ''">
+              <ion-label> HAWB List</ion-label>
+            </td>
+            <td *ngIf="HAWBCheck == ''">
+              <ion-label> AWB Details
+              </ion-label>
+            </td>
+            <td>
+              <!-- <ion-label>Details</ion-label> -->
+              <ion-label>GP Status</ion-label>
+            </td>
+          </tr>
+        </table>
+        <!-- <table style="width: 100%;">
+          <tr style="background-color: lightgray;text-align: center;">
+            <td>
+              <ion-label> HAWB List</ion-label>
+            </td>
+            <td>
+              <ion-label>Details</ion-label>
+            </td>
+          </tr>
+        </table> -->
+        <!-- <ion-row>
+          <ion-col col-7>
+            <ion-item class="item " href="#">
+              HAWB List
+            </ion-item>
+          </ion-col>
+          <ion-col col-5>
+            <ion-item class="item " href="#">
+              Details
+            </ion-item>
+          </ion-col>
+        </ion-row> -->
+      </ion-grid>
+
+      <!-- <ion-grid>
+        <ion-item>
+          <ion-label>Exam Percentage</ion-label>
+          <ion-input type="tel" class="fontSize12" [(ngModel)]="_ExamPercentage" placeholder="Exam Percentage" name="ExamPercentage"
+          pattern="[0-9]*" maxlength="10" #ExamP></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Service Type</ion-label>
+          <ion-select [(ngModel)]="_ServiceType" (ionChange)="onServiceTypeChange($event);" multiple="false"
+            interface="popover">
+            <ion-option *ngFor="let dt of ServiceType; let idx = index" [value]="dt.ServiceCode"
+              selected="{{(idx==0)}}">{{dt.ServiceName[0]}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-grid> -->
+
+      <ion-grid>
+        <ion-row *ngFor="let tspData of tspdetails;">
+          <ion-col col-10 *ngIf="tspData.GPStatus == '0' && tspData.HAWBNo != ''">
+            <ion-item *ngIf="tspData.CHADCubeStatus != 'false'" class="item flightdetail" href="#"
+              (click)='goTOTPSMileStone(tspData.HAWBId.toString(),tspData.HAWBNo.toString(),tspData.MAWBNo.toString(),tspData.GPStatus.toString(),tspData.TSPStatus.toString());'>
+              {{tspData.HAWBNo}}
+              <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+            </ion-item>
+
+            <ion-item *ngIf="tspData.CHADCubeStatus == 'false'" class="item flightdetail" href="#"
+              (click)='notSubscribedMsg();'>
+              {{tspData.HAWBNo}}
+              <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+            </ion-item>
+          </ion-col>
+
+          <ion-col col-10 *ngIf="tspData.GPStatus == '0' && tspData.HAWBNo == ''">
+            <ion-item *ngIf="tspData.CHADCubeStatus != 'false'" class="item flightdetail" href="#"
+              (click)='goTOTPSMileStone(tspData.HAWBId.toString(),tspData.HAWBNo.toString(),tspData.MAWBNo.toString(),tspData.GPStatus.toString(),tspData.TSPStatus.toString());'>
+              Direct
+              <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+            </ion-item>
+
+            <ion-item *ngIf="tspData.CHADCubeStatus == 'false'" class="item flightdetail" href="#"
+              (click)='notSubscribedMsg();'>
+              {{tspData.HAWBNo}}
+              <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+            </ion-item>
+          </ion-col>
+
+          <ion-col col-10 *ngIf="tspData.GPStatus == '2' && tspData.HAWBNo != ''">
+            <ion-item *ngIf="tspData.CHADCubeStatus != 'false'" class="item flightdetail" href="#"
+              (click)='goTOTPSMileStone(tspData.HAWBId.toString(),tspData.HAWBNo.toString(),tspData.MAWBNo.toString(),tspData.GPStatus.toString(),tspData.TSPStatus.toString(),tspData.GPDeliveryStatus.toString());'>
+              {{tspData.HAWBNo}}
+              <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+            </ion-item>
+
+            <ion-item *ngIf="tspData.CHADCubeStatus == 'false'" class="item flightdetail" href="#"
+              (click)='notSubscribedMsg();'>
+              {{tspData.HAWBNo}}
+              <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+            </ion-item>
+          </ion-col>
+          <ion-col col-10 *ngIf="tspData.GPStatus == '2' && tspData.HAWBNo == ''">
+            <ion-item *ngIf="tspData.CHADCubeStatus != 'false'" class="item flightdetail" href="#"
+              (click)='goTOTPSMileStone(tspData.HAWBId.toString(),tspData.HAWBNo.toString(),tspData.MAWBNo.toString(),tspData.GPStatus.toString(),tspData.TSPStatus.toString(),tspData.GPDeliveryStatus.toString());'>
+              Direct
+              <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+            </ion-item>
+
+            <ion-item *ngIf="tspData.CHADCubeStatus == 'false'" class="item flightdetail" href="#"
+              (click)='notSubscribedMsg();'>
+              {{tspData.HAWBNo}}
+              <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+            </ion-item>
+          </ion-col>
+
+          <ion-col col-10 *ngIf="tspData.GPStatus == '1' && tspData.HAWBNo != ''">
+            <ion-item *ngIf="tspData.CHADCubeStatus != 'false'" class="item flightdetailgray" href="#"
+              (click)='goTOTPSMileStone(tspData.HAWBId.toString(),tspData.HAWBNo.toString(),tspData.MAWBNo.toString(),tspData.GPStatus.toString(),tspData.TSPStatus.toString());'>
+              {{tspData.HAWBNo}}
+              <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+            </ion-item>
+
+            <ion-item *ngIf="tspData.CHADCubeStatus == 'false'" class="item flightdetail" href="#"
+              (click)='notSubscribedMsg();'>
+              {{tspData.HAWBNo}}
+              <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+            </ion-item>
+          </ion-col>
+
+          <ion-col col-10 *ngIf="tspData.GPStatus == '1' && tspData.HAWBNo == ''">
+            <ion-item *ngIf="tspData.CHADCubeStatus != 'false'" class="item flightdetailgray" href="#"
+              (click)='goTOTPSMileStone(tspData.HAWBId.toString(),tspData.HAWBNo.toString(),tspData.MAWBNo.toString(),tspData.GPStatus.toString(),tspData.TSPStatus.toString());'>
+              Direct
+              <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+            </ion-item>
+
+            <ion-item *ngIf="tspData.CHADCubeStatus == 'false'" class="item flightdetail" href="#"
+              (click)='notSubscribedMsg();'>
+              <!-- {{tspData.HAWBNo}} -->
+              <!-- above commented on 04/05 -->
+              Direct
+              <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+            </ion-item>     
+
+          </ion-col>
+
+          <ion-col col-2>
+            <ion-item *ngIf="tspData.GPStatus == '0'" class="item gpstatusgray">
+              <ion-icon class="ioniconclassstatus" ios="ios-close" md="md-close"></ion-icon>
+            </ion-item>
+            <ion-item *ngIf="tspData.GPStatus == '1'" class="item gpstatusgreen">
+              <ion-icon class="ioniconclassstatus" ios="ios-checkmark" md="md-checkmark"></ion-icon>
+            </ion-item>
+            <ion-item *ngIf="tspData.GPStatus == '2' && tspData.HAWBNo == ''" class="item gpstatusgreen">
+              <!-- <ion-icon class="ioniconclassstatus" ios="ios-close" md="md-close"></ion-icon> -->
+              Part
+            </ion-item>
+            <ion-item *ngIf="tspData.GPStatus == '2' && tspData.HAWBNo != ''" class="item gpstatusgreen">
+              <!-- <ion-icon class="ioniconclassstatus" ios="ios-close" md="md-close"></ion-icon> -->
+              Part
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </ion-list>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+  </div>
+
+</ion-content>
+<ion-fab right bottom #fab1 style="bottom:38px !important">
+  <button class="pop-in" ion-fab mini color="primary" [ngClass]="{'pop-out': fabGone}" (click)="clearInputs()">
+    <ion-icon name="close"></ion-icon>
+  </button>
+</ion-fab>
+<Gmax-footer></Gmax-footer>
