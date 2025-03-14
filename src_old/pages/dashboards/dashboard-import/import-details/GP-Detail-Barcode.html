@@ -1,0 +1,175 @@
+<style>
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td,
+  th {
+    padding: 0.5rem;
+    border: solid thin #1EA1CC;
+  }
+
+
+
+  .flightdetail {
+    background-color: #1EA1CC !important;
+    border-radius: 10px !important;
+    color: #fff !important;
+    border-bottom: none;
+  }
+
+  .ioniconclassstatus {
+    color: #000000 !important;
+    float: center !important;
+    font-size: 30px;
+    font-weight: bold;
+  }
+
+  .ioniconclass {
+    color: #fff !important;
+    float: right;
+  }
+
+  qrcode {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+  }
+</style>
+<Gmax-header [title]="title">
+</Gmax-header>
+
+<ion-content class="marginTop44">
+  <div>
+
+    <!-- <ion-row> -->
+    <!-- <div center text-center class="imgClassDashboard">
+      <img src="assets/imgs/CSIAGVKlogo.jpg" width="100%">
+    </div> -->
+    <!-- </ion-row> -->
+  </div>
+  <div>
+
+    <ion-list>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-12>
+
+            <table>
+              <tr>
+                <td *ngIf="vehicleDetail[0].TokenNo[0].slice(0,3) != 'IPH' && vehicleDetail[0].TokenNo[0].slice(0,3) != 'ITR'">
+                  Vehicle Number
+                </td>
+                <td *ngIf="vehicleDetail[0].TokenNo[0].slice(0,3) == 'IPH'">
+                  Delivery
+                </td>
+                <td *ngIf="vehicleDetail[0].TokenNo[0].slice(0,3) == 'ITR'">
+                  Trolley Number
+                </td>
+                <!-- <td *ngIf="vehicleDetail[0].TokenNo[0].slice(0,3) != 'IPH'"> 
+                  {{VehicleNo}}
+                </td> -->
+
+                <td *ngIf="vehicleDetail[0].TokenNo[0].slice(0,3) == 'IVT'"> 
+                  {{VehicleNo}}
+                </td>
+                <td *ngIf="vehicleDetail[0].TokenNo[0].slice(0,3) == 'ITR'"> 
+                  {{VehicleNo.split("--").join(" ")}}
+                </td>
+
+
+                <td *ngIf="vehicleDetail[0].TokenNo[0].slice(0,3) == 'IPH'">
+                  By hand
+                </td>
+
+              </tr>
+              <tr>
+                <td>
+                  Token Number
+                </td>
+                <td>
+                  <!-- {{objRemoveGPDetail[0]['TokenNo']}} -->
+                  {{TokenNo}}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  MAWB Number
+                </td>
+                <td>
+                  <!-- {{objRemoveGPDetail[0]['MAWBNo']}} -->
+                  {{MAWBNo}}
+                </td>
+              </tr>
+              <tr *ngIf="HAWBNo != null && HAWBNo != ''">
+                <td>
+                  HAWB Number
+                </td>
+                <td>
+                  <!-- {{objRemoveGPDetail[0]['HAWBNo']}} -->
+                  {{HAWBNo}}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  GP Number
+                </td>
+                <td>
+                  <!-- {{objRemoveGPDetail[0]['GPNo']}} -->
+                  {{GPNo}}
+                </td>
+              </tr>
+            </table>
+          </ion-col>
+          <br>
+          <br>
+
+          <ion-item style="text-align: center;">
+            <ngx-barcode col-12 [bc-value]="GPNo" [bc-display-value]="GPNo"></ngx-barcode>
+          </ion-item>
+
+
+          <!-- <ion-list>
+            <ion-grid>
+              <ion-row>
+                <ion-col col-12>
+                  <button (click)="backToImp()" ion-button block icon-start
+                    style="margin-top: 20px !important;position: fixed;">
+                    Back to Search Import TSP
+                  </button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-list> -->
+
+          <br>
+          <br>
+          <ion-col col-12>
+            <button (click)="backToImp()" ion-button block icon-start style="margin-top: 20px !important;">
+              Back to Active Tokens
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+  </div>
+
+</ion-content>
+<!-- <ion-fab right bottom #fab1 style="bottom:38px !important">
+  <button class="pop-in" ion-fab mini color="primary" [ngClass]="{'pop-out': fabGone}">
+    <ion-icon name="close"></ion-icon>
+  </button>
+</ion-fab> -->
+<Gmax-footer></Gmax-footer>

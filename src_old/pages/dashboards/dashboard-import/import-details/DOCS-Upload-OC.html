@@ -1,0 +1,65 @@
+<style>
+  .float-right {
+    float: right;
+  }
+
+  .float-left {
+    float: left;
+  }
+
+  .text-center {
+    text-align: center;
+    padding: 5px;
+  }
+
+  ion-label[fixed] {
+    width: 100%;
+  }
+</style>
+<Gmax-header [title]="title">
+</Gmax-header>
+
+<ion-content class="marginTop44">
+  <div>
+
+    <!-- <ion-row> -->
+    <!-- <div center text-center class="imgClassDashboard">
+      <img src="assets/imgs/CSIAGVKlogo.jpg" width="100%">
+    </div> -->
+    <!-- </ion-row> -->
+  </div>
+  <div>
+    <!-- <form (ngSubmit)="UploadDoc_HHT_Recon()"> -->
+    <ion-grid>
+      <ion-row>
+        <ion-col col-4>
+          <ion-label color="primary" class="fontSize12 marginSet" fixed>OoC Number
+          </ion-label>
+        </ion-col>
+        <ion-col ion-item col-6>
+          <ion-input type="tel" maxlength="10" [(ngModel)]="OCNumber"
+            class="fontSize12" autocapitalize="characters" placeholder="OoC Number" name="OCNumber">
+          </ion-input>
+          <!-- (keypress)="special_char($event)" -->
+        </ion-col>
+        <ion-col col-12>
+          <ion-label color="primary" class="fontSize12 marginSet" fixed>Upload OoC PDF
+          </ion-label>
+        </ion-col>
+        <ion-col col-12>
+          <input type="file" (change)="readFile($event);onSelectFile($event)" accept="application/pdf"
+            [(ngModel)]="fileList" class="fontSize12" name="fileList">
+          <!-- <input type="file" id="file" (change)="handleFileInput($event.target.files)"> -->
+        </ion-col>
+        <ion-col col-12>
+          <button (click)="UploadDoc_HHT_Recon();" ion-button block icon-start style="margin-top: 20px !important;">
+            Upload and Submit OoC Number
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <!-- </form> -->
+  </div>
+
+
+  <Gmax-footer></Gmax-footer>

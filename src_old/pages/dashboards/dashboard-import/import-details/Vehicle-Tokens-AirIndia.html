@@ -1,0 +1,180 @@
+<style>
+  .label-md {
+    margin: 0px;
+  }
+
+  .label-ios {
+    margin: 0px;
+  }
+
+  .text-input-ios {
+    margin: 0px;
+  }
+
+  .float-right {
+    margin-top: 15px !important;
+  }
+
+  ion-label[fixed] {
+    width: 100%;
+  }
+
+  .text-right {
+    text-align: right !important;
+  }
+</style>
+
+<Gmax-header [title]="title">
+</Gmax-header>
+
+
+<ion-content class="marginTop44">
+
+
+
+  <ion-grid>
+    <ion-row>
+      <ion-col col-3>
+        <ion-label color="primary" class="fontSize12 marginSet" fixed>AI GP No.</ion-label>
+      </ion-col>
+      <ion-col col-9>
+        <ion-textarea type="text" autocapitalize="characters" style="border: solid thin  lightgray;"
+          placeholder="Enter comma separated Multiple GP No." (change)="special_charGP($event)" [(ngModel)]="GPNo" #textAr>
+        </ion-textarea>
+      </ion-col>
+
+      <ion-col col-4>
+        <ion-label color="primary" class="fontSize12 marginSet" fixed>VT NoP & Wt.</ion-label>
+      </ion-col>
+      <ion-col col-4>
+        <input type="text" maxlength="10" style="width: 90%;text-align: right;margin-top: 10px;" [(ngModel)]="Pieces">
+
+      </ion-col>
+      <ion-col col-4>
+        <input type="text" maxlength="10" style="width: 90%;text-align: right;margin-top: 10px;" [(ngModel)]="GrWt">
+      </ion-col>
+      <!-- <button>
+          <ion-icon slot="end" name="add"> Add GP</ion-icon>
+        </button> -->
+
+      <!-- <ion-row>
+        <ion-col col-5>
+          <ion-label color="primary" class="fontSize12 marginSet" fixed>NoP</ion-label>
+        </ion-col>
+        <ion-col ion-item col-7>
+
+          <ion-input type="tel" class="fontSize12" [(ngModel)]="Pieces" formControlName="Pieces" name="Pieces"
+            pattern="[0-9]*" style='text-align: right;' maxlength="10"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-5>
+          <ion-label color="primary" class="fontSize12 marginSet" fixed>Gr.Wt</ion-label>
+        </ion-col>
+        <ion-col ion-item col-7>
+
+          <ion-input type="text" class="fontSize12" [(ngModel)]="GrWt" formControlName="GrWt" name="GrWt"
+            pattern="[0-9]*" style='text-align: right;' maxlength="10"></ion-input>
+          &nbsp;Kgs.
+        </ion-col>
+      </ion-row> -->
+
+
+
+      <ion-col col-5>
+        <ion-label color="primary" class="fontSize12 marginSet" fixed>Vehicle Number
+        </ion-label>
+      </ion-col>
+      <ion-col ion-item col-7>
+        <ion-input type="text" maxlength="15" autocapitalize="characters" class="ion-text-uppercase"
+          (change)="special_charVN(objVT.vehicleNo)" [(ngModel)]="objVT.vehicleNo">
+        </ion-input>
+      </ion-col>
+      <ion-col col-5>
+        <ion-label color="primary" class="fontSize12 marginSet" fixed>Driver Name</ion-label>
+      </ion-col>
+      <ion-col ion-item col-7>
+        <ion-input type="text" maxlength="20" autocapitalize="characters" (change)="special_charDN($event)"
+          [(ngModel)]="objVT.driverName">
+        </ion-input>
+      </ion-col>
+      <ion-col col-5>
+        <ion-label color="primary" class="fontSize12 marginSet" fixed>License Number</ion-label>
+      </ion-col>
+      <ion-col ion-item col-7>
+        <ion-input type="text" maxlength="30" autocapitalize="characters" (change)="special_charLN($event)"
+          [(ngModel)]="objVT.licenseNo">
+        </ion-input>
+      </ion-col>
+
+
+      <ion-col col-5>
+        <ion-label color="primary" class="fontSize12 marginSet" fixed>Mobile Number
+        </ion-label>
+      </ion-col>
+      <ion-col ion-item col-7>
+        <ion-input type="tel" pattern="[0-9]*" (change)="mobileChange($event)" maxlength="10" [(ngModel)]="objVT.mobNo"
+          maxlength="10" minlength="10">
+        </ion-input>
+      </ion-col>
+
+      <ion-col col-6>
+        <ion-label color="primary" style="white-space: inherit !important;" class="fontSize12 marginSet" fixed>Notify
+          (Non smart phone)</ion-label>
+      </ion-col>
+      <ion-col col-2>
+        <ion-checkbox class="float-right" [checked]="unchecked" [(ngModel)]="objVT.IsConsignee"
+          (ionChange)="onChange($event)">
+        </ion-checkbox>
+      </ion-col>
+
+      <ion-col col-4>
+        <button [disabled]="addVDisabled == '0'" type="button" class="btn  mb-2" style="margin-left:auto;line-height: 3;" (click)="addVehicle(1)">+ Add
+          Vehicle</button>
+      </ion-col>
+
+      <ion-col col-5>
+        <ion-label color="primary" class="fontSize12 marginSet" fixed>AI Shed
+        </ion-label>
+      </ion-col>
+      <ion-col col-7>
+        <ion-select disabled style="max-width: 100%;" col-12 [(ngModel)]="objVT.shedType"
+          (ionChange)="onServiceTypeChange($event);" interface="popover">
+          <ion-option selected value="Air India Terminal">Air India Terminal</ion-option>
+          <ion-option *ngFor="let dt of objshedType; let idx = index" [value]="dt.HAWBNo">
+            {{dt.ITC_CLEARANCE_NAME[0].toString()}}
+          </ion-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-list>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12>
+          <button  ion-button block icon-start (click)="IMPCreateToken_HHT()"
+            style="margin-top: 20px !important;" type="submit">
+            Generate Vehicle Token
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+
+
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+</ion-content>
+<ion-fab right bottom #fab1 style="bottom:38px !important">
+  <button class="pop-in" ion-fab mini color="primary" [ngClass]="{'pop-out': fabGone}" (click)="clearInputs()">
+    <ion-icon name="close"></ion-icon>
+  </button>
+</ion-fab>
+<Gmax-footer></Gmax-footer>

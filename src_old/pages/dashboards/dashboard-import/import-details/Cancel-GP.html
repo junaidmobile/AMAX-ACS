@@ -1,0 +1,147 @@
+<style>
+  table {
+    width: 100%;
+    border: none;
+  }
+
+  ion-select {
+    max-width: 100% !important;
+  }
+
+  td,
+  th {
+    border: solid thin #1EA1CC;
+    padding: 5px !important;
+  }
+
+  ion-icon {
+    font-size: xx-large;
+  }
+
+  .iconCenter {
+    text-align: center !important;
+  }
+
+  qrcode {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+  }
+
+  .select-ios {
+    padding: 1px !important;
+  }
+
+  ion-select .select-text {
+    font-size: 1.5rem !important;
+  }
+
+  ion-label {
+    font-size: 15px;
+    font-weight: normal !important;
+  }
+</style>
+<Gmax-header [title]="title">
+</Gmax-header>
+
+<ion-content class="marginTop44">
+  <div>
+
+    <!-- <ion-row> -->
+    <div center text-center class="imgClassDashboard">
+      <img src="assets/imgs/CSIAGVKlogo.png" width="100%">
+    </div>
+    <!-- </ion-row> -->
+  </div>
+  <div>
+
+    <ion-list>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-12>
+
+            <table>
+              <tr>
+                <td>
+                  MAWB Number
+                </td>
+                <td>
+                  {{MAWBNo | slice:0:3}}&nbsp;{{MAWBNo | slice:3:11}}
+                </td>
+              </tr>
+              <tr *ngIf="HAWBNo != null && HAWBNo != ''">
+                <td>
+                  HAWB Number
+                </td>
+                <td>
+                  {{HAWBNo}}
+                </td>
+              </tr>
+              <!-- <tr *ngIf="ddlTSP">
+                <td>
+                  TSP (BC) Number
+                </td>
+                <td>
+                  <ion-select (ionChange)="onCustodianChange($event);" multiple="false" interface="popover">
+                    <ion-option *ngFor="let dt of MultipleTSP; let idx = index" [value]="dt.TSPNo"
+                      selected="{{(idx==0)}}">{{dt.TSPNo[0]}}</ion-option>
+                  </ion-select>
+                </td>
+              </tr> -->
+              <tr>
+                <td>
+                  GP Number
+                </td>
+                <td>
+                  {{GPNumber}}
+                </td>
+              </tr>
+            </table>
+          </ion-col>
+
+
+
+        </ion-row>
+      </ion-grid>
+
+    </ion-list>
+
+
+
+
+    <ion-item style="text-align: center;">
+      <ngx-barcode col-12 [bc-value]="GPNumber" [bc-display-value]="GPNumber"></ngx-barcode>
+    </ion-item>
+    <ion-grid>
+      <ion-row>
+
+        <ion-col *ngIf="!deliveredMsg" col-12>
+          <button (click)="cancelConfirmMAster()" ion-button block icon-start style="margin-top: 20px !important;">
+            Cancel Gate Pass
+          </button>
+        </ion-col>
+
+        <ion-col *ngIf="deliveredMsg" col-12>
+          <ion-label><h3 style="text-align:center">This Gate Pass has been Delivered</h3></ion-label>
+        </ion-col>
+        
+
+      </ion-row>
+    </ion-grid>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+  </div>
+
+</ion-content>
+<!-- <ion-fab right bottom #fab1 style="bottom:38px !important">
+  <button class="pop-in" ion-fab mini color="primary" [ngClass]="{'pop-out': fabGone}">
+    <ion-icon name="close"></ion-icon>
+  </button>
+</ion-fab> -->
+<Gmax-footer></Gmax-footer>

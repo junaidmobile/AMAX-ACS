@@ -1,0 +1,23 @@
+<ion-content class="has-subheader">
+    <div center text-center class="imgClassLogin">
+        <img src="assets/imgs/CSIAGVKlogo.png" width="100%">
+    </div>
+
+    <ion-grid class="gridProperAlign">
+        <ion-row>
+            <ion-col class="colProperAlign" (click)="goToPDbalance()">
+                <img [src]="OtherImages[0].img">
+            </ion-col>
+            <ion-col class="colProperAlign" (click)="goToChargeCalculator()">
+                <img [src]="OtherImages[1].img">
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="colProperAlign" (click)="goToContactUs()">
+                <img [src]="OtherImages[2].img">
+            </ion-col>
+            <ion-col class="colProperAlign">
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

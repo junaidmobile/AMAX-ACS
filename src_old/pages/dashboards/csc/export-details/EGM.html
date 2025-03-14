@@ -1,0 +1,89 @@
+<style>
+    .toolbar-background {
+        background-color: #DE1D1B !important;
+    }
+
+    .fab-md {
+        background-color: #DE1D1B !important;
+    }
+</style>
+<Gmax-header [title]="title" [isCSC]="true">
+</Gmax-header>
+
+<ion-content class="marginTop44">
+    <div>
+
+        <!-- <ion-row> -->
+        <div center text-center class="imgClassDashboard">
+            <img src="assets/imgs/csc.jpg" width="100%">
+        </div>
+        <!-- </ion-row> -->
+    </div>
+    <div>
+        <form (ngSubmit)="submitDetails()">
+            <ion-list>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-3>
+                            <ion-label color="primaryCsc" class="fontSize12 marginSet" fixed>MAWB No.
+                                <font color="red" class="margin12">*</font>
+                            </ion-label>
+                        </ion-col>
+                        <ion-col ion-item col-3>
+                            <ion-input name="prefix" type="tel" class="fontSize12" [(ngModel)]="Prefix"
+                                placeholder="PREFIX" pattern="[0-9]*" maxlength="5" (ionChange)="focusNextInput()"
+                                #PrefixValue></ion-input>
+                        </ion-col>
+                        <!-- <ion-col col-1></ion-col> -->
+                        <ion-col ion-item col-4>
+                            <ion-input name="MAWBNo" type="tel" class="fontSize12" [(ngModel)]="MAWBNo"
+                                placeholder="MAWB No." pattern="[0-9]*" maxlength="8" #MAWBNoValue></ion-input>
+                        </ion-col>
+                        <ion-col col-2>
+                            <button ion-fab class="ion-fab34">
+                                <ion-icon name="md-search" class="margin4"></ion-icon>
+                            </button>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-list>
+
+            <!-- <ion-list> -->
+            <div *ngIf="showDiv">
+                <ion-item>
+                    <ion-label color="primaryCsc" class="fontSize12">EGM No.</ion-label>
+                    <ion-input type="text" name="EGM No." class="fontSize12" [(ngModel)]="EGMResp.EGMNo[0]"
+                        placeholder="" [disabled]="true" maxlength="20" text-right></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label color="primaryCsc" class="fontSize12">EGM Date</ion-label>
+                    <ion-input type="text" name="EGM Date" class="fontSize12" [(ngModel)]="EGMDate" placeholder=""
+                        [disabled]="true" maxlength="20" text-right></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label color="primaryCsc" class="fontSize12">Flight No.</ion-label>
+                    <ion-input type="text" name="Flight No." class="fontSize12" [(ngModel)]="EGMResp.FlightNo[0]"
+                        placeholder="" [disabled]="true" maxlength="20" text-right></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label color="primaryCsc" class="fontSize12">Flight Date</ion-label>
+                    <ion-input type="text" name="Flight Date" class="fontSize12" [(ngModel)]="EGMDate" placeholder=""
+                        [disabled]="true" maxlength="20" text-right></ion-input>
+                </ion-item>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        </form>
+    </div>
+
+</ion-content>
+<ion-fab right bottom #fab1 style="bottom:38px !important">
+    <button class="pop-in" ion-fab mini color="primaryCsc" [ngClass]="{'pop-out': fabGone}" (click)="clearInputs()">
+        <ion-icon name="close"></ion-icon>
+    </button>
+</ion-fab>
+<Gmax-footer [isCSC]="true"></Gmax-footer>

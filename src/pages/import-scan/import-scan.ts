@@ -504,6 +504,8 @@ export class ImportScanPage {
     console.log("************************  scan function");
 
     this.userRole = this.global.get('userRole');
+    
+    console.log('User Role    ' + this.userRole)
     // "IVT2202180001"; // code 128 IVT220218
 
     this.showDiv = false;

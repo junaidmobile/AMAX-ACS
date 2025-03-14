@@ -1,0 +1,48 @@
+
+<Gmax-header [title]="title">
+</Gmax-header>
+
+
+
+<ion-content padding>
+
+  <ion-row style="margin-top: 50px;">
+  <ion-col col-8>
+    <!-- <ion-item> -->
+      <ion-label color="primary" class="fontSize12 marginSet">
+        Approved Gate Pass Count:
+      </ion-label>
+    <!-- </ion-item> -->
+  </ion-col>
+  <ion-col col-2>
+    <ion-input disabled type="text" placeholder="{{verifiedCount}}"></ion-input>
+  </ion-col>
+</ion-row>
+
+<ion-row>
+  <ion-col col-8>
+    <!-- <ion-item> -->
+      <ion-label color="primary" class="fontSize12 marginSet">
+        Total Gate Pass Count:
+      </ion-label>
+    <!-- </ion-item> -->
+  </ion-col>
+  <ion-col col-2>
+    <ion-input disabled type="text" placeholder="{{totalCount}}"></ion-input>
+  </ion-col>
+</ion-row>
+
+<ion-row>
+  <ion-col col-4>
+    <!-- <ion-item> -->
+      <ion-label color="primary" class="fontSize12 marginSet">
+        For today:
+      </ion-label>
+    <!-- </ion-item> -->
+  </ion-col>
+  <ion-col col-4>
+    <ion-input disabled type="text" placeholder="{{today | date: 'dd/MM/yyyy'}}"></ion-input>
+  </ion-col>
+</ion-row>
+
+</ion-content>

@@ -1,0 +1,237 @@
+<style>
+  .itemClass {
+    background-color: #1EA1CC !important;
+    border-radius: 10px !important;
+    color: #fff !important;
+  }
+
+
+
+  ion-icon {
+    color: #fff !important;
+    float: right;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  td,
+  th {
+    border: solid thin #999;
+    padding: 5px !important;
+
+  }
+
+  .text-right {
+    text-align: right !important;
+  }
+
+  .button-designed-radius_smallb {
+    /* padding: 0 6rem !important; */
+    border-top-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-top-right-radius: 6px;
+    height: 3.2rem !important;
+    width: 90px !important;
+  }
+
+  .select-md {
+    padding: 0px 0px 0px 0px;
+}
+
+
+ion-select {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.select-md .select-icon {
+    position: relative;
+    width: 22px!important;
+    height: 19px;
+}
+
+</style>
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Splitting</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+
+
+  <ion-item>
+    <ion-label floating>
+      Group ID
+    </ion-label>
+    <ion-input type="text" class="fontSize12" name="groupid" (ionChange)="switch($event)" [(ngModel)]="splitgroupid"
+      (blur)="scanGroupID();" maxlength="16" #GRPID></ion-input>
+  </ion-item>
+
+
+  <!-- <div class="row" style="border: 1px solid;border-radius: 5px;border-color: #999;">
+      <ion-input type="text" class="fontSize12" name="groupid" [(ngModel)]="groupid" 
+      maxlength="16" #PrefixValue></ion-input>
+    </div>
+  -->
+
+  <!-- <ion-row>
+
+    <ion-col ion-item col-12>
+      <ion-input type="text" class="fontSize12" name="groupid" [(ngModel)]="groupid" placeholder="Group ID"
+        maxlength="16" #PrefixValue></ion-input>
+    </ion-col>
+     (ionChange)="focusNextInput()" 
+  </ion-row>
+-->
+  <ion-row class="marginTop23" style="margin-left: 5px;">
+
+    <button id="btnSearch" class="button-designed-radius_smallb" (click)="getGroupIDDetails()" ion-button>
+      Search
+    </button>
+
+  </ion-row>
+
+
+  <ion-row class="marginTop23">
+    <ion-grid>
+      <ion-row justify-content-start>
+        <table id="tblNews" border="1"
+          style="width:100%;table-layout:fixed;word-break:break-word;border-color: white;margin-top: 2%;">
+          <thead>
+            <tr>
+              <th height="30" style="background-color:#ebebeb;padding: 3px 3px 3px 0px;font-size:14px" align="center">
+                MAWB
+              </th>
+              <th height="30" style="background-color:#ebebeb;padding: 3px 3px 3px 0px;font-size:14px;" align="center">
+                Location
+              </th>
+              <th height="30" style="background-color:#ebebeb;padding: 3px 3px 3px 0px;font-size:14px;" align="center">
+                Pieces
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td height="30" style="padding-left: 4px;font-size:14px" align="center">{{ awbNumber }}
+                <!-- {{VehicleResp.Table1[0].TokenNo[0]}}
+                        background: rgb(224, 243, 215); -->
+              </td>
+              <td height="30" style="padding-left: 4px;font-size:14px" align="center">{{ locCode }}
+                <!-- {{VehicleResp.Table1[0].VehicleNo[0]}} -->
+              </td>
+              <td height="30" style="padding-left: 4px;font-size:14px" align="center">{{ pieces }}
+                <!-- {{VehicleResp.Table1[0].VehicleNo[0]}} -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </ion-row>
+    </ion-grid>
+  </ion-row>
+
+
+  <ion-item>
+    <ion-label floating>
+      New Group ID
+    </ion-label>
+    <ion-input type="text" name="newgroupid" [(ngModel)]="newGroupID" maxlength="16" #newgroupidval></ion-input>
+  </ion-item>
+
+
+
+  <ion-item>
+    <ion-label floating>
+      Pieces
+    </ion-label>
+    <ion-input type="text" name="pieces" [(ngModel)]="newPieces" type="number" pattern="[0-9]*" maxlength="8"
+      #piecesval></ion-input>
+  </ion-item>
+
+
+
+  <ion-row class="marginTop23">
+
+
+
+
+
+    <ion-col col-8 style=" padding: 0px 0px 0px 0px;">
+      <ion-searchbar placeholder="New Location." [(ngModel)]="searchValue" (ionChange)="filterList()"></ion-searchbar>
+    </ion-col>
+    <ion-col col-4 style=" padding: 0px 0px 0px 10px;">
+      <!-- <ion-list>
+        <ion-item *ngFor="let result of filteredList">
+          <ion-label>{{ result.LD_LocationCode_C }}</ion-label>
+        </ion-item>
+      </ion-list> -->
+      <ion-item>
+        <ion-select color="primary" placeholder="Select" text-center name="eqt" multiple="false"  [(ngModel)]="eqtValue"
+          (ionChange)="fetchLocationDetails($event)">
+
+          <ion-option *ngFor="let eqtr of filteredList">{{eqtr.LD_LocationCode_C}}</ion-option>
+        </ion-select>
+      </ion-item></ion-col>
+
+  </ion-row>
+
+
+
+
+
+  <!-- 
+  <div class="row marginTop23" style="border: 1px solid;border-radius: 5px;border-color: #999;">
+    <ion-input type="text" name="newgroupid" [(ngModel)]="newgroupid" maxlength="16" #newgroupidval></ion-input>
+  </div>
+
+
+  <div class="row marginTop23" style="border: 1px solid;border-radius: 5px;border-color: #999;">
+    <ion-input type="text" name="pieces" [(ngModel)]="pieces" maxlength="8" #piecesval></ion-input>
+  </div>
+
+
+  <div class="row marginTop23" style="border: 1px solid;border-radius: 5px;border-color: #999;">
+
+    <ion-input type="text" name="location" [(ngModel)]="location" maxlength="50" #locationval></ion-input>
+  </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+  <ion-row class="marginTop23" style="margin-left: 5px;">
+
+    <button id="btnClear" class="button-designed-radius_smallb" ion-button (click)="clearAllValues()">
+      Clear
+    </button>
+
+    <button id="btnSubmit" class="button-designed-radius_smallb" ion-button (click)="saveLocationData()">
+      Submit
+    </button>
+
+  </ion-row>
+
+
+
+
+
+
+</ion-content>

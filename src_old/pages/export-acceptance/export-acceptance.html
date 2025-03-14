@@ -1,0 +1,213 @@
+<style>
+  .itemClass {
+    background-color: #1EA1CC !important;
+    border-radius: 10px !important;
+    color: #fff !important;
+  }
+
+
+
+  ion-icon {
+    color: #fff !important;
+    float: right;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  td,
+  th {
+    border: solid thin #999;
+    padding: 5px !important;
+
+  }
+
+  .text-right {
+    text-align: right !important;
+  }
+
+  .button-designed-radius_smallb {
+    /* padding: 0 6rem !important; */
+    border-top-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-top-right-radius: 6px;
+    height: 3.2rem !important;
+    width: 90px !important;
+  }
+
+  .button-designed-radius_bigb {
+    /* padding: 0 6rem !important; */
+    border-top-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-top-right-radius: 6px;
+    height: 3.2rem !important;
+    width: 100px !important;
+  }
+</style>
+<!-- <script>
+
+
+  $(document).ready(function () {
+    $(document).on("keyup", "#tdn", function () {
+      $("#tdn").val($("#tdn").val().replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '').toLowerCase());
+    });
+  });
+
+</script> -->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Acceptance</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+
+<ion-content padding>
+  <!-- <div class="row marginTop23" style="border: 1px solid;border-radius: 5px;border-color: #999;"> -->
+  <ion-row>
+
+    <ion-col col-10>
+      <ion-item>
+        <ion-label floating>
+          VCT No.
+        </ion-label>
+        <ion-input type="text" class="fontSize12" (ionChange)="switch($event)" autocapitalize="characters"
+          [(ngModel)]="VCTacc" name="VCT" (blur)="scanVCTNO();" maxlength="16">
+
+        </ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col col-2 style="margin-top: 20px;">
+      <button ion-fab class="ion-fab34" (click)="getVctDetails()">
+        <ion-icon name="md-search" class="margin4"></ion-icon>
+      </button>
+    </ion-col></ion-row>
+
+
+  <!-- </div> -->
+
+
+
+  <ion-item>
+    <ion-label floating>
+      Truck Dock No.
+    </ion-label>
+    <!-- <ion-input type="text" class="fontSize12" name="truckdockno" [(ngModel)]="trkDockNo" maxlength="16"
+      #tdn></ion-input> -->
+
+      <ion-input type="number" class="fontSize12"  autocapitalize="characters"
+      [(ngModel)]="trkDockNo" name="truckdockno" (keypress)='textareaMaxLengthValidation();' (blur)="scanTruckDoorNO();">
+      </ion-input>
+  </ion-item>
+
+
+
+  <ion-row style="margin-top: 15px; margin-left: 15px;">
+
+    <button id="btnMove" class="button-designed-radius_smallb" [disabled]="isDockedInPerformed()" ion-button
+      (click)="performDockInDockOut('I')">
+      Dock In
+    </button>
+
+  </ion-row>
+
+
+
+  <ion-item>
+    <ion-label floating>
+      Total Pieces
+    </ion-label>
+    <ion-input type="text" class="fontSize12" name="totalpieces" [(ngModel)]="totPieces" [disabled]="true"
+      maxlength="16"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>
+      Total Gr.Wt.
+    </ion-label>
+    <ion-input type="text" class="fontSize12" name="totalgrwr" [(ngModel)]="totGRWT" [disabled]="true"
+      maxlength="16"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>
+      Accepted Pieces
+    </ion-label>
+    <ion-input type="text" class="fontSize12" name="accpieces" [(ngModel)]="totAccPieces" [disabled]="true"
+      maxlength="16"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>
+      Remaining Pieces
+    </ion-label>
+    <ion-input type="text" class="fontSize12" name="rempieces" [(ngModel)]="remPieces" [disabled]="true"
+      maxlength="16"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>
+      AWB Count
+    </ion-label>
+    <ion-input type="text" class="fontSize12" name="awbcount" [(ngModel)]="awbCount" [disabled]="true"
+      maxlength="16"></ion-input>
+  </ion-item>
+
+  <ion-row style="margin-top: 15px; margin-left: 15px;">
+
+    <button id="btnClear" class="button-designed-radius_smallb" ion-button (click)="clearAllValues()">
+      Clear
+    </button>
+    <!-- 
+    <ion-col col-3 style=" padding: 0px 0px 0px 10px;"> -->
+    <!-- <button id="btnNext"  *ngIf="dockInPerformed == false" [disabled]="!dockInPerformed"class="button-designed-radius_smallb" (click)="gotoAwbAcceptance()" ion-button>
+      Next
+    </button>
+
+    <button id="btnNext"  *ngIf="dockInPerformed == true" [disabled]="false" class="button-designed-radius_smallb" (click)="gotoAwbAcceptance()" ion-button>
+      Next
+    </button> [disabled]="isDockedIn()"-->
+
+    <button id="btnNext"  class="button-designed-radius_smallb" (click)="gotoAwbAcceptance()" [disabled]="isNextDisabled()" 
+      ion-button>
+      Next
+    </button>
+
+
+    <button id="btnUnscan" class="button-designed-radius_bigb" (click)="gotoUnscanned()" ion-button>
+      Un-scanned
+    </button>
+
+  </ion-row>
+
+
+  <ion-row style="margin-top: 15px; margin-left: 15px;">
+
+    <!-- <button id="btnDockOut" class="button-designed-radius_smallb" [disabled]="isDockedOUTPerformed()" ion-button
+      (click)="performDockInDockOut('O')">
+      Dock Out
+    </button> -->
+
+
+    <button id="btnCloseVCT" [disabled]="isClosedVCTPerformed()" class="button-designed-radius_smallb" ion-button
+      (click)="performCloseRevokeVCT('CloseVCT')">
+      Dock out
+    </button>
+
+    <button id="btnRevokeVCT" [disabled]="canPerformRevokeVCT()" class="button-designed-radius_bigb" ion-button
+      (click)="performCloseRevokeVCT('RevokeVCT')">
+      Revoke VCT
+    </button>
+
+
+
+  </ion-row>
+
+
+
+</ion-content>

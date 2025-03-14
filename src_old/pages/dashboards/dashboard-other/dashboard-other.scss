@@ -1,0 +1,58 @@
+page-others-ContactUs{
+    .accordion-list {
+        background: color($colors, light);
+        height: 100%;
+    }
+    .section {
+        background-color: #1EA1CC !important;
+        color: #000;
+        margin-bottom: 4px;
+        border-top-left-radius: 25px;
+        border-bottom-right-radius: 25px
+    }
+    .section-active {
+        background-color: #1EA1CC!important;
+        color: #fff;
+        border-top-left-radius: 25px;
+        border-bottom-right-radius: 25px
+    }
+ 
+    .child {
+        background: #e8e7e6;
+        color: #000;
+        margin-bottom: 4px;
+    }
+    .child-item {
+        background: #f3f2f1;
+        padding: 10px;
+    }
+    .label {
+        margin: 0px;
+    }
+    .list {
+        margin-bottom: 4px;
+        margin-top: 13px;
+    }
+    a:focus, a:hover {
+        color: #23527c !important;
+        text-decoration: underline;
+    }
+    a {
+        color: #337ab7 !important;
+        text-decoration: none;
+    }
+}
+
+
+page-other-Charge-Calculator{
+    .details_text{
+        text-align: inherit !important;
+    }
+
+    ion-fab[bottom] {
+        bottom: 30px !important;
+    }
+
+
+
+}

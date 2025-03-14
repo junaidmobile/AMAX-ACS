@@ -1,0 +1,113 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title id="WHDashboard" center text-center [ngClass]="{'marginLeft70': isAndroid === true}">
+      Landside
+    </ion-title>
+    <ion-buttons right>
+      <!-- <button id="notification-button" ion-button icon-only (click)="notifications()">
+        <ion-icon ios="ios-notifications" md="md-notifications"
+            [ngClass]="{'shake': !isNotificationSeen && !hideClass}">
+            <ion-badge id="notifications-badge"
+                [ngClass]="!isNotificationSeen && !hideClass ? 'notifications-badge' : 'notifications-badge-update'"
+                color="danger" *ngIf="!isNotificationSeen" style="padding: 2px 7px;min-width: 8px;">{{count}}
+            </ion-badge>
+        </ion-icon>
+    </button> -->
+      <button ion-button icon-only (click)="logOut()">
+        <ion-icon ios="ios-power" md="md-power"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+  <!-- <ion-toolbar class="target-class" no-border-top mode='md'>
+    <ion-segment mode='md' [(ngModel)]="selectedSegment" (ionChange)="onSegmentChanged($event)">
+      <ion-segment-button value="Exports">
+        Exports
+      </ion-segment-button>
+      <ion-segment-button value="Imports">
+        Imports
+      </ion-segment-button>
+
+    </ion-segment>
+  </ion-toolbar> -->
+
+</ion-header>
+
+
+<ion-content class="outer-content">
+  <!-- <h1>{{ selectedSegment }} > {{ exportSideString }} </h1>
+
+
+  <ion-item>
+
+    <ion-label  (click)="goToExportMenu(0)" > {{selectedSegment }}</ion-label>
+    <ion-label   (click)="labelClick($event)" > {{exportSideString }}</ion-label>
+
+ </ion-item>  -->
+
+ <!-- <ion-row>
+
+  <ion-label  (click)="goToExportMenu(0)" > {{selectedSegment }}</ion-label>
+  <ion-label   (click)="labelClick($event)" > {{exportSideString }}</ion-label> 
+
+</ion-row> -->
+
+  <ion-grid class="gridProperAlign">
+    <!-- <ion-row *ngIf="selectedSegment == 'Exports' && exportSideString ==''">
+      <ion-col class="colProperAlign" (click)="goToExportMenu(1)">
+        <img [src]="ExpDashImages[13].img"width="46%">
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="selectedSegment == 'Imports' && exportSideString ==''">
+
+      <ion-col class="colProperAlign" (click)="goToExportMenu(2)">
+        <img [src]="ExpDashImages[1].img">
+      </ion-col>
+    </ion-row> -->
+
+    <ion-row>
+      <ion-col class="colProperAlign" (click)="goToAcceptance()">
+        <img [src]="ExpDashImages[8].img">
+      </ion-col>
+      <ion-col class="colProperAlign" (click)="goToBinning()">
+        <img [src]="ExpDashImages[9].img">
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+
+
+      <ion-col class="colProperAlign" (click)="goToScanning()">
+        <img [src]="ExpDashImages[12].img">
+      </ion-col>
+
+      <ion-col class="colProperAlign" (click)="goToScreening()">
+        <img [src]="ExpDashImages[11].img">
+      </ion-col>
+      
+    </ion-row>
+
+
+    <ion-row>
+
+
+      <ion-col class="colProperAlign" (click)="goToCartingORder()">
+        <img [src]="ExpDashImages[10].img" width="46%">
+      </ion-col>
+      
+    </ion-row>
+
+    <!-- <ion-row *ngIf="exportSideString == 'Airside'">
+      <ion-col class="colProperAlign" (click)="goToEGM()">
+        <img [src]="ExpDashImages[2].img">
+      </ion-col>
+    </ion-row> -->
+
+
+  </ion-grid>
+
+</ion-content>
+
+<Gmax-footer></Gmax-footer>

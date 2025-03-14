@@ -1,0 +1,54 @@
+<ion-content class="has-subheader">
+
+  <div center text-center class="imgClassLogin">
+    <img src="assets/imgs/CSIAGVKlogo.png" width="100%">
+  </div>
+
+  <ion-grid class="gridProperAlign">
+    <ion-row>
+      <ion-col class="colProperAlign" (click)="goToAWBTracking()">
+        <img [src]="ExpDashImages[0].img">
+      </ion-col>
+      <ion-col class="colProperAlign" (click)="goToVehicleTracking()">
+        <img [src]="ExpDashImages[1].img">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="colProperAlign" (click)="goToEGM()">
+        <img [src]="ExpDashImages[2].img">
+      </ion-col>
+      <ion-col class="colProperAlign" (click)="goToFAQ()">
+        <img [src]="ExpDashImages[3].img">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="colProperAlign" (click)="goToAppCharges()">
+        <img [src]="ExpDashImages[4].img">
+      </ion-col>
+      <ion-col class="colProperAlign" (click)="goToVehicleTokenSummary()">
+        <img [src]="ExpDashImages[5].img">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col *ngIf="DOStat == 5" class="colProperAlign" (click)="goToTGD()">
+        <img [src]="ExpDashImages[6].img">
+      </ion-col>
+      <ion-col *ngIf="DOStat == 5" class="colProperAlign" (click)="goToTokenScanning()">
+        <img [src]="ExpDashImages[7].img">
+      </ion-col>
+     
+    </ion-row>
+
+    <ion-row>
+      <ion-col *ngIf="DOStat == 5" class="colProperAlign" (click)="gotoLandside()">
+        <img [src]="ExpDashImages[13].img"width="46%">
+      </ion-col>
+      <ion-col *ngIf="DOStat == 5" class="colProperAlign">
+        <img [src]="ExpDashImages[14].img"width="46%">
+      </ion-col>
+    </ion-row>
+   
+  </ion-grid>
+
+
+</ion-content>

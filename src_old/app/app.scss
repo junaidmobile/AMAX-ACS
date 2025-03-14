@@ -1,0 +1,127 @@
+// http://ionicframework.com/docs/theming/
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+ion-content {
+  background-color: #f5f5dc !important;
+}
+
+tr {
+  border-color: black !important;
+}
+
+.content-ios {
+  background-color: #f5f5dc !important;
+}
+.button-ios {
+  color: black !important;
+}
+
+.marginLeft70 {
+  margin-left: 70px;
+}
+
+.item-ios {
+  background-color: beige !important;
+}
+
+.text-1x {
+  font-size: 1em;
+}
+
+.errorbox{
+  text-decoration-color: red;
+}
+
+// POP-IN (FLOAT ACTION BUTTON EFFECT) -------------
+.pop-in {
+  animation: pop-in 0.65s;
+}
+@keyframes pop-in {
+  0% {
+    transform: scale(0);
+  }
+  45% {
+    transform: scale(0);
+  }
+  90% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+// POP-OUT (FLOAT ACTION BUTTON EFFECT) -------------
+.pop-out {
+  animation: pop-out 2.5s;
+}
+
+@keyframes pop-out {
+  0% {
+    transform: scale(1);
+  }
+  15% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+.text-input[disabled] {
+  opacity: 1 !important;
+}
+
+.gmaxBGColor {
+  background-color: #1EA1CC;
+}
+
+.cscBGColor {
+  background-color: #de1d1b;
+}
+
+.button-md {
+  text-transform: initial !important;
+}
+.segment-md .segment-button {
+  text-transform: initial !important;
+}
+.toolbar-background {
+  background: rgb(29,122,215);
+  background: linear-gradient(90deg, rgba(29,122,215,1) 0%, rgba(160,24,149,1) 100%, rgba(0,212,255,1) 100%);
+}
+
+.alertLogout {
+  background: rgb(29,122,215);
+  background: linear-gradient(90deg, rgba(29,122,215,1) 0%, rgba(160,24,149,1) 100%, rgba(0,212,255,1) 100%);
+}
+
+.alertCustomCss {
+  color: white; // text color for basic alerts
+  button {
+      // color: white !important;
+      // background-color: color($colors, secondary, base) !important;
+  }
+  .alert-message {
+      // color: white; // text color for confirm alerts
+  }
+  .alert-wrapper {
+      // background-color: color($colors, dark, base);
+  }
+  .alert-head {
+    background: rgb(29,122,215);
+    background: linear-gradient(90deg, rgba(29,122,215,1) 0%, rgba(160,24,149,1) 100%, rgba(0,212,255,1) 100%);
+}
+}

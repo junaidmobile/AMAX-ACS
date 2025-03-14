@@ -1,0 +1,231 @@
+<style>
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td,
+  th {
+    padding: 0.2rem;
+  }
+
+  .tblClass td,
+  th {
+    border: 1px solid #999;
+    padding: 0.2rem;
+  }
+
+  th {
+    text-align: center;
+  }
+
+  ion-icon {
+    font-size: large;
+  }
+
+
+
+  .iconCenter {
+    text-align: center !important;
+  }
+
+  .flightdetail {
+    background-color: #1EA1CC !important;
+    border-radius: 10px !important;
+    color: #fff !important;
+    border-bottom: none;
+  }
+
+  .ioniconclass {
+    color: #fff !important;
+    float: right;
+  }
+
+  .text-right {
+    text-align: right !important;
+  }
+
+  .float-right {
+    margin-top: 15px !important;
+  }
+
+  ion-label[fixed] {
+    width: 100%;
+  }
+</style>
+<Gmax-header [title]="title">
+</Gmax-header>
+
+<ion-content class="marginTop44">
+  <div>
+
+    <!-- <ion-row> -->
+    <!-- <div center text-center class="imgClassDashboard">
+      <img src="assets/imgs/CSIAGVKlogo.jpg" width="100%">
+    </div> -->
+    <!-- </ion-row> -->
+  </div>
+  <div>
+
+    <ion-grid>
+      <table>
+        <tr>
+          <td>
+            MAWB Number
+          </td>
+          <td>
+            {{MAWBNo | slice:0:3}}&nbsp;{{MAWBNo | slice:3:11}}
+          </td>
+        </tr>
+        <tr *ngIf="HAWBNo != null && HAWBNo != ''">
+          <td>
+            HAWB Number
+          </td>
+          <td>
+            {{HAWBNo}}
+          </td>
+        </tr>
+
+      </table>
+
+      <!-- <ion-col col-12 *ngIf="HAWBNo != null " (click)="HAWBDetail(HAWBNo);">
+        <ion-item class="item flightdetail" href="#">
+          {{HAWBNo}}
+          <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+        </ion-item>
+      </ion-col> -->
+    </ion-grid>
+    <ion-list>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-12>
+            <table class="tblClass">
+              <thead>
+                <tr style="background-color: lightgray;">
+                  <th>
+                    Charge Description
+                  </th>
+                  <th>
+                    Charge Amt.
+                  </th>
+
+                </tr>
+              </thead>
+              <tbody *ngFor="let chargDes of calculatedData; index as i;">
+                <tr *ngFor="let chargDes of calculatedDataTb1; index as i;">
+                  <td>
+                    {{chargDes.ChargeDesc}}
+                  </td>
+                  <td class="text-right">
+                    {{chargDes.TotalAmount}}
+                  </td>
+                </tr>
+                <!-- <tr>
+                  <td>Import Terminal Charges </td>
+                  <td>{{chargDes.TSPCalculated}}</td>
+                </tr> -->
+                <tr>
+                  <td>Tax - Terminal Charges</td>
+                  <td style="text-align: right;">{{chargDes.ServiceTaxCalculated}}</td>
+                </tr>
+                <tr>
+                  <td>Total Charges</td>
+                  <td style="text-align: right;">{{chargDes.PayableAmount}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </ion-col>
+
+          <ion-col col-7 *ngIf="PureAgentStatus == 'true'">
+            <ion-label color="primary" class="fontSize12 marginSet" fixed>Pure Agent
+            </ion-label>
+          </ion-col>
+          <ion-col col-1 *ngIf="PureAgentStatus == 'true'">
+            <ion-checkbox checked="false" class="float-right" [(ngModel)]="IsConsignee" (ionChange)="onChange($event)">
+            </ion-checkbox>
+          </ion-col>
+          <ion-col style="font-size: 8px;" col-3 *ngIf="PureAgentStatus == 'true'">
+            I hereby take responsibility of declaration of GSTN of importer.
+          </ion-col>
+
+          <ion-col col-7 *ngIf="PureAgentStatus == 'true'">
+            <ion-label color="primary" class="fontSize12 marginSet" fixed>Consignee GSTN
+            </ion-label>
+          </ion-col>
+          <ion-col ion-item col-5 *ngIf="PureAgentStatus == 'true'">
+            <ion-input [disabled]="!IsConsignee" style="text-transform: uppercase;" (change)="special_char($event)"
+              autocapitalize="characters" type="text" class="fontSize12" [(ngModel)]="ConsigneeGSTNo"
+              name="ConsigneeGSTNo" maxlength="15" #ExamP>
+            </ion-input>
+          </ion-col>
+
+          <ion-col col-7 *ngIf="PureAgentStatus == 'false'">
+            <ion-label color="primary" class="fontSize12 marginSet" fixed>% for Exam Percentage
+            </ion-label>
+          </ion-col>
+          <ion-col ion-item col-5 *ngIf="PureAgentStatus == 'false'">
+            <ion-input style="text-align: right;" autocomplete="off" type="tel" class="fontSize12"
+              [(ngModel)]="_ExamPercentage" name="ExamPercentage" pattern="[0-9]*" maxlength="10" #ExamP></ion-input>
+            <!-- <ion-label>(5% - 100%)</ion-label> -->
+          </ion-col>
+
+          <ion-col col-7 *ngIf="PureAgentStatus == 'false'">
+            <ion-label color="primary" class="fontSize12 marginSet" fixed>Service Type
+            </ion-label>
+          </ion-col>
+          <ion-col ion-item col-5 *ngIf="PureAgentStatus == 'false'">
+            <ion-select [(ngModel)]="_ServiceType" style="max-width: 100%;" (ionChange)="onServiceTypeChange($event);"
+              multiple="false" interface="popover">
+              <ion-option *ngFor="let dt of ServiceType; let idx = index" [value]="dt.ServiceCode"
+                selected="{{(idx==0)}}">{{dt.ServiceName[0]}}</ion-option>
+            </ion-select>
+          </ion-col>
+
+          <ion-col col-7>
+            <ion-label color="primary" class="fontSize12 marginSet" fixed>Payment Type
+            </ion-label>
+          </ion-col>
+          <ion-col ion-item col-5>
+            <ion-select style="max-width: 100%;" multiple="false" interface="popover">
+              <ion-option value="PD" selected>Pre-Deposit</ion-option>
+              <!-- <ion-option value="Online">Online Payment</ion-option> -->
+            </ion-select>
+          </ion-col>
+
+          <ion-col col-7>
+            <ion-label color="primary" class="fontSize12 marginSet" fixed>Transaction Password
+            </ion-label>
+          </ion-col>
+          <ion-col ion-item col-5>
+            <ion-input autocomplete="off" type="password" class="fontSize12" [(ngModel)]="TransactionPassword"
+              (change)="CompareTransactionPassword_TSP()" name="TransactionPassword" maxlength="20" #paswordval></ion-input>
+
+          </ion-col>
+          <br>
+          <ion-col col-12>
+            <button (click)="IMPCreateTSP_HHT();" [disabled]='PassWord != "True"' ion-button block icon-start
+              style="margin-top: 20px !important;">
+              Proceed to Pay TSP Charges
+            </button>
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+  </div>
+
+</ion-content>
+<!-- <ion-fab right bottom #fab1 style="bottom:38px !important">
+  <button class="pop-in" ion-fab mini color="primary" [ngClass]="{'pop-out': fabGone}">
+    <ion-icon name="close"></ion-icon>
+  </button>
+</ion-fab> -->
+<Gmax-footer></Gmax-footer>

@@ -1,0 +1,166 @@
+.gridProperAlign{
+    padding:10px !important;
+}
+
+.colProperAlign{
+    padding:18px !important;
+}
+
+.colProperAlign img{
+    border-radius: 12px;
+}
+
+.gridProperAlign1{
+    padding:10px !important;
+}
+
+.colProperAlign1{
+    padding:18px !important;
+    width: 50%;
+    height: 50%;
+    text-align: start;
+    max-width: 50%;
+}
+
+.colProperAlign1 img{
+    border-radius: 12px;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+}
+
+
+.sub_details {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: #AE441B;
+    text-decoration: none;
+}
+
+.warehouse-header {
+    background-color: #F9E698;
+    height: 24px;
+    color: #AE441B;
+    line-height: 18px;
+    background-repeat: repeat-x;
+}
+.table{
+    border-collapse: collapse;
+    width: 90%;
+    border: none;
+}
+
+.table-header {
+    height: 24px;
+    color: #F26820;
+    font-size: 12px;
+    text-align: center;
+    background-color: #F9E698;
+    font-weight: bold;
+    border-color: black;
+    width: 10%;
+    padding: 0in 5.4pt 0in 5.4pt;
+}
+.paddingAlignHeaderAppCharges{
+    padding: 4px 0px 0px 40px;
+}
+
+page-export-appcharges{
+    .scroll-content{
+          overflow-x: scroll !important;
+        }
+}
+
+page-export-AWB-tracking{
+    .text-input{
+        text-align: end;
+      }
+}
+
+page-export-EGM{
+    .text-input{
+        text-align: end;
+      }
+}
+
+page-export-Vehicle-tracking{
+    .text-input{
+        text-align: end;
+      }
+}
+
+page-csc-main-menu{
+    ion-content.content-md:not([padding]) .scroll-content{
+        margin-top: initial !important;
+    }
+
+    .toolbar-background{
+        background-color: #DE1D1B !important;
+    }
+    .imgClassDashboard{
+        background-color:white;
+         border-bottom:solid 2px;
+         border-color: #949494;
+        //  margin-top: 10px;
+      }
+      
+      
+}
+
+page-export-AWB-tracking-csc{
+    .alert-wrapper{
+        background-color: #DE1D1B !important;
+    }
+    ion-content{
+        background-color: white !important;
+      }
+      .item-md{
+        background-color: white !important;
+
+      }
+      .imgClassDashboard{
+        background-color:white;
+         border-bottom:solid 2px;
+         border-color: #949494;
+        //  margin-top: 10px;
+      }
+
+}
+
+page-export-EGM-csc{
+    .alert-md .alert-head{
+        background-color: #DE1D1B !important;
+    }
+    ion-content{
+        background-color: white !important;
+      }
+      .item-md{
+        background-color: white !important;
+
+      }.imgClassDashboard{
+        background-color:white;
+         border-bottom:solid 2px;
+         border-color: #949494;
+        //  margin-top: 10px;
+      }
+}
+
+page-export-Vehicle-tracking-csc{
+    .alert-md .alert-head{
+        background-color: #DE1D1B !important;
+    }
+    ion-content{
+        background-color: white !important;
+      }
+      .item-md{
+        background-color: white !important;
+
+      }.imgClassDashboard{
+        background-color:white;
+         border-bottom:solid 2px;
+         border-color: #949494;
+        //  margin-top: 10px;
+      }
+}

@@ -1,0 +1,218 @@
+<style>
+  /* .itemClass {
+    background-color: #1EA1CC !important;
+    border-radius: 10px !important;
+    color: #fff !important;
+  }
+
+
+  ion-icon {
+    color: #fff !important;
+    float: right;
+  }
+ */
+
+  table {
+    width: 100%;
+  }
+
+  td,
+  th {
+    border: solid thin #999;
+    padding: 0px 0px 0px 5px !important;
+
+  }
+
+  /* .text-right {
+    text-align: right !important;
+  } */
+
+  .button-designed-radius_smallb {
+    /* padding: 0 6rem !important; */
+    border-top-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-top-right-radius: 6px;
+    height: 3.2rem !important;
+    width: 90px !important;
+  }
+
+  .button-designed-radius_bigb {
+    /* padding: 0 6rem !important; */
+    border-top-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-top-right-radius: 6px;
+    height: 3.2rem !important;
+    width: 150px !important;
+  }
+
+
+
+  /* .select-md {
+    padding: 0px 0px 0px 0px;
+}
+
+
+ion-select {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.select-md .select-icon {
+    position: relative;
+    width: 22px !important;
+    height: 19px;
+} */
+</style>
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Scan Group ID</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+
+  <ion-content padding>
+
+    <ion-row style="margin-left: 20px;">
+      <ion-col col-6 style="padding: 0%;">
+
+        <ion-label>
+          AWB No. :
+        </ion-label>
+
+      </ion-col>
+
+      <ion-col col-6 style=" padding: 0px 0px 0px 10px;">
+
+        <ion-label>
+          {{ awbno }}
+        </ion-label>
+
+
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-10>
+        <ion-item>
+          <ion-label floating>
+            Group ID Scan
+          </ion-label>
+          <!-- (blur)="getGroupIDDetails();" -->
+          <ion-input type="text" class="fontSize12" name="grp" [(ngModel)]="groupID" (blur)="scanGroupID();"
+            maxlength="16" autofocus  (ionChange)="switch($event)"></ion-input>
+        </ion-item></ion-col>
+      <ion-col col-2 style="margin-top: 20px;">
+        <button ion-fab class="ion-fab34" (click)="getGroupIDDetails()">
+          <ion-icon name="md-search" class="margin4"></ion-icon>
+        </button>
+      </ion-col></ion-row>
+
+    <ion-row style="margin-top: 10px;" *ngIf="hasRows == true">
+      <ion-grid>
+        <ion-row justify-content-start>
+          <table id="tblNews" border="0.5"
+            style="width:100%;table-layout:fixed;word-break:break-word;border-color: transparent;margin-top: 2%;">
+            <thead>
+              <tr>
+                <th height="30" style="background-color:#ebebeb;padding: 3px 3px 3px 0px;font-size:14px ; width: 150px;"
+                  align="center">
+                  Group ID
+                </th>
+                <th height="30" style="background-color:#ebebeb;padding: 3px 3px 3px 0px;font-size:14px;"
+                  align="center">
+                  Pieces
+                </th>
+                <th height="30" style="background-color:#ebebeb;padding: 3px 3px 3px 0px;font-size:14px;"
+                  align="center">
+                  Action
+                </th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let usn of tableData ;let i = index;">
+
+                <td style="background-color:#f3f3f3;font-size:14px" align="left">{{ usn.grpid }}
+                </td>
+                <td style="background-color:#f3f3f3;font-size:14px" align="center">{{ usn.pieces }}
+                </td>
+                <td style="background-color:#f3f3f3;font-size:14px" align="center">
+                  <button icon-only ion-button clear type="button" (click)="remove(i);" item-right>
+                    <ion-icon name="trash" style="color: #9c1d1d;"></ion-icon>
+                  </button>
+
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </ion-row>
+      </ion-grid>
+    </ion-row>
+
+    <ion-row style="margin-top: 10px;" *ngIf="hasRows == true">
+      <ion-grid>
+        <ion-row justify-content-start>
+          <table id="tblNews" border="0.5"
+            style="width:100%;table-layout:fixed;word-break:break-word;border-color: transparent;margin-top: 2%;">
+            <thead>
+              <tr>
+                <th height="30" style="background-color:#ebebeb;padding: 3px 3px 3px 0px;font-size:14px ; width: 150px;"
+                  align="center">
+                  Total Pieces Count
+                </th>
+                <th height="30" style="background-color:#ebebeb;padding: 3px 3px 3px 0px;font-size:14px;"
+                  align="center">
+                  {{ totalPieces }}
+                </th>
+                <th height="30" style="background-color:#ebebeb;padding: 3px 3px 3px 0px;font-size:14px;"
+                  align="center">
+
+                </th>
+
+              </tr>
+            </thead>
+          </table>
+        </ion-row>
+      </ion-grid>
+    </ion-row>
+
+    <!-- <ion-row style="margin-bottom: 10px;margin-top: 10px;"> -->
+
+
+
+    <!-- <ion-footer style="text-align: center;"> -->
+
+    <ion-row style="margin-bottom: 10px;margin-top: 10px;">
+
+      <button id="btnClear" class="button-designed-radius_smallb" ion-button (click)="clearAll()">
+        Clear
+      </button>
+
+      <button id="btnBack" class="button-designed-radius_smallb" ion-button (click)="exitForm()">
+        Back
+      </button>
+      <button id="btnNext" class="button-designed-radius_bigb" ion-button [disabled]="isSubmitDisabled()"
+        (click)="submitForm()">
+        Submit
+      </button>
+
+
+    </ion-row>
+
+
+    <!-- </ion-footer> -->
+    <!-- </ion-row> -->
+
+  </ion-content>

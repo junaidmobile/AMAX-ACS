@@ -1,0 +1,84 @@
+<style>
+  .float-right {
+    float: right;
+  }
+
+  .float-left {
+    float: left;
+  }
+
+  .text-center {
+    text-align: center;
+    padding: 5px;
+  }
+  h4 {
+    text-align: center;
+  }
+</style>
+<Gmax-header [title]="title">
+</Gmax-header>
+
+<ion-content class="marginTop44">
+  <ion-list>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12>
+          <ion-item>
+            <ion-select col-12 [(ngModel)]="_DocsType" (ionChange)="onServiceTypeChange($event);" multiple="false"
+              interface="popover">
+              <ion-option selected value="0">Select Document</ion-option>
+              <ion-option *ngFor="let dt of DocumnetType; let idx = index" [value]="dt.DOCTYPE">{{dt.DOCTYPE[0]}}
+              </ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col col-12>
+          <ion-col>
+            <input [(ngModel)]="fileInput" type="file" [disabled]='_DocsType == "0"' accept="application/pdf" multiple
+              (change)="getFileDetails($event);onSelectFile($event)" />
+            <!-- <button (click)="removePhone(i)">Remove Phone</button> -->
+            <!-- <button ion-fab class="ion-fab34">
+              <ion-icon (click)="removePhone(i);" name="ios-trash-outline" class="margin4"></ion-icon>
+            </button> -->
+          </ion-col>
+          <br>
+          <br>
+          <!-- <pre>{{myFiles | json}}</pre> -->
+          <div *ngFor="let file of myFiles">
+            <div> {{file.name}} - {{file.type}} - {{file.size}}</div>
+          </div>
+        </ion-col>
+        <!-- <ion-col col-12>
+          <button right ion-fab class="ion-fab34">
+            <ion-icon (click)="addPhone();" name="ios-add-outline" class="margin4"></ion-icon>
+          </button>
+        </ion-col> -->
+        <br>
+        <br>
+        <ion-col col-12>
+          <button [disabled]='_DocsType == "0" && fileZero == false' (click)="UploadDoc_HHT_Recon();" ion-button block
+            icon-start style="margin-top: 20px !important;">
+            Upload
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+  <!-- <div formArrayName="items" *ngFor="let item of orderForm.get('items').controls; let i = index;">
+    <div [formGroupName]="i">
+      <input formControlName="name" placeholder="Item name">
+      <input formControlName="description" placeholder="Item description">
+      <input formControlName="price" placeholder="Item price">
+    </div>
+  </div> -->
+  <!-- <ion-list>
+    <ion-grid>
+      <ion-row style="text-align:center">
+        <h4>Documents Uploaded</h4>
+      </ion-row>
+    </ion-grid>
+  </ion-list> -->
+</ion-content>
+
+
+<Gmax-footer></Gmax-footer>

@@ -1,0 +1,152 @@
+<style>
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td,
+  th {
+    padding: 0.5rem;
+    border: solid thin #1EA1CC;
+  }
+
+  .tblMilestone td,
+  th {
+    border: 1px solid #999;
+    padding: 0.2rem;
+
+  }
+</style>
+<Gmax-header [title]="title">
+</Gmax-header>
+
+<ion-content class="marginTop44">
+  <div>
+
+    <!-- <ion-row> -->
+    <!-- <div center text-center class="imgClassDashboard">
+      <img src="assets/imgs/CSIAGVKlogo.jpg" width="100%">
+    </div> -->
+    <!-- </ion-row> -->
+  </div>
+  <ion-list>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12>
+          <table>
+            <tr>
+              <td *ngIf="vehicleDetail[0].TokenNo[0].slice(0,3) != 'IPH' && vehicleDetail[0].TokenNo[0].slice(0,3) != 'ITR'">
+                Vehicle Number
+              </td>
+              <td *ngIf="vehicleDetail[0].TokenNo[0].slice(0,3) == 'IPH'">
+                Delivery
+              </td>
+              <td *ngIf="vehicleDetail[0].TokenNo[0].slice(0,3) == 'ITR'">
+                Trolley Number
+              </td>
+              <!-- <td *ngIf="vehicleDetail[0].TokenNo[0].slice(0,3) != 'IPH'">
+                {{vehicleDetail[0].VehicleNo}}
+              </td> -->
+
+              <td *ngIf="vehicleDetail[0].TokenNo[0].slice(0,3) == 'IVT'">
+                {{vehicleDetail[0].VehicleNo}}
+              </td>
+              <td *ngIf="vehicleDetail[0].TokenNo[0].slice(0,3) == 'ITR'">
+                {{vehicleDetail[0].VehicleNo[0].split("--").join(" ")}}
+              </td>
+
+
+              <td *ngIf="vehicleDetail[0].TokenNo[0].slice(0,3) == 'IPH'">
+                By hand
+              </td>
+
+            </tr>
+            <tr>
+              <td>
+                Token Number
+              </td>
+              <td>
+                {{vehicleDetail[0].TokenNo}}
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                Warehouse
+              </td>
+              <td>
+                {{vehicleDetail[0].Shed[0].split(',')[0]}}
+                <!-- {{shed}} -->
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                Driver Name
+              </td>
+              <td>
+                {{vehicleDetail[0].DriverName}}
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                Licence Number
+              </td>
+              <td>
+                {{vehicleDetail[0].LicenceNo}}
+              </td>
+            </tr>
+          </table>
+        </ion-col>
+
+        <br>
+        <br>
+
+        <ion-item style="text-align: center;">
+          <ngx-barcode col-12 [bc-value]="vehicleDetail[0].TokenNo" [bc-display-value]="vehicleDetail[0].TokenNo">
+          </ngx-barcode>
+        </ion-item>
+
+        <!-- <ion-item style="text-align: center;" (click)="toEditVT()">
+          <ion-label><ion-icon name="create"></ion-icon>
+          Edit Token</ion-label>
+        </ion-item> -->
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+
+
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6>
+        <button (click)="showMsgOnCancelVT();" ion-button block icon-start
+          style="margin-top: 20px !important;">
+          <!-- click function has ben changed from ImpCancelToken_HHT_VTCancel by himesh on 21/12 -->
+          Cancel Token
+        </button>
+      </ion-col>
+      <ion-col col-6>
+        <button (click)="goTOGPDetail();" ion-button block icon-start style="margin-top: 20px !important;">
+          GP Details
+        </button>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+
+</ion-content>
+<!-- <ion-fab right bottom #fab1 style="bottom:38px !important">
+  <button class="pop-in" ion-fab mini color="primary" [ngClass]="{'pop-out': fabGone}" (click)="clearInputs()">
+    <ion-icon name="close"></ion-icon>
+  </button>
+</ion-fab> -->
+<Gmax-footer></Gmax-footer>

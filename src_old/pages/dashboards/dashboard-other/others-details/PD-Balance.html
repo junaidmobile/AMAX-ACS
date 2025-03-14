@@ -1,0 +1,47 @@
+<Gmax-header [title]="title">
+</Gmax-header>
+
+<ion-content class="marginTop44">
+    <div>
+        <!-- <ion-row> -->
+        <div center text-center class="imgClassDashboard">
+            <img src="assets/imgs/CSIAGVKlogo.png" width="100%">
+        </div>
+        <!-- </ion-row> -->
+    </div>
+    <div>
+        <form>
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label color="primary" class="fontSize12">Balance for.
+                                <font color="red">*</font>
+                            </ion-label>
+                            <ion-select color="primary" placeholder="Select" name="BalanceFor" text-center multiple="false"
+                                [(ngModel)]="selectedVal" (ionChange)="getPDBalance()">
+                                <ion-option *ngFor="let bal of Bal_Options">{{bal}}</ion-option>
+                            </ion-select>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <div *ngIf="showMIALBal">
+                <ion-item>
+                    <ion-label color="primary" class="fontSize12">MIAL PD balance is:</ion-label>
+                    <ion-input type="text" class="fontSize12" name="PDBal" [(ngModel)]="PDBal" placeholder=""
+                        [disabled]="true" text-right></ion-input>
+                </ion-item>
+            </div>
+            <div *ngIf="showGMAXBal">
+                <ion-item>
+                    <ion-label color="primary" class="fontSize12">GMAX PD balance is:</ion-label>
+                    <ion-input type="text" class="fontSize12" name="GMaxBal" [(ngModel)]="PDBal" placeholder=""
+                        [disabled]="true" text-right></ion-input>
+                </ion-item>
+            </div>
+        </form>
+    </div>
+
+</ion-content>
+<Gmax-footer></Gmax-footer>

@@ -263,13 +263,13 @@
           <ion-col>
 
 
-            <button *ngIf="VehicleTrackResp.IsGateIn == '0' && userRole == 'MainGateIn'" (click)="performEvent();"
+            <button *ngIf="VehicleTrackResp.IsGateIn == '0' && userRole == 'Security Main Gate Keeper'" (click)="performEvent();"
               style="background-color: green;  height:  40px;color: white;  border-radius: 5px; padding: 7px; text-align: left;width: 90%"
               class="fontSize12">
               Main Gate-IN
             </button>
 
-            <ion-label *ngIf="VehicleTrackResp.IsGateIn == '1' || userRole != 'MainGateIn' "
+            <ion-label *ngIf="VehicleTrackResp.IsGateIn == '1' || userRole != 'Security Main Gate Keeper' "
               style="background-color: gray;  color: white;   height:  40px; border-radius: 5px; padding: 7px; text-align: left;width: 90%"
               class="fontSize12">
               Main Gate-IN
@@ -302,7 +302,7 @@
             </button>
 
             <ion-label
-              *ngIf="VehicleTrackResp.IsDockIn == '1' || userRole != 'Dock' ||VehicleTrackResp.IsGateIn == '0' || VehicleTrackResp.IsGateOut == '1'"
+              *ngIf="VehicleTrackResp.IsDockIn == '1' || userRole != 'Dock' || VehicleTrackResp.IsGateIn == '0' || VehicleTrackResp.IsGateOut == '1'"
               style="background-color: gray;  color: white;   height:  40px; border-radius: 5px; padding: 7px; text-align: left;width: 90%"
               class="fontSize12">
               Dock-IN
@@ -365,7 +365,7 @@
 
 
             <button
-              *ngIf="VehicleTrackResp.IsGateOut == '0' && userRole == 'MainGateOut' && VehicleTrackResp.IsGateIn == '1'"
+              *ngIf="VehicleTrackResp.IsGateOut == '0' && userRole == 'GatekeeperOut' && VehicleTrackResp.IsGateIn == '1'"
               (click)="performEvent();"
               style="background-color: green;  height:  40px;color: white;  border-radius: 5px; padding: 7px; text-align: left;width: 90%"
               class="fontSize12">
@@ -373,7 +373,7 @@
             </button>
 
             <ion-label
-              *ngIf="VehicleTrackResp.IsGateOut == '1' || userRole != 'MainGateOut' || VehicleTrackResp.IsGateIn == '0' "
+              *ngIf="VehicleTrackResp.IsGateOut == '1' || userRole != 'GatekeeperOut' || VehicleTrackResp.IsGateIn == '0' "
               style="background-color: gray;  color: white;  height:  40px; border-radius: 5px; padding: 7px; text-align: left;width: 90%"
               class="fontSize12">
               Main Gate-OUT

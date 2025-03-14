@@ -1,0 +1,54 @@
+<ion-header>
+    <ion-navbar no-border-bottom color="primaryCsc">
+        <ion-title id="mainMenu" center text-center [ngClass]="{'marginLeft70': isAndroid === true}">
+            CSC-Pharma Excellence Center
+        </ion-title>
+        <ion-buttons right>
+            <!-- <button id="notification-button" ion-button icon-only (click)="notifications()">
+                <ion-icon ios="ios-notifications" md="md-notifications"
+                    [ngClass]="{'shake': !isNotificationSeen && !hideClass}">
+                    <ion-badge id="notifications-badge"
+                        [ngClass]="!isNotificationSeen && !hideClass ? 'notifications-badge' : 'notifications-badge-update'"
+                        color="danger" *ngIf="!isNotificationSeen" style="padding: 2px 7px;min-width: 8px;">{{count}}
+                    </ion-badge>
+                </ion-icon>
+            </button> -->
+            <button ion-button icon-only (click)="logOut()">
+                <ion-icon ios="ios-power" md="md-power"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+    <ion-toolbar no-border-top mode='md' color="primaryCsc">
+        <ion-segment mode='md' [(ngModel)]="selectedSegment" (ionChange)="onSegmentChanged($event)">
+            <ion-segment-button value="Exports" *ngIf="LoginType == 'Agent'">
+                Exports
+            </ion-segment-button>
+            <!-- <ion-segment-button value="Imports" *ngIf="LoginType == 'Agent'">
+                Imports
+            </ion-segment-button>
+            <ion-segment-button value="Others" *ngIf="LoginType == 'Agent'">
+                Others
+            </ion-segment-button> -->
+
+
+        </ion-segment>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="outer-content" style="background-color: white !important;">
+    <ion-slides *ngIf="slides && slides.length" #mySlider (ionSlideDidChange)="onSlideChanged($event)">
+        <!--  TODO in future-->
+        <!-- <ion-slide *ngFor="let slide of slides">
+          <div [innerHtml]="slide.name | sanitizeHtml"></div>
+      </ion-slide> -->
+
+        <ion-slide *ngIf="LoginType == 'Agent'">
+            <page-dashboard-export-csc></page-dashboard-export-csc>
+        </ion-slide>
+
+
+
+
+    </ion-slides>
+</ion-content>
+
+<Gmax-footer color="primaryCsc"></Gmax-footer>

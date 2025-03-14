@@ -1,0 +1,58 @@
+page-home {
+    .borderClass {
+        border: 2px solid grey;
+    }
+    ion-content{
+        background-color: white !important;
+      }
+
+      .marginTop120{
+        margin-top: 40px;
+      }
+
+      .itemfirst{
+        // border: 2px solid #F36F23;
+        border: 2px solid #1EA1CC;
+        background-color: initial !important; 
+
+      }
+
+      
+      .itemSecond{
+        border: 2px solid #1EA1CC;
+         background-color: initial !important; 
+
+      }
+
+      ion-content.content-md:not([padding]) .scroll-content{
+        padding: 14px !important;
+        margin-top: 160px;
+
+      }
+
+      ion-list{
+        margin: -1px 0 30px !important;
+      }
+    
+     
+#cscPharmaBtn{
+  background-color: #1EA1CC !important;
+}
+.auth-page::after {
+  content: "";
+  background: url("../assets/imgs/bg.jpg") no-repeat;
+  background-size: cover;
+  opacity: .1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: 0;
+}
+
+#gradBackground {
+  background: -webkit-linear-gradient(-55deg, #50a2a7 35%, #e9b44c 100%) !important;
+}
+
+}

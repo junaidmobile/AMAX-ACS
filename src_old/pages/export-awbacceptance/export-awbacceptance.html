@@ -1,0 +1,529 @@
+<style>
+  .itemClass {
+    background-color: #1EA1CC !important;
+    border-radius: 10px !important;
+    color: #fff !important;
+  }
+
+
+  ion-icon {
+    color: #fff !important;
+    float: right;
+  }
+
+  table {
+    width: 100%;
+  }
+
+
+  th {
+    border: none transparent;
+    padding: 0px !important;
+    width: 30%;
+  }
+
+
+  td {
+    border: none transparent;
+    /* padding: 5px !important; */
+    width: 50%;
+  }
+
+  .text-right {
+    text-align: right !important;
+  }
+
+  .button-designed-radius_smallb {
+    /* padding: 0 6rem !important; */
+    border-top-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-top-right-radius: 6px;
+    height: 3.2rem !important;
+    width: 90px !important;
+  }
+
+  .select-md {
+    padding: 0px 0px 0px 0px !important;
+  }
+
+  ion-select {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    overflow: visible !important;
+    max-width: 100% !important;
+  }
+
+  .searchbar-md .searchbar-input {
+    padding: 6px 35px !important;
+    border-radius: 2px;
+    background-position: left 8px center;
+    height: auto;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 3rem;
+    color: #141414;
+    background-color: #fff;
+    -webkit-box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+  }
+
+  .autocomplete {
+    width: 100%;
+
+    ion-item {
+      ion-input {
+        padding: 1px !important;
+      }
+    }
+
+    ion-list {
+      position: absolute;
+      width: 95%;
+      overflow-y: scroll;
+      max-height: 150%;
+      border: 5px;
+      z-index: 999;
+
+      ion-item {
+        background: #f1f1f1;
+      }
+
+      ion-item:hover {
+        cursor: pointer;
+        background: #dddddd
+      }
+    }
+  }
+  .item-ios{
+    padding-left: 0px;
+  }
+</style>
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>AWB Acceptance</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+
+<ion-content padding>
+
+  <ion-row style="margin-left: 20px;">
+    <ion-col col-6 style="padding: 0%;">
+
+      <ion-label>
+        VCT No. :
+      </ion-label>
+
+    </ion-col>
+
+    <ion-col col-6 style=" padding: 0px 0px 0px 10px;">
+
+      <ion-label>
+        {{ VCT }}
+      </ion-label>
+
+
+    </ion-col>
+  </ion-row>
+
+
+  <ion-row>
+
+
+    <ion-col col-10>
+      <ion-item>
+        <ion-label floating>
+          Scan AWB
+        </ion-label>
+        <ion-input type="text" class="fontSize12" (ionChange)="switchAWB($event)" (blur)="scanAWBNO();"
+          [(ngModel)]="awbnoAcc" name="awbno" maxlength="16"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col col-2 style="margin-top: 20px;">
+      <button ion-fab class="ion-fab34" (click)="getVctDetails()">
+        <ion-icon name="md-search" class="margin4"></ion-icon>
+      </button>
+    </ion-col></ion-row>
+
+
+
+
+  <!-- <ion-item>
+    <ion-label floating>
+      MAWB No.
+    </ion-label>
+    <ion-input type="text" class="fontSize12" name="mawbnoac" [(ngModel)]="mawbno" maxlength="16"></ion-input>
+  </ion-item> -->
+
+  <ion-item>
+    <ion-label floating>
+      Group ID
+    </ion-label>
+    <ion-input type="text" class="fontSize12" (ionChange)="switchGRP($event)" (blur)="scanGroupID();" name="grpid"
+      [(ngModel)]="groupID" maxlength="16"></ion-input>
+  </ion-item>
+
+  <ion-row>
+    <ion-col col-6 style="padding: 0%;">
+      <ion-item>
+        <ion-label floating>
+          Pieces
+        </ion-label>
+        <ion-input type="text" name="location" type="number" pattern="[0-9]*" maxlength="20"
+          [(ngModel)]="pieces"></ion-input></ion-item>
+    </ion-col>
+
+    <ion-col col-6 style=" padding: 0px 0px 0px 10px;">
+      <ion-item>
+        <ion-label floating>
+          GR. WT.
+        </ion-label>
+        <ion-input type="text" name="location1" maxlength="20" type="number" pattern="[0-9]*"
+          [(ngModel)]="grwt"></ion-input></ion-item>
+    </ion-col>
+  </ion-row>
+
+
+  <!-- <ion-item>
+    <ion-label floating>
+      No. of Eqpt./ Trolley
+    </ion-label>
+    <ion-input type="text" class="fontSize12" name="eqcount" maxlength="16"></ion-input>
+  </ion-item> -->
+
+
+  <ion-row style="margin-left: 20px;">
+
+    <ion-label>
+      Select Trolley/Equipment
+    </ion-label>
+
+  </ion-row>
+
+
+  <ion-row>
+    <ion-col col-6>
+      <ion-searchbar placeholder="Enter equipment/ trolley" [(ngModel)]="searchValue"
+        (ionChange)="filterList()"></ion-searchbar>
+    </ion-col>
+    <!-- <ion-input type="text" name="location" [(ngModel)]="newLoc"  maxlength="50" #locationval></ion-input> -->
+
+    <ion-col col-6>
+      <ion-item>
+        <ion-select color="primary" placeholder="Select" text-center name="eqt" multiple="false" [(ngModel)]="eqTrolley"
+          (ionChange)="fetchLocationDetails($event)">
+
+          <ion-option *ngFor="let eqtr of filteredList">{{eqtr.TrolleyNo}}</ion-option>
+        </ion-select>
+      </ion-item></ion-col>
+  </ion-row>
+
+
+  <ion-row style="margin-top: 3px;">
+    <ion-grid>
+      <ion-row justify-content-start>
+        <table id="tblNews" border="1"
+          style="width:100%;table-layout:fixed;word-break:break-word;border-color: transparent;margin-top: 2%;">
+          <thead>
+            <tr>
+              <th height="30" style="background-color:#ebebeb;padding: 3px 3px 3px 0px;font-size:14px" align="center">
+                Tare Wt.
+              </th>
+              <th height="30" style="background-color:#ebebeb;padding: 3px 3px 3px 0px;font-size:14px;" align="center">
+
+              </th>
+              <th height="30" style="background-color:#ebebeb;padding: 3px 3px 3px 0px;font-size:14px;" align="center">
+                NoP
+              </th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="background-color:#f3f3f3;font-size:14px" align="center">Pieces
+              </td>
+              <td style="background-color:#f3f3f3;font-size:14px" align="center">Volume(L/W/H)
+              </td>
+              <td style="background-color:#f3f3f3;font-size:14px" align="center">UOM
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </ion-row>
+    </ion-grid>
+  </ion-row>
+
+  <ion-row style="margin-top: 10px;">
+    <ion-col col-3 style="padding: 0%;">
+      <div style="border: 1px solid;border-radius: 5px;border-color: #999;">
+        <ion-input type="text" class="fontSize12" name="pcs" maxlength="16" type="number" pattern="[0-9]*"
+          [(ngModel)]="tarepieces"></ion-input>
+      </div>
+    </ion-col>
+
+    <ion-col col-3 style="padding: 0px 0px 0px 5px;">
+      <div style="border: 1px solid;border-radius: 5px;border-color: #999;">
+        <!-- <ion-input type="text" class="fontSize12" name="Lvol" maxlength="16" type="number" pattern="[0-9]*"
+          [(ngModel)]="tarevol"></ion-input> -->
+
+        <ion-input type="number" class="fontSize12" name="Lvol" maxlength="16"  pattern="[0-9]*"
+          [(ngModel)]="tarevol" (ionChange)="searchLenth()" debounce=500 (ionBlur)="removeFocusLenth()"></ion-input>
+
+        <ion-item *ngFor="let lnth of lenthList_return" (click)="addLenth(lnth)">
+          {{lnth}}
+        </ion-item>
+
+      </div>
+    </ion-col>
+
+    <ion-col col-3 style="padding: 0px 0px 0px 5px;">
+      <div style="border: 1px solid;border-radius: 5px;border-color: #999;">
+        <!-- <ion-input type="text" class="fontSize12" name="Wvol" maxlength="16" type="number" pattern="[0-9]*"
+          [(ngModel)]="tarewidth"></ion-input> -->
+        <ion-input type="number" class="fontSize12" name="Wvol" maxlength="16"  pattern="[0-9]*"
+          [(ngModel)]="tarewidth" (ionChange)="searchWidth()" debounce=500 (ionBlur)="removeFocusWidth()"></ion-input>
+
+        <ion-item *ngFor="let wdth of WidthList_return" (click)="addWidth(wdth)">
+          {{wdth}}
+        </ion-item>
+      </div>
+    </ion-col>
+
+    <ion-col col-3 style="padding: 0px 0px 0px 5px;">
+      <div style="border: 1px solid;border-radius: 5px;border-color: #999;">
+        <!-- <ion-input type="text" class="fontSize12" name="Hvol" maxlength="16" type="number" pattern="[0-9]*"
+          [(ngModel)]="tareheight"></ion-input> -->
+        <ion-input type="number" class="fontSize12" name="Hvol" maxlength="16" type="number" pattern="[0-9]*"
+        [(ngModel)]="tareheight" (ionChange)="searchHeight()" debounce=500 (ionBlur)="removeFocusHeight()"></ion-input>
+
+        <ion-item *ngFor="let hegt of HeightList_return" (click)="addHeight(hegt)">
+          {{hegt}}
+        </ion-item>
+      </div>
+    </ion-col>  
+
+
+    <!-- <ion-col col-4>
+      <div style="border: 1px solid;border-radius: 5px;border-color: #999;">
+        <ion-select multiple="false" interface="popover">
+          <ion-option selected value="0">CMS</ion-option>
+          <ion-option value="1">KGS</ion-option>
+
+        </ion-select>
+      </div>
+    </ion-col> -->
+
+
+    <ion-col col-6>
+      <ion-item>
+        <ion-select multiple="false" interface="popover" [(ngModel)]="tareuom" (ionChange)="fetchUOM($event)">
+          <ion-option value="CMS">CMS</ion-option>
+          <ion-option value="INCH">INCH </ion-option>
+        </ion-select> </ion-item></ion-col>
+
+
+
+
+  </ion-row>
+
+  <!-- <ion-row style="margin-top: 10px;margin-left: 10px;">
+    <ion-col col-3 style="padding: 0%;">
+      <div style="border: 1px solid;border-radius: 5px;border-color: #999;">
+        <ion-input type="text" class="fontSize12" name="pcs" maxlength="16" [(ngModel)]="tarepieces"></ion-input>
+      </div>
+    </ion-col>
+
+    <ion-col col-2 style="padding: 0px 0px 0px 5px;">
+      <div style="border: 1px solid;border-radius: 5px;border-color: #999;">
+        <ion-input type="text" class="fontSize12" name="Lvol" maxlength="16" [(ngModel)]="tarevol"></ion-input>
+      </div>
+    </ion-col>
+
+    <ion-col col-2 style="padding: 0px 0px 0px 5px;">
+      <div style="border: 1px solid;border-radius: 5px;border-color: #999;">
+        <ion-input type="text" class="fontSize12" name="Wvol" maxlength="16" [(ngModel)]="tarewidth"></ion-input>
+      </div>
+    </ion-col>
+
+    <ion-col col-2 style="padding: 0px 0px 0px 5px;">
+      <div style="border: 1px solid;border-radius: 5px;border-color: #999;">
+        <ion-input type="text" class="fontSize12" name="Hvol" maxlength="16" [(ngModel)]="tareheight"></ion-input>
+      </div>
+    </ion-col>
+
+
+    <ion-col col-6 style="padding: 0px 0px 0px 10px;">
+      <div style="border: 1px solid;border-radius: 5px;border-color: #999;">
+        <ion-select multiple="false" interface="popover">
+          <ion-option selected value="0">CMS</ion-option>
+          <ion-option value="1">KGS</ion-option>
+
+        </ion-select>
+      </div>
+    </ion-col>
+
+
+
+  </ion-row> -->
+
+
+
+  <ion-row>
+    <ion-col col-4 style="padding: 0%;">
+
+      <ion-label>
+        Damage NoP
+      </ion-label>
+
+    </ion-col>
+
+    <ion-col col-4 style=" padding: 0px 0px 0px 10px;">
+      <!-- <ion-item>
+        <ion-label floating>
+          NoP
+        </ion-label>
+        <ion-input type="text" name="dmg_nop1" maxlength="20"  [(ngModel)]="dmgNop"></ion-input></ion-item> -->
+
+
+      <div style="border: 1px solid;border-radius: 5px;border-color: #999;">
+        <ion-input type="text" class="fontSize12" name="dmg_nop1" maxlength="16" type="number" pattern="[0-9]*"
+          [(ngModel)]="dmgNop"></ion-input>
+      </div>
+
+
+
+    </ion-col>
+
+    <ion-col col-4 style=" padding: 0px 0px 0px 10px;">
+      <!-- <ion-item>
+        <ion-label floating>
+          NoP
+        </ion-label>
+        <ion-input type="text" name="dmg_nop2" maxlength="20" [disabled] = "true" [(ngModel)]="dmgNopPrev"></ion-input></ion-item> -->
+
+      <div style="border: 1px solid;border-radius: 5px;border-color: #999;">
+        <ion-input type="text" class="fontSize12" name="dmg_nop2" [disabled]="true" maxlength="16" type="number"
+          pattern="[0-9]*" [(ngModel)]="dmgNopPrev"></ion-input>
+      </div>
+    </ion-col>
+
+  </ion-row>
+
+
+
+  <ion-row style="margin-top: 5px;">
+    <ion-col col-4 style="padding: 0%;">
+
+      <ion-label>
+        Damage Wt.
+      </ion-label>
+
+    </ion-col>
+
+    <ion-col col-4 style=" padding: 0px 0px 0px 10px;">
+      <!-- <ion-item>
+        <ion-label floating>
+          Wt.
+        </ion-label>
+        <ion-input type="text" name="dmg_wt1" maxlength="20"[(ngModel)]="dmgWT" ></ion-input></ion-item> -->
+      <div style="border: 1px solid;border-radius: 5px;border-color: #999;">
+        <ion-input type="text" class="fontSize12" name="dmg_wt1" maxlength="16" type="number" pattern="[0-9]*"
+          [(ngModel)]="dmgWT"></ion-input>
+      </div>
+    </ion-col>
+
+    <ion-col col-4 style=" padding: 0px 0px 0px 10px;">
+      <div style="border: 1px solid;border-radius: 5px;border-color: #999;">
+        <ion-input type="text" class="fontSize12" [disabled]="true" name="dmg_wt2" maxlength="16" type="number"
+          pattern="[0-9]*" [(ngModel)]="dmgWTPrev"></ion-input>
+      </div>
+      <!-- <ion-item>
+        <ion-label floating>
+          Wt.
+        </ion-label>
+        <ion-input type="text" name="dmg_wt2" [disabled] = "true" [(ngModel)]="dmgWTPrev" maxlength="20"></ion-input></ion-item> -->
+    </ion-col>
+
+  </ion-row>
+
+
+  <!-- <ion-col col-6>
+    <ion-item>
+      <ion-select color="primary" placeholder="Select" text-center name="eqt" multiple="false" [(ngModel)]="eqTrolley"
+        (ionChange)="fetchLocationDetails($event)">
+
+        <ion-option *ngFor="let eqtr of filteredList">{{eqtr.TrolleyNo}}</ion-option>
+      </ion-select>
+    </ion-item></ion-col> -->
+
+  <ion-row>
+    <ion-col col-5 style="padding: 0%;">
+
+      <ion-label>
+        Damage Type
+      </ion-label>
+    </ion-col>
+    <ion-col col-7 style="padding: 0%;">
+      <ion-item>
+        <ion-select color="primary" placeholder="Select" multiple="false" text-center name="dmgt" [(ngModel)]="dmgType"
+          (ionChange)="fetchDamageType($event)">
+          <!-- <ion-option value="0">Container (AAC)</ion-option>
+          <ion-option value="1">Container (AML)</ion-option>
+          <ion-option value="2">Crushed</ion-option>
+          <ion-option value="16">Damaged</ion-option>
+          <ion-option value="3">Loose Packing</ion-option>
+          <ion-option value="4">Outer Cover Damage</ion-option>
+          <ion-option value="5">Open Condition</ion-option>
+          <ion-option value="6">Pressed</ion-option>
+          <ion-option value="7">Re-Taped</ion-option>
+          <ion-option value="8">Received in Wet Condition</ion-option>
+          <ion-option value="9">Strap Broken</ion-option>
+          <ion-option value="10">Seal Broken</ion-option>
+          <ion-option value="11">Without Lock</ion-option>
+          <ion-option value="12">Without Seal</ion-option>
+          <ion-option value="13">Wet & Damaged</ion-option>
+          <ion-option value="14">Weight Variation</ion-option>
+          <ion-option value="15">Weight Variation / Strap Broken</ion-option> -->
+
+          <ion-option *ngFor="let dt of damageTypesList; let idx = index"
+            [value]="dt.REFERENCE_DATA_IDENTIFIER">{{dt.REFERENCE_DESCRIPTION}}</ion-option>
+
+        </ion-select>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row style="margin-bottom: 10px;margin-top: 10px;">
+
+    <button id="btnSave" class="button-designed-radius" ion-button (click)="performAcceptance()">
+      Submit
+    </button>
+
+    <button id="btnClear" class="button-designed-radius" ion-button (click)="clearAllValues()">
+      Clear
+    </button>
+
+  </ion-row>
+
+
+  <!-- <div class="autocomplete">
+    <ion-item>
+      <ion-label floating>Country</ion-label>
+      <ion-input type="text" [(ngModel)]="input" (ionChange)="search()" (ionBlur)="removeFocus()"
+        debounce=500></ion-input>
+    </ion-item>
+    <ion-list>
+      <ion-item *ngFor="let country of countries" (click)="add(country)">
+        {{country}}
+      </ion-item>
+    </ion-list>
+  </div> -->
+
+
+</ion-content>

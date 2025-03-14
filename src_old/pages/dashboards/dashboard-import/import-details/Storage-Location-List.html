@@ -1,0 +1,91 @@
+<style>
+  .itemClass {
+    background-color: #1EA1CC !important;
+    border-radius: 10px !important;
+    color: #fff !important;
+  }
+
+  ion-icon {
+    color: #fff !important;
+    float: right;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  td,
+  th {
+    border: solid thin #1EA1CC;
+  }
+</style>
+<Gmax-header [title]="title">
+</Gmax-header>
+
+<ion-content class="marginTop44">
+  <div>
+
+    <!-- <ion-row> -->
+    <!-- <div center text-center class="imgClassDashboard">
+      <img src="assets/imgs/CSIAGVKlogo.jpg" width="100%">
+    </div> -->
+    <!-- </ion-row> -->
+  </div>
+  <div>
+
+
+    <ion-list *ngIf="showDiv">
+      <ion-grid>
+        <ion-row>
+
+          <table id="tblNews" border="1">
+            <thead>
+              <tr style="background-color: lightgrey;
+              font-size: large;
+              font-weight: 600;">
+                <td height="30" style="padding: 5px !important;">
+                  Storage Location
+                </td>
+                <td height="30" style="padding: 5px !important;">
+                  NoP
+                </td>
+              </tr>
+            </thead>
+            <tbody>
+
+
+              <tr *ngFor="let strLocation of objStorageLocation; index as i;">
+                <td height="30" style="padding: 5px !important;">
+
+                  {{strLocation.IHL_LOCATION_C}}
+                </td>
+                <td  height="30" style="padding: 5px !important;text-align: right;">
+                  {{strLocation.IHL_NOOFPackages_I}}
+                </td>
+              </tr>
+
+
+            </tbody>
+
+          </table>
+
+
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+  </div>
+
+</ion-content>
+<ion-fab right bottom #fab1 style="bottom:38px !important">
+  <button class="pop-in" ion-fab mini color="primary" [ngClass]="{'pop-out': fabGone}">
+    <ion-icon name="close"></ion-icon>
+  </button>
+</ion-fab>
+<Gmax-footer></Gmax-footer>

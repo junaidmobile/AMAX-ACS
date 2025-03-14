@@ -670,6 +670,8 @@ export class TokenScanningPage implements OnInit {
     // this._scanParams.pi_strVTNo = this.scannedBarCode;
 
     this.userRole = this.global.get('userRole');
+
+    console.log('user role === ' + this.userRole)
     this.http.getHttpPostRequest("ImpSearchTokenScanning_HHT", this._scanParams).then((response) => {
       // console.log(response['NewDataSet']['Table'][0]);
       if (response != null && response != "") {

@@ -1,0 +1,65 @@
+<Gmax-header [title]="title">
+</Gmax-header>
+
+<ion-content class="marginTop44">
+    <div>
+        <!-- <ion-row> -->
+        <div center text-center class="imgClassLogin">
+            <img src="assets/imgs/CSIAGVKlogo.png" width="100%">
+        </div>
+        <!-- </ion-row> -->
+    </div>
+    <ion-grid>
+        <ion-list class="accordion-list">
+            <!-- First Level -->
+            <ion-list-header *ngFor="let item of contactUS; let i = index" no-lines no-padding>
+                <!-- Toggle Button -->
+                <button ion-item (click)="toggleSection(i)" detail-none [ngClass]="{'section-active': item.open, 'section': !item.open}"
+                    text-justify>
+                    <ion-icon item-left name="ios-arrow-dropright-outline" *ngIf="!item.open"></ion-icon>
+                    <ion-icon item-left name="ios-arrow-dropdown-outline" *ngIf="item.open"></ion-icon>
+                    {{ item.name }}
+                </button>
+
+                <ion-list *ngIf="item.children && item.open" no-lines>
+                    <!-- Second Level -->
+                    <ion-list-header *ngFor="let child of item.children; let j = index" no-padding>
+                        <!-- Toggle Button -->
+
+                        <!-- Direct Add Button as Fallback -->
+                        <ion-item *ngIf="!child.children" ion-item detail-none class="child-item" text-wrap>
+                            <h2>{{ child.name }}</h2>
+                            <div *ngFor="let contact of child.Contact_no">
+                                <ion-icon name="call"></ion-icon>
+                                <a href="tel:{{contact}}">{{contact}}</a>
+                            </div>
+                            <br *ngIf="child?.Extensions?.length > 0">
+                            <div *ngIf="child?.Extensions?.length > 0">
+                                <h2 *ngIf="child?.Extensions?.length > 0">Extensions</h2>
+                                <div *ngFor="let extension of child.Extensions">
+                                    <ion-icon *ngIf="child?.Extensions?.length > 0" name="call"></ion-icon>
+                                    <a href="tel:{{extension}}">{{extension}}</a>
+                                </div>
+                            </div>
+                            <br *ngIf="child?.GalaxySupport">
+
+                            <div *ngIf="child?.GalaxySupport">
+                                <h2 *ngIf="child?.GalaxySupport">GalaxySupport</h2>
+                                <ion-icon name="call"></ion-icon>
+                                <a href="tel:{{child.GalaxySupport}}">{{child.GalaxySupport}}</a>
+                            </div>
+
+                            <div *ngFor="let email of child.emailIds">
+                                <ion-icon name="mail"></ion-icon>
+                                <a [href]="'mailto:' + email">{{email}}</a>
+                            </div>
+                        </ion-item>
+                    </ion-list-header>
+                </ion-list>
+
+            </ion-list-header>
+        </ion-list>
+    </ion-grid>
+</ion-content>
+
+<Gmax-footer></Gmax-footer>

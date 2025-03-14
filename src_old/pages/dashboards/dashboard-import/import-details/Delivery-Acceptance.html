@@ -1,0 +1,396 @@
+<style>
+  .gpstatusgray {
+    background-color: #7f7f7f !important;
+    color: white !important;
+    border-bottom: none;
+  }
+
+  .gpstatusgreen {
+    background-color: green !important;
+    color: white !important;
+    border-bottom: none;
+    border-radius: 10px !important;
+  }
+
+  .list-ios .item-block .item-inner {
+    border-bottom: transparent !important;
+  }
+
+  .flightdetail {
+    background-color: #1EA1CC !important;
+    border-radius: 10px !important;
+    color: #fff !important;
+    border-bottom: none;
+  }
+
+  .flightdetailgray {
+    background-color: #7f7f7f !important;
+    border-radius: 10px !important;
+    color: #ffffff !important;
+    border-bottom: none;
+  }
+
+  .ioniconclass {
+    color: #fff !important;
+    float: right;
+  }
+
+  .ioniconclassstatus {
+    color: #fff !important;
+    float: center !important;
+    font-size: 20px;
+  }
+
+  .text-input {
+    text-align: right !important;
+  }
+</style>
+<Gmax-header [title]="title">
+</Gmax-header>
+
+
+<ion-content class="marginTop44">
+  <div>
+    
+  </div>
+  <div>
+
+
+    <ion-grid>
+      <ion-row>
+        <ion-col col-3>
+          <ion-label color="primary" class="fontSize12 marginSet" fixed>GP Number
+          </ion-label>
+        </ion-col>
+        <ion-col ion-item col-5>
+          <!-- <ion-input type="text" disabled="disabled" maxlength="7" style="background-color: lightgray;" [(ngModel)]="GPPrefix"
+            class="fontSize12 " placeholder="" name="GPPrefix">
+          </ion-input> -->
+          <ion-input type="text" maxlength="7" style="background-color: lightgray;" [(ngModel)]="GPPrefix"
+            class="fontSize12 " placeholder="" name="GPPrefix">
+          </ion-input>
+        </ion-col>
+        <ion-col ion-item col-4>
+          <ion-input type="text" maxlength="12" [(ngModel)]="GPOTP" (ionChange)="onChange()" class="fontSize12 text-align" placeholder="OTP"
+            name="GPOTP" #OTPValue>
+          </ion-input>
+        </ion-col>
+        <ion-col col-8>
+        </ion-col>
+        <ion-col col-2>
+          <button ion-fab class="ion-fab34">
+            <ion-icon (click)="GetTSPDetail();" name="md-search" class="margin4"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col col-2>
+          <button ion-fab class="ion-fab34">
+            <ion-icon (click)="scanBarCode();" name="md-qr-scanner" class="margin4"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col col-12 style="text-align: center;">
+          OR
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+    <form (ngSubmit)="GetMAWBDetail()">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-3>
+            <ion-label color="primary" class="fontSize12 marginSet" fixed>MAWB Number
+            </ion-label>
+          </ion-col>
+          <ion-col ion-item col-3>
+            <ion-input type="tel" class="fontSize12" [(ngModel)]="Prefix" placeholder="Prefix" name="prefix"
+              pattern="[0-9]*" maxlength="5" (ionChange)="focusNextInput()" #PrefixValue></ion-input>
+          </ion-col>
+          <!-- <ion-col col-1></ion-col> -->
+          <ion-col ion-item col-4>
+            <ion-input type="tel" class="fontSize12" [(ngModel)]="MAWBNo" placeholder="MAWB No." name="MAWBNo"
+              pattern="[0-9]*" maxlength="8" #MAWBNoValue></ion-input>
+          </ion-col>
+          <ion-col col-2>
+            <button ion-fab class="ion-fab34">
+              <ion-icon name="md-search" class="margin4"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+    <ion-grid *ngIf="HAWBNumberbool">
+      <ion-row>
+        <ion-col col-3>
+          <ion-label color="primary" class="fontSize12 marginSet" fixed>HAWB No.
+          </ion-label>
+        </ion-col>
+        <ion-col ion-item col-9>
+          <ion-select col-12 [(ngModel)]="HAWBNumber" (ionChange)="onServiceTypeChange(HAWBNumber,$event);"
+            multiple="false" interface="popover">
+            <ion-option selected value="0">Select HAWB No.</ion-option>
+            <ion-option *ngFor="let dt of dropdownHAWB; let idx = index" [value]="dt.HAWBNo">{{dt.HAWBNo[0].toString()}}
+            </ion-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-list *ngIf="showDiv">
+      <ion-grid>
+        <table style="width: 100%;">
+          <tr style="background-color: lightgray;text-align: center;">
+            <td *ngIf="ShowHideHAwb != ''">
+              <ion-label> HAWB List</ion-label>
+            </td>
+            <td *ngIf="ShowHideHAwb == ''">
+              <ion-label> AWB Details
+              </ion-label>
+            </td>
+            <td>
+              <ion-label>GP Status</ion-label>
+            </td>
+          </tr>
+        </table>
+      </ion-grid>
+
+      <div>
+        <ion-col *ngIf="GpStat == 'Delivered'" col-12>
+          <ion-label><h3 style="text-align:center">This Gate Pass has been Delivered</h3></ion-label>
+        </ion-col>    
+      </div>
+  
+      
+      <!-- <ion-grid>
+        <ion-row *ngFor="let GPData of GPdetails;">
+          <ion-col col-7 *ngIf="GPData.GPDeliveryStatus == '' && GPData.GPStatus != 0 ">
+            <ion-item *ngIf="GPData.HAWBNo != '' " class="item flightdetailgray" href="#">
+              {{GPData.HAWBNo}}{{GPData.IHM_HAWBNo_C}} {{Direct}}
+              <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+            </ion-item> -->
+            <!-- && this.habboNo != undefined added later on at 159 -->
+            <!-- <ion-item *ngIf="this.habboNo == undefined" class="item flightdetailgray" href="#">
+              Direct
+              <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+            </ion-item> -->
+            <!-- || this.habboNo == undefined added later on at 164 -->
+            <!-- <ion-item *ngIf="GPData.HAWBNo == '' && this.habboNo == undefined" class="item flightdetailgray" href="#">
+                Direct
+                <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+              </ion-item> -->
+              <!-- above is the new item <ion-item></ion-item> -->
+          <!-- </ion-col>
+          <ion-col col-5 *ngIf="GPData.GPDeliveryStatus == '' && GPData.GPStatus != 0">
+            <ion-item class="item flightdetailgray" href="#">
+              Not Approved
+              <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+            </ion-item>
+          </ion-col>
+          <ion-col col-7
+            *ngIf="GPData.GPDeliveryStatus != ''  && GPData.GPDeliveryStatus == 'Approved'  && GPData.HAWBNo != '' && this.habboNo != undefined ">
+            <ion-item class="item flightdetail" href="#"
+              (click)='goGPDelivery(GPData.HAWBNo,GPData.GPDeliveryStatus,GPData.MAWBNo,GPData.IHM_HAWBNo_C,GPData.IHM_MAWBNo_C);'>
+              {{GPData.HAWBNo}} {{GPData.IHM_HAWBNo_C}} {{Direct}}
+              <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+            </ion-item>
+          </ion-col>
+          
+          <ion-col col-7
+            *ngIf="GPData.GPDeliveryStatus != ''  && GPData.GPDeliveryStatus == 'Approved'">
+            <ion-item class="item flightdetail" href="#"
+              (click)='goGPDelivery(GPData.HAWBNo.toString(),GPData.GPDeliveryStatus.toString(),GPData.MAWBNo.toString());'>
+              {{GPData.HAWBNo}}
+              <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+            </ion-item> -->
+
+            <!-- on line 192 click event 1st para GPData.HAWBNo.toString() -->
+          <!-- </ion-col>       -->
+          <!-- line 190 end part is new -->
+          <!-- <ion-col col-5 *ngIf="GPData.GPDeliveryStatus != '' && GPData.GPDeliveryStatus == 'Approved' && this.habboNo != undefined ">
+            <ion-item class="item gpstatusgreen">
+              {{GPData.GPDeliveryStatus}}
+            </ion-item>
+          </ion-col> -->
+
+          <!-- new for part delivered -->
+          <!-- <ion-col col-5 *ngIf="GPData.GPDeliveryStatus != '' && GPData.GPDeliveryStatus == 'Part Delivered' && this.habboNo != undefined ">
+              <ion-item class="item gpstatusgreen">
+                {{GPData.GPDeliveryStatus}}
+              </ion-item>
+            </ion-col>
+   -->
+          <!-- new block of code for defect 160754 -->
+          <!-- <ion-col col-7
+          *ngIf="GPData.GPDeliveryStatus != ''  && GPData.GPDeliveryStatus == 'Approved' && this.habboNo == undefined ">
+          <ion-item class="item flightdetail" href="#"
+            (click)='goGPDelivery("HAWBNo",GPData.GPDeliveryStatus.toString(),GPData.IHM_MAWBNo_C.toString());'>
+            Direct
+            <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+          </ion-item>
+        </ion-col> -->
+
+        <!-- just commented below code -->
+        <!-- <ion-col col-5 *ngIf="GPData.GPDeliveryStatus != '' && GPData.GPDeliveryStatus == 'Approved'  && this.habboNo == undefined ">
+            <ion-item class="item gpstatusgreen">
+              {{GPData.GPDeliveryStatus}}
+            </ion-item>
+          </ion-col> -->
+
+          <!-- new code for otp invalid issue -->
+          <!-- <ion-col col-7
+            *ngIf="GPData.GPDeliveryStatus != ''  && GPData.GPDeliveryStatus == 'Approved' && GPData.IHM_MAWBNo_C != ''">
+            <ion-item class="item flightdetail" href="#"
+              (click)='goGPDelivery(this.HAWBNo,GPData.GPDeliveryStatus,GPData.IHM_MAWBNo_C);'>
+              Direct888
+              <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+            </ion-item>     
+          </ion-col>      
+          <ion-col col-5 *ngIf="GPData.GPDeliveryStatus != '' && GPData.GPDeliveryStatus == 'Approved' && GPData.IHM_MAWBNo_C != '' ">
+            <ion-item class="item gpstatusgreen">
+              {{GPData.GPDeliveryStatus}}
+            </ion-item>
+          </ion-col>
+
+          
+          <ion-col col-7
+            *ngIf="GPData.GPDeliveryStatus != '' && GPData.GPDeliveryStatus != 'Approved' && GPData.IHM_HAWBNo_C != ''  && GPData.HAWBNo !=  ''">
+            <ion-item class="item flightdetailgray" href="#">
+              {{GPData.HAWBNo}} {{GPData.IHM_HAWBNo_C}}
+              <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+            </ion-item>
+          </ion-col>
+          <ion-col col-7
+            *ngIf="GPData.GPDeliveryStatus != '' && GPData.GPDeliveryStatus != 'Approved' && (GPData.HAWBNo == '' || GPData.IHM_HAWBNo_C == '') ">
+            <ion-item class="item flightdetailgray" href="#">
+              Direct
+              <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+            </ion-item>
+          </ion-col>
+          <ion-col col-5 *ngIf="GPData.GPDeliveryStatus != '' && GPData.GPDeliveryStatus != 'Approved' ">
+            <ion-item class="item flightdetailgray">
+              {{GPData.GPDeliveryStatus}}
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid> -->
+
+      <ion-grid>
+          <ion-row *ngFor="let GPData of GPdetails;">
+            <ion-col col-7 *ngIf="GPData.GPDeliveryStatus == '' && GPData.GPStatus != 0 ">
+              <ion-item *ngIf="GPData.HAWBNo != '' " class="item flightdetailgray" href="#">
+                {{GPData.HAWBNo}}{{GPData.IHM_HAWBNo_C}} {{Direct}}
+                <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+              </ion-item>
+              <ion-item *ngIf="GPData.HAWBNo == '' && GPData.GPDeliveryStatus != 'Delivered'" class="item flightdetailgray" href="#">
+                <!-- && GPData.GPDeliveryStatus != 'Delivered' on above line (cha's requirement) -->
+                Direct
+                <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+              </ion-item>
+            </ion-col>
+            <ion-col col-5 *ngIf="GPData.GPDeliveryStatus == '' && GPData.GPStatus != 0">
+              <ion-item class="item flightdetailgray" href="#">
+                Not Approved
+              </ion-item>
+            </ion-col>
+            <ion-col col-7
+              *ngIf="GPData.GPDeliveryStatus != '' && GPData.CHADCubeStatus != 'false'  && GPData.GPDeliveryStatus == 'Approved' && GPData.HAWBNo != '' && HAWBNo != 'HAWB' ">
+              <ion-item class="item flightdetail" href="#"
+                (click)='goGPDelivery(GPData.HAWBNo,GPData.GPDeliveryStatus,GPData.MAWBNo,GPData.IHM_HAWBNo_C,GPData.IHM_MAWBNo_C);'>
+                {{GPData.HAWBNo}} {{GPData.IHM_HAWBNo_C}} {{Direct}}
+                <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+              </ion-item>
+            </ion-col>
+            <!-- && HAWBNo != 'HAWB' added at the end is new on 288, this is line 295 -->
+            <ion-col col-7
+              *ngIf="GPData.GPDeliveryStatus != '' && GPData.CHADCubeStatus != 'false'  && GPData.GPDeliveryStatus == 'Approved' && GPData.HAWBNo == ''  && GPData.IHM_HAWBNo_C != '' ">
+              <ion-item class="item flightdetail" href="#"
+                (click)='goGPDelivery(GPData.HAWBNo.toString(),GPData.GPDeliveryStatus.toString(),GPData.MAWBNo.toString());'>
+                Direct
+                <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+              </ion-item>
+            </ion-col>
+
+            <!-- new below ion-col -->
+            <ion-col col-7
+              *ngIf="GPData.GPDeliveryStatus != '' && GPData.CHADCubeStatus != 'false'  && GPData.GPDeliveryStatus == 'Approved' && HAWBNo == 'HAWB' ">
+              <ion-item class="item flightdetail" href="#"
+                (click)='goGPDelivery(HAWBNo,GPData.GPDeliveryStatus.toString(),GPData.IHM_MAWBNo_C.toString());'>
+                Direct
+                <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+              </ion-item>
+            </ion-col>
+
+            <!-- below 3 ion-col col-7 are new for unsubscribed d-cube users, also above 3 col-7 have added 1 more check (CHADCubeStatus) -->
+            <ion-col col-7
+              *ngIf="GPData.GPDeliveryStatus != '' && GPData.CHADCubeStatus == 'false'  && GPData.GPDeliveryStatus == 'Approved' && GPData.HAWBNo != '' && HAWBNo != 'HAWB' ">
+              <ion-item class="item flightdetail" href="#"
+              (click)='notSubscribedMsg();'>
+                {{GPData.HAWBNo}} {{GPData.IHM_HAWBNo_C}} {{Direct}}
+                <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+              </ion-item>
+            </ion-col>
+            
+            <ion-col col-7
+              *ngIf="GPData.GPDeliveryStatus != '' && GPData.CHADCubeStatus == 'false'  && GPData.GPDeliveryStatus == 'Approved' && GPData.HAWBNo == ''  && GPData.IHM_HAWBNo_C != '' ">
+              <ion-item class="item flightdetail" href="#"
+              (click)='notSubscribedMsg();'>
+                Direct
+                <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+              </ion-item>
+            </ion-col>
+  
+            <ion-col col-7
+              *ngIf="GPData.GPDeliveryStatus != '' && GPData.CHADCubeStatus == 'false'  && GPData.GPDeliveryStatus == 'Approved' && HAWBNo == 'HAWB' ">
+              <ion-item class="item flightdetail" href="#"
+              (click)='notSubscribedMsg();'>
+                Direct
+                <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+              </ion-item>
+            </ion-col>
+
+
+            <ion-col col-5 *ngIf="GPData.GPDeliveryStatus != '' && GPData.GPDeliveryStatus == 'Approved' ">
+              <ion-item class="item gpstatusgreen">
+                {{GPData.GPDeliveryStatus}}
+              </ion-item>
+            </ion-col>
+            <ion-col col-7
+              *ngIf="GPData.GPDeliveryStatus != '' && GPData.GPDeliveryStatus != 'Approved' && GPData.IHM_HAWBNo_C != ''  && GPData.HAWBNo !=  '' && GPData.GPDeliveryStatus != 'Delivered'">
+              <!-- && GPData.GPDeliveryStatus != 'Delivered' on above line (cha's requirement) -->
+              <ion-item class="item flightdetailgray" href="#">
+                {{GPData.HAWBNo}} {{GPData.IHM_HAWBNo_C}}
+                <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+              </ion-item>
+            </ion-col>
+            <ion-col col-7
+              *ngIf="GPData.GPDeliveryStatus != '' && GPData.GPDeliveryStatus != 'Approved' && GPData.GPDeliveryStatus != 'Delivered' && (GPData.HAWBNo == '' || GPData.IHM_HAWBNo_C == '') ">
+              <!-- && GPData.GPDeliveryStatus != 'Delivered' on above line (cha's requirement) -->
+              <ion-item class="item flightdetailgray" href="#">
+                Direct
+                <ion-icon class="ioniconclass" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+              </ion-item>
+            </ion-col>
+            <ion-col col-5 *ngIf="GPData.GPDeliveryStatus != '' && GPData.GPDeliveryStatus != 'Approved' && GPData.GPDeliveryStatus != 'Delivered' ">
+              <!-- && GPData.GPDeliveryStatus != 'Delivered' on above line (cha's requirement) -->
+              <ion-item class="item flightdetailgray">
+                {{GPData.GPDeliveryStatus}}
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        
+    </ion-list>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+  </div>
+
+</ion-content>
+<ion-fab right bottom #fab1 style="bottom:38px !important">
+  <button class="pop-in" ion-fab mini color="primary" [ngClass]="{'pop-out': fabGone}" (click)="clearInputs()">
+    <ion-icon name="close"></ion-icon>
+  </button>
+</ion-fab>
+<Gmax-footer></Gmax-footer>

@@ -1,0 +1,115 @@
+<style>
+  table {
+    width: 100%;
+  }
+
+  .classtbl td,
+  th {
+    border: solid thin #1EA1CC;
+  }
+
+  .text-right {
+    text-align: right !important;
+  }
+</style>
+<Gmax-header [title]="title">
+</Gmax-header>
+
+<ion-content class="marginTop44">
+  <div>
+
+    <!-- <ion-row> -->
+    <!-- <div center text-center class="imgClassDashboard">
+      <img src="assets/imgs/CSIAGVKlogo.jpg" width="100%">
+    </div> -->
+    <!-- </ion-row> -->
+  </div>
+  <div>
+    <ion-list>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-12>
+
+            <table>
+              <tr>
+                <td>
+                  MAWB Number
+                </td>
+                <td>
+                  {{MAWBNo | slice:0:3}}&nbsp;{{MAWBNo | slice:3:11}}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  HAWB Number
+                </td>
+                <td>
+                  {{HAWBNo}}
+                </td>
+              </tr>
+            </table>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+    <ion-list>
+      <ion-grid>
+        <ion-row>
+          <table class="classtbl" id="tblNews" border="1">
+            <thead>
+              <th>
+                NoP
+              </th>
+              <th>
+                Gr. Wt.
+              </th>
+              <th>
+                Ch. Wt.
+              </th>
+            </thead>
+            <tbody>
+              <tr class="text-right">
+                <td height="30" style="padding: 5px !important;">
+                  {{Pieces}}
+                </td>
+                <td height="30" style="padding: 5px !important;">
+                  {{GrWt}}
+                </td>
+                <td height="30" style="padding: 5px !important;">
+                  {{ChWt}}
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+          <br>
+          <br>
+          <br><br><br>
+          <ion-col col-6>
+
+            Consignee Name
+          </ion-col>
+          <ion-col col-6>
+
+            {{ConsigneeName}}
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+  </div>
+
+</ion-content>
+<!-- <ion-fab right bottom #fab1 style="bottom:38px !important">
+  <button class="pop-in" ion-fab mini color="primary" [ngClass]="{'pop-out': fabGone}">
+    <ion-icon name="close"></ion-icon>
+  </button>
+</ion-fab> -->
+<Gmax-footer></Gmax-footer>

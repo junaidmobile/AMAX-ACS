@@ -59,7 +59,7 @@ export class LoginPage {//implements OnInit {//implements AfterViewChecked {//
 
   source: string;
 
-  constructor(public global: GlobalProvider, public http: HttpProvider, public alertCtrl: AlertController,private _changeDetectionRef: ChangeDetectorRef) {
+  constructor(public global: GlobalProvider, public http: HttpProvider, public alertCtrl: AlertController, private _changeDetectionRef: ChangeDetectorRef) {
     this.user = new User();
     this.appBuildConfig = this.global.appBuildConfig;
     this._postParm = new postParm();
@@ -121,6 +121,7 @@ export class LoginPage {//implements OnInit {//implements AfterViewChecked {//
         if (response != null && response != "") {
           this.organizationType = response['clsUser'].Organization[0]['Type'];
           console.log('check org type: ', this.organizationType);
+          debugger
           if (this.isRemembered) {
             this.global.store('userName', this.user.pi_strUserName);
             this.global.store('password', this.user.pi_strPassword);
@@ -137,11 +138,16 @@ export class LoginPage {//implements OnInit {//implements AfterViewChecked {//
           this.global.store('isLogged', 'true');
           this.global.store('userResp', JSON.stringify(response['clsUser']));
 
+          //junaid 16052024
+         // this.global.store('userRole', response['clsUser'].FName[0]);
           
-          //this.global.store('Organization123', response['clsUser'].FName[0]);
-
-          console.log("userRole : ", response['clsUser'].FName);
-          this.global.store('userRole', response['clsUser'].FName);
+          //junaid 07032024
+           var permitFlag = response['clsUser']['RolePermissionCollection'][0]['clsRolePermissions'][0].RoleName
+           this.global.store('userRole', permitFlag);
+          // if (permitFlag == 'true') {
+          //   this.global.store('userRole', 'MainGateIn');
+          // }
+          //  this.global.store('userRole', response['clsUser'].FName);
           // this.goToMenu(response['clsUser'].Organization[0]);
 
           // console.log(JSON.parse(this.global.get('userResp')).RolePermissionCollection[0]);
@@ -182,9 +188,8 @@ export class LoginPage {//implements OnInit {//implements AfterViewChecked {//
     // }
   }
 
-  nextPage()
-  {
-    
+  nextPage() {
+
     // this.global.setRootPage(MainMenu);
   }
 
@@ -212,8 +217,8 @@ export class LoginPage {//implements OnInit {//implements AfterViewChecked {//
   checkAppVersion() {
 
 
-   console.log('******************  checkAppVersion called here');
-   //this.PrefixInput.setFocus();
+    console.log('******************  checkAppVersion called here');
+    //this.PrefixInput.setFocus();
     this.http.getHttpPostRequest(Constants.GMAX_Services.Login.GetAppVersion).then((response) => {
       console.log('App version check: ', response);
       this.versionCode = response['Root']['Output'];
@@ -224,23 +229,23 @@ export class LoginPage {//implements OnInit {//implements AfterViewChecked {//
         this.global.showAlert('Please update your app, else some functions may not work.');
       } else {
         console.log('this is latest application');
-    
+
 
         // console.log('setting focus on username in ionViewLoaded');
         // setTimeout(() => {
         //   this.PrefixInput.setFocus();
         // },150);
-    
+
 
         //document.getElementById('username').focus();
 
 
-        
-     //   this.setFocusOnInput();
-      //  this.PrefixInput.setFocus();
+
+        //   this.setFocusOnInput();
+        //  this.PrefixInput.setFocus();
       }
     });
-   // this.PrefixInput.setFocus();
+    // this.PrefixInput.setFocus();
     // this.global.setRootPage(VehicleTrackingImport);
 
   }
@@ -256,7 +261,7 @@ export class LoginPage {//implements OnInit {//implements AfterViewChecked {//
 
     // //     document.getElementById('username').focus();
     // //this.PrefixInput.setFocus();
-    
+
     // setTimeout(() => {
     //   this.PrefixInput.setFocus();
     // }, 200)
@@ -271,7 +276,7 @@ export class LoginPage {//implements OnInit {//implements AfterViewChecked {//
     //   this.PrefixInput.setFocus();
     // },150);
 
- }
+  }
 
 
 
@@ -296,10 +301,10 @@ export class LoginPage {//implements OnInit {//implements AfterViewChecked {//
 
   ngAfterViewInit() {
     console.log('******************  ngAfterViewInit called here');
-  //   setTimeout(() => {
-  //      this.PrefixInput.setFocus();
-  // }, 400);
-}
+    //   setTimeout(() => {
+    //      this.PrefixInput.setFocus();
+    // }, 400);
+  }
 
   // check input Valid
   isInputValid(): boolean {
@@ -381,36 +386,36 @@ export class LoginPage {//implements OnInit {//implements AfterViewChecked {//
     // console.log("document.activeElement");
     // console.log(document.activeElement.id.toString);
 
-//     setTimeout(() => {
-//       this.PrefixInput.setFocus();
-// }, 1000);
-  //this.needsFocus = true;
+    //     setTimeout(() => {
+    //       this.PrefixInput.setFocus();
+    // }, 1000);
+    //this.needsFocus = true;
 
 
     // console.log('setting focus on ionViewDidEnter');
     // this.needsFocus = true;
- }
- 
-//  public ngAfterViewChecked(): void {
-//   console.log('******************  ngAfterViewChecked called here');
-//   this.PrefixInput.setFocus();
-//     //  if (this.PrefixInput.nee) {
-//     //   console.log('Needs focus: focus');
-//     //      this.needsFocus = false;
-//     //    this.PrefixInput.setFocus();
-//     //      this._changeDetectionRef.detectChanges();
-//     //  }
-//  }
+  }
 
-public ngAfterViewChecked(): void {
-  // if (this.needsFocus) {
-  //     this.needsFocus = false;
-  //     this.PrefixInput.setFocus();
-  //     this._changeDetectionRef.detectChanges();
-  // }
-}
+  //  public ngAfterViewChecked(): void {
+  //   console.log('******************  ngAfterViewChecked called here');
+  //   this.PrefixInput.setFocus();
+  //     //  if (this.PrefixInput.nee) {
+  //     //   console.log('Needs focus: focus');
+  //     //      this.needsFocus = false;
+  //     //    this.PrefixInput.setFocus();
+  //     //      this._changeDetectionRef.detectChanges();
+  //     //  }
+  //  }
 
- 
+  public ngAfterViewChecked(): void {
+    // if (this.needsFocus) {
+    //     this.needsFocus = false;
+    //     this.PrefixInput.setFocus();
+    //     this._changeDetectionRef.detectChanges();
+    // }
+  }
+
+
   // testMethod() {
 
   //   this.global.setRootPage(TSPSuccessMessage);

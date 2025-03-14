@@ -1,0 +1,151 @@
+<style>
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td,
+  th {
+    padding: 0.2rem;
+    border: solid thin #1EA1CC;
+  }
+
+  .tblMilestone td,
+  th {
+    border: 1px solid #999;
+    padding: 0.2rem;
+
+  }
+</style>
+<Gmax-header [title]="title">
+</Gmax-header>
+
+<ion-content class="marginTop44">
+  <div>
+
+    <!-- <ion-row> -->
+    <!-- <div center text-center class="imgClassDashboard">
+      <img src="assets/imgs/CSIAGVKlogo.jpg" width="100%">
+    </div> -->
+    <!-- </ion-row> -->
+  </div>
+  <div>
+    <ion-grid>
+      <ion-row>
+
+          <ion-item>
+          <ion-select [(ngModel)]="value" (ionChange)="onSelectChange($event)" multiple="false"
+          interface="popover">
+            <ion-option value="mial" selected>MIAL</ion-option>
+            <ion-option value="airIndia">Air India</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-col col-3>
+          <ion-label color="primary" class="fontSize12 marginSet" fixed>Token No.
+          </ion-label>
+        </ion-col>
+        <ion-col ion-item col-5>
+          <!-- <ion-input type="text" disabled="disabled" maxlength="9" style="background-color: lightgray;" [(ngModel)]="VTNo" class="fontSize12" placeholder="" name="VTNo">
+          </ion-input> -->
+          <ion-input type="text"  maxlength="9" style="background-color: lightgray;" [(ngModel)]="VTNo" class="fontSize12" placeholder="" name="VTNo">
+          </ion-input>
+        </ion-col>
+        <ion-col ion-item col-4>
+          <ion-input type="text" maxlength="14" [(ngModel)]="VTOTP" (ionChange)="onChange()" class="fontSize12" placeholder="OTP" name="VTOTP" #OTPValue> 
+            <!-- #OTPValue on above line of code at the end -->
+          </ion-input>
+        </ion-col>
+        <ion-col col-8>
+        </ion-col>
+        <ion-col col-2>
+          <button ion-fab class="ion-fab34">
+            <ion-icon (click)="GetImpVTDetails_HHT();" name="md-search" class="margin4"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col col-2>
+          <button ion-fab class="ion-fab34">
+            <ion-icon (click)="scanBarCode();" name="md-qr-scanner" class="margin4"></ion-icon>
+          </button>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+  </div>
+  <br>
+  <br>
+
+  <ion-list *ngIf="showDiv">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12>
+          <table>
+            <tr>
+              <td>
+                Vehicle/Trolley Number
+              </td>
+              <td>
+                {{gadiNo}}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Token Number
+              </td>
+              <td>
+                {{comeVT}}
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                Warehouse
+              </td>
+              <td>
+                <!-- {{Shed}} -->
+                {{Shed[0].split(',')[0]}}
+              </td>
+              </tr>
+
+              <tr>
+                <td>
+                  Driver/Operator Name
+                </td>
+                <td>
+                  {{driverName}}
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  License/Permit Number
+                </td>
+                <td>
+                  {{licenseNo}}
+                </td>
+              </tr>
+
+          </table>
+        </ion-col>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <ion-item style="text-align: center;">
+          <ngx-barcode col-12 [bc-value]="comeVT" [bc-display-value]="comeVT"></ngx-barcode>
+        </ion-item>
+
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+
+
+
+</ion-content>
+<ion-fab right bottom #fab1 style="bottom:38px !important">
+  <button class="pop-in" ion-fab mini color="primary" [ngClass]="{'pop-out': fabGone}" (click)="clearInputs()">
+    <ion-icon name="close"></ion-icon>
+  </button>
+</ion-fab>
+<Gmax-footer></Gmax-footer>

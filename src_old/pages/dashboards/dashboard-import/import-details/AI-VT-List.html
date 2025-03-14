@@ -1,0 +1,96 @@
+<style>
+  .float-right {
+    float: right;
+  }
+
+  .float-left {
+    float: left;
+  }
+
+  .text-center {
+    text-align: center;
+    padding: 5px;
+  }
+
+  .list-ios {
+    margin: -1px 0 0px !important;
+  }
+
+  .list-ios .item-block .item-inner {
+    border-bottom: 0.55px solid #c8c7cc !important;
+  }
+
+  .flightdetail {
+    background-color: #1EA1CC !important;
+    border-radius: 10px !important;
+    color: #fff !important;
+    margin-bottom: -10px;
+  }
+</style>
+<Gmax-header [title]="title">
+</Gmax-header>
+
+<ion-content class="marginTop44">
+  <ion-segment style="background-color: #1EA1CC;" mode='md' [(ngModel)]="segment">
+    <ion-segment-button value="VTList" (click)="GetImpActiveTokenDetails_HHT();">
+      Vehicle Tokens &nbsp;
+      <ion-badge id="notifications-badge" color="danger">{{vtCount}}</ion-badge>
+    </ion-segment-button>
+  </ion-segment>
+  <ion-content [ngSwitch]="segment">
+
+    <ion-grid *ngSwitchCase="'VTList'">
+      <div style="height: 60vh;overflow-y: scroll;">
+        <ion-list>
+          <table style="width: 100%;margin-bottom: -13px;">
+            <tr>
+              <td>
+                <span style="padding-left: 25px;">Vehicle Number</span>
+              </td>
+              <td>
+                <span style="padding-left: 25px;"> Details</span>
+              </td>
+            </tr>
+          </table>
+          <ion-col col-12 *ngFor="let vtData of VTtData; index as i;">
+            <ion-item class="item flightdetail" href="#"
+              (click)='goTOVTPQRCode(vtData.TokenNo,vtData.VehicleNo,vtData.Shed);'>
+              {{vtData.VehicleNo}}
+              <ion-icon class="float-right" ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+            </ion-item>
+          </ion-col>
+        </ion-list>
+        <ion-list>
+
+          <ion-item style="text-align: center;">
+            <h3>{{GPError}}</h3>
+            <ngx-barcode col-12 [bc-value]="staticbarcode"></ngx-barcode>
+            <h5>{{msg}}</h5>
+          </ion-item>
+
+        </ion-list>
+      </div>
+      <ion-col col-12>
+        <button (click)="navigateTOGenAI();" ion-button block icon-start style="margin-top: 20px !important;">
+          Generate Vehicle Token
+        </button>
+      </ion-col>
+    </ion-grid>
+
+
+  </ion-content>
+
+</ion-content>
+
+
+<Gmax-footer></Gmax-footer>
+
+
+<!-- <ion-label id="idMAWB"> HAWB1
+            <ion-checkbox class="float-right" name='chkMAWB' [(ngModel)]="chkMAWB"></ion-checkbox>&nbsp;&nbsp;
+          </ion-label> -->
+
+<!-- <div *ngFor="let qualifica of data.HAWBNo">
+            <label *ngIf="d.showDetails"></label>
+            {{d.HAWBNo}}
+          </div> -->

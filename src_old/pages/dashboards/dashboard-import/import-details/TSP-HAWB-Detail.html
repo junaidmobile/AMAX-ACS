@@ -1,0 +1,167 @@
+<style>
+  .itemClass {
+    background-color: #1EA1CC !important;
+    border-radius: 10px !important;
+    color: #fff !important;
+  }
+
+  ion-icon {
+    color: #fff !important;
+    float: right;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  td,
+  th {
+    border: solid thin #1EA1CC;
+    padding: 5px !important;
+
+  }
+
+  .text-right {
+    text-align: right !important;
+  }
+
+  ion-label[fixed] {
+    width: 100%;
+  }
+
+  .text-input-md {
+    text-align: right;
+  }
+</style>
+<Gmax-header [title]="title">
+</Gmax-header>
+
+
+<ion-content class="marginTop44">
+  <div>
+
+    <!-- <ion-row> -->
+    <!-- <div center text-center class="imgClassDashboard">
+      <img src="assets/imgs/CSIAGVKlogo.jpg" width="100%">
+    </div> -->
+    <!-- </ion-row> -->
+  </div>
+  <div>
+
+
+    <ion-list *ngIf='showDiv'>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-12>
+            <table>
+              <tr>
+                <td>
+                  MAWB Number
+                </td>
+                <td>
+                  {{MAWBNo | slice:0:3}}&nbsp;{{MAWBNo | slice:3:11}}
+                </td>
+              </tr>
+              <tr *ngIf="HAWBNo != null && HAWBNo != ''">
+                <td>
+                  HAWB Number
+                </td>
+                <td>
+                  {{HAWBNo}}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Consignee Name
+                </td>
+                <td>
+                  {{ConsigneeName}}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  NoP Recd./Total
+                </td>
+                <td class="text-right">
+                  {{Pieces}} / {{Pieces}}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Gross Wt.
+                </td>
+                <td class="text-right">
+                  {{GrWt}} / {{GrWt}} Kgs
+                </td>
+              </tr>
+
+            </table>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+
+      <ion-grid>
+        <ion-row>
+          <ion-col col-7>
+            <ion-label color="primary" class="fontSize12 marginSet" fixed>Chargeable Wt.
+            </ion-label>
+          </ion-col>
+          <ion-col ion-item col-5>
+            <ion-input type="tel" (change)="onlyNumberChWt($event)" class="fontSize12 text-right" [(ngModel)]="ChWt"
+              name="ChWt" pattern="[0-9]*" maxlength="10" autofocus></ion-input> Kgs
+          </ion-col>
+
+          <ion-col col-7>
+            <ion-label color="primary" class="fontSize12 marginSet" fixed>Service Type
+            </ion-label>
+          </ion-col>
+          <ion-col col-5>
+            <ion-select disabled style="max-width: 100%;" [(ngModel)]="_ServiceType"
+              (ionChange)="onServiceTypeChange($event);" multiple="false" interface="popover">
+              <ion-option *ngFor="let dt of ServiceType; let idx = index" [value]="dt.ServiceCode"
+                selected="{{(idx==0)}}">{{dt.ServiceName[0]}}</ion-option>
+            </ion-select>
+          </ion-col>
+          <ion-col col-7>
+            <ion-label color="primary" class="fontSize12 marginSet" fixed>% for Examination
+            </ion-label>
+          </ion-col>
+          <ion-col ion-item col-5>
+            <ion-input style="text-align: right;" autocomplete="off" type="tel" class="fontSize12"
+              [(ngModel)]="ExamPerZero" (change)="calculateExampieces($event);" placeholder="Exam Percentage"
+              name="ExamPerZero" pattern="[0-9]*" maxlength="3" #ExamP></ion-input>
+          </ion-col>
+          <ion-col col-7>
+            <ion-label color="primary" class="fontSize12 marginSet" fixed>NoP for Examination
+            </ion-label>
+          </ion-col>
+          <ion-col ion-item col-5>
+            <ion-input type="tel" disabled class="fontSize12 text-right" [(ngModel)]="_pi_decExamPercentage"
+              name="_pi_decExamPercentage" pattern="[0-9]*" maxlength="3" #NoPVal></ion-input>
+          </ion-col>
+          <ion-col col-12>
+            <button (click)="navToTSPPay()" ion-button block icon-start style="margin-top: 20px !important;">
+              Next
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </ion-list>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+  </div>
+
+</ion-content>
+<!-- <ion-fab right bottom #fab1 style="bottom:38px !important">
+  <button class="pop-in" ion-fab mini color="primary" [ngClass]="{'pop-out': fabGone}" (click)="clearInputs()">
+    <ion-icon name="close"></ion-icon>
+  </button>
+</ion-fab> -->
+<Gmax-footer></Gmax-footer>

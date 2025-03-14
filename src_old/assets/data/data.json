@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Will Smith",
+        "gender": "Male",
+        "country": "USA"
+    },
+    {
+        "name": "Jackline Joy",
+        "gender": "Female",
+        "country": "Sri Lanak"
+    },
+    {
+        "name": "Alu Arjun",
+        "gender": "Male",
+        "country": "Microsoft"
+    },
+    {
+        "name": "Kavitha Kumar",
+        "gender": "Female",
+        "country": "India"
+    },
+    {
+        "name": "John Snow",
+        "gender": "Male",
+        "country": "United Kingdom"
+    },
+    {
+        "name": "Priya kanana",
+        "gender": "Female",
+        "country": "India"
+    },
+    {
+        "name": "Shri Devi",
+        "gender": "Female",
+        "country": "Sri Lanka"
+    },
+    {
+        "name": "Richard Roy",
+        "gender": "Male",
+        "country": "France"
+    }
+]

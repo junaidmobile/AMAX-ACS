@@ -37,14 +37,14 @@
         </ion-item>
       </ion-col> -->
 
-      <ion-col col-12 *ngIf="DOStat == 5">
+      <ion-col col-12 *ngIf="DOStat == 3">
         <ion-item class="item item-icon-right" href="#" (click)="goToApproveDelivery()">
           Approve Delivery
           <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
         </ion-item>
       </ion-col>
 
-      <ion-col col-12 *ngIf="DOStat == 5">
+      <ion-col col-12 *ngIf="DOStat == 3">
         <ion-item class="item item-icon-right" href="#" (click)="goToReports()">
           Reports
           <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
@@ -68,7 +68,7 @@
         </ion-item>
       </ion-col>
 
-      <ion-col col-12 *ngIf="DOStat == 3 && isAccessToken">
+      <ion-col col-12 *ngIf="DOStat == 5 && isAccessToken">
         <ion-item class="item item-icon-right" href="#" (click)="goToAccessVehicleToken()">
           Access Token
           <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>

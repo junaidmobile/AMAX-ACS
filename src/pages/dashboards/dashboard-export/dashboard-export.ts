@@ -32,6 +32,7 @@ export class DashboardExport implements OnInit {
     this.appBuildConfig = this.global.appBuildConfig;
 
     this.DOStat = JSON.parse(this.global.get('userResp')).Organization[0].Type[0];
+    
   }
 
 

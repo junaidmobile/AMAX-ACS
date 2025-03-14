@@ -1,0 +1,20 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title id="Dashboard" style="text-align: center">Notification Details</ion-title>
+        <ion-buttons right>
+            <button ion-button icon-only (click)="dismiss()">
+                <ion-icon name='close'></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <h2>{{notification.headings.en}}</h2>
+    <!-- <p>{{notification.contents.en}}</p> -->
+    <!-- <img [src]="notification.big_picture != '' ? notification.big_picture : '../assets/imgs/icon_logo.png'" alt="notification"
+    /> -->
+    <p>{{notification.contents.en}}
+        <ion-note item-end>{{notification.delivery_time_of_day}}</ion-note>
+    </p>
+</ion-content>

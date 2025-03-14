@@ -1,0 +1,138 @@
+<style>
+  table {
+
+    width: 100%;
+  }
+
+  td,
+  th {
+    border: solid thin #1EA1CC;
+    padding: 5px !important;
+  }
+
+  th {
+    text-align: center;
+  }
+
+  ion-icon {
+    font-size: xx-large;
+  }
+
+  .button-inner {
+    display: none;
+  }
+
+  ion-label {
+    font-size: large;
+    font-weight: bold;
+  }
+
+  .iconCenter {
+    text-align: center !important;
+  }
+
+  qrcode {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+  }
+</style>
+<!-- <Gmax-header [title]="title">
+</Gmax-header> -->
+<!-- above lines commented and below header added by Himesh on 10/11/2020 -->
+
+<ion-header style="position: fixed;">
+  <ion-navbar color={{color}} hideBackButton="true">
+    <ion-title id="Dashboard" center text-center>
+      {{title}}
+    </ion-title>
+    <ion-buttons right>
+      <!-- <button ion-button icon-only (click)="notifications()">
+          <ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
+      </button> -->
+      <button ion-button icon-only (click)="homeButton()">
+        <ion-icon ios="ios-home" md="md-home"></ion-icon>
+    </button>
+
+      <button ion-button icon-only (click)="logOut()">
+          <ion-icon ios="ios-power" md="md-power"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="marginTop44">
+  <div>
+
+    <!-- <ion-row> -->
+    <div center text-center class="imgClassDashboard">
+      <img src="assets/imgs/CSIAGVKlogo.png" width="100%">
+    </div>
+    <!-- </ion-row> -->
+  </div>
+  <div>
+    <ion-grid *ngIf="showDiv">
+      <span [title]="successMsg"></span>
+      <table>
+        <tr>
+          <td>
+            MAWB Number
+          </td>
+          <td>
+            {{MAWBNo | slice:0:3}}&nbsp;{{MAWBNo | slice:3:11}}
+          </td>
+        </tr>
+        <tr *ngIf="HAWBNo != null && HAWBNo != ''">
+          <td>
+            HAWB Number
+          </td>
+          <td>
+            {{HAWBNo}}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            GP Number
+          </td>
+          <td>
+            {{gpNumber}}
+          </td>
+        </tr>
+      </table>
+
+      <br>
+      <br>
+      <ion-item style="text-align: center;">
+        <ngx-barcode col-12 [bc-value]="gpNumber" [bc-display-value]="gpNumber"></ngx-barcode>
+      </ion-item>
+
+    </ion-grid>
+    <br>
+    <br>
+    <ion-grid>
+      <ion-row>
+
+        <ion-col col-12>
+          <button ion-button block icon-start style="margin-top: 20px !important;" (click)="goToMAWB();">
+            Back to MAWB Details
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+  </div>
+
+</ion-content>
+<!-- <ion-fab right bottom #fab1 style="bottom:38px !important">
+  <button class="pop-in" ion-fab mini color="primary" [ngClass]="{'pop-out': fabGone}">
+    <ion-icon name="close"></ion-icon>
+  </button>
+</ion-fab> -->
+<Gmax-footer></Gmax-footer>
